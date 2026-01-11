@@ -1,0 +1,139 @@
+.yala-hero {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  min-height: 300px;
+  overflow: hidden;
+  //margin-top: 150px;
+  
+  .hero-background {
+    position: absolute;
+    inset: 0;
+    
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+    
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+      
+      &:hover {
+        transform: scale(1.02);
+      }
+    }
+  }
+  
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 2rem 1rem;
+    
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      margin-top: 100px;
+    }
+    
+    .hero-text {
+      max-width: 600px;
+      
+      .hero-title {
+        font-size: clamp(3rem, 8vw, 4rem);
+        font-weight: 700;
+        color: white;
+        margin: 0 0 1.5rem 0;
+        line-height: 1.1;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+      
+      .hero-description {
+        font-size: clamp(1.1rem, 2.5vw, 1.25rem);
+        color: #e5e7eb;
+        line-height: 1.6;
+        margin: 0 0 2.5rem 0;
+        max-width: 500px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      }
+      
+      .cta-button {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: #22c55e;
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 0.75rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          background: #16a34a;
+          transform: translateY(-2px);
+        }
+        
+        &:focus {
+          outline: none;
+          box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.3);
+        }
+        
+        .button-icon {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .yala-hero {
+    margin-top: 100px;
+    min-height: 200px;
+    .hero-content {
+      padding: 1rem;
+      text-align: center;
+      
+      .hero-text {
+        .hero-title {
+          margin-bottom: 1rem;
+        }
+        
+        .hero-description {
+          margin-bottom: 1.5rem;
+        }
+        
+        .cta-button {
+          padding: 0.875rem 1.75rem;
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .yala-hero {
+    .hero-content {
+      padding: 0.75rem;
+      
+      .hero-text {
+        .cta-button {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}

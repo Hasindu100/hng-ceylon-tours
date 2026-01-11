@@ -1,0 +1,45 @@
+<app-hero></app-hero>
+<div class="tour-cards-container">
+  <div class="tour-cards-grid">
+    <div 
+      class="tour-card" 
+      *ngFor="let tour of tourCards; trackBy: trackByTourId"
+      (click)="onCardClick(tour)"
+      [attr.aria-label]="'View details for ' + tour.title"
+      tabindex="0"
+      role="button"
+    >
+      <div class="tour-card__image-container">
+        <img 
+          [src]="tour.imageUrl" 
+          [alt]="tour.imageAlt"
+          class="tour-card__image"
+          loading="lazy"
+        >
+        <div class="tour-card__overlay"></div>
+      </div>
+      
+      <div class="tour-card__content">
+        <div class="tour-card__info">
+          <h3 class="tour-card__title">{{ tour.title }}</h3>
+          <p class="tour-card__price">
+            Starting From ${{ tour.startingPrice | number:'1.0-0' }} {{ tour.currency }}
+          </p>
+        </div>
+        
+        <div class="tour-card__duration">
+          <span class="tour-card__nights">{{ tour.nights | number:'2.0-0' }}</span>
+          <span class="tour-card__nights-label">Nights</span>
+        </div>
+      </div>
+      
+      <button 
+        class="tour-card__book-btn"
+        (click)="onBookNow(tour, $event)"
+        
+      >
+        Book Now
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,111 @@
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Company Info Section -->
+    <div class="footer-section company-info">
+      <div class="logo-section">
+        <img src="assets/images/logo/footer-logo.png" alt="Tourslanka" class="footer-logo">
+        <!-- <p class="tagline">Private Sri Lanka Tours</p> -->
+      </div>
+      <!-- Newsletter Section -->
+      <div class="footer-section newsletter-section">
+        <!-- <h3 class="section-title newsletter-title">Get the latest updates on Tourslanka</h3>
+        <form class="newsletter-form" (ngSubmit)="onNewsletterSubmit()">
+          <div class="input-group">
+            <input 
+              type="email" 
+              [(ngModel)]="newsletterEmail"
+              name="newsletterEmail"
+              placeholder="Enter your email"
+              class="newsletter-input"
+              required>
+            <button type="submit" class="newsletter-btn">
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </form> -->
+        
+        <!-- Social Media Links -->
+        <div class="social-links">
+          <a 
+            *ngFor="let social of socialLinks" 
+            (click)="openSocialLink(social.url)"
+            [attr.aria-label]="social.platform"
+            class="social-link">
+            <i [class]="social.icon"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="mask">
+        <img src="assets/images/about/mask3.png" alt="Sri Lankan Traditional Mask" class="mask-image">
+    </div> -->
+
+    <!-- Contact Details -->
+    <div class="footer-section contact-details">
+      <h3 class="section-title">{{ contactInfo.companyName }}</h3>
+      <div class="contact-item">
+        <p class="address">
+          {{ contactInfo.address }}<br>
+          {{ contactInfo.country }}
+        </p>
+      </div>
+      <div class="contact-item">
+        <p class="phone">
+          <span class="label">Tel:</span> 
+          <a href="tel:{{ contactInfo.phone }}">{{ contactInfo.phone }}</a>
+        </p>
+      </div>
+      <div class="contact-item">
+        <p class="email">
+          <span class="label">E-mail:</span> 
+          <a href="mailto:{{ contactInfo.email }}">{{ contactInfo.email }}</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Quick Links Section -->
+    <div class="footer-section links-section">
+      <h3 class="section-title">Quick Links</h3>
+      <ul class="footer-links">
+        <li *ngFor="let link of quickLinks">
+          <a (click)="navigateTo(link.url)" class="footer-link">{{ link.label }}</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Popular Activities -->
+    <div class="footer-section links-section">
+      <h3 class="section-title">Popular Activities</h3>
+      <ul class="footer-links">
+        <li *ngFor="let link of popularActivitiesLinks">
+          <a (click)="navigateTo(link.url)" class="footer-link">{{ link.label }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+    <div class="footer-bottom-content">
+      <!-- Payment Methods -->
+      <div class="payment-methods">
+        <img src="../../../assets/images/cards/Visa_Inc._logo.svg" alt="Visa" class="payment-logo">
+        <img src="../../../assets/images/cards/Mastercard-logo.svg" alt="Mastercard" class="payment-logo">
+      </div>
+
+      <!-- Copyright -->
+      <div class="copyright">
+        <p>© 2025 HNG Ceylon Tours All rights reserved.
+        </p>
+      </div>
+
+      <!-- Back to Top Button -->
+      <div class="back-to-top">
+        <button class="back-to-top-btn" (click)="scrollToTop()" aria-label="Back to top">
+          <i class="fas fa-chevron-up"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</footer>

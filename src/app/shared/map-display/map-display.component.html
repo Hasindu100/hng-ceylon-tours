@@ -1,0 +1,21 @@
+<google-map
+  height="500px"
+  width="100%"
+  [center]="{lat: latitude, lng: longitude}"
+  [zoom]="13">
+
+  
+<!-- <map-marker
+    *ngFor="let marker of markers"
+    [position]="marker.position"
+    [label]="marker.label"
+    [title]="marker.title">
+  </map-marker> -->
+
+  <map-marker
+    [position]="{ lat: latitude, lng: longitude }"
+    [label]="'A'">
+  </map-marker>
+
+  
+</google-map>

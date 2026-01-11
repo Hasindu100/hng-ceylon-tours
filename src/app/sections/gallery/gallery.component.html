@@ -1,0 +1,75 @@
+<section class="popular-destinations">
+  <div class="container">
+    <!-- Header Section -->
+    <div class="header">
+      <h2 class="title">Exploring Popular Destination</h2>
+      <p class="subtitle">Lorem ipsum dolor sit amet consectetur.</p>
+    </div>
+
+    <!-- Carousel Section -->
+    <div class="carousel-wrapper">
+      <!-- Navigation Buttons -->
+      <button 
+        class="nav-btn nav-btn--prev" 
+        [class.nav-btn--disabled]="!canGoPrevious"
+        (click)="previous()"
+        [disabled]="!canGoPrevious || isAnimating"
+        aria-label="Previous destinations">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <button 
+        class="nav-btn nav-btn--next" 
+        [class.nav-btn--disabled]="!canGoNext"
+        (click)="next()"
+        [disabled]="!canGoNext || isAnimating"
+        aria-label="Next destinations">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <!-- Carousel Container -->
+      <div class="carousel-container" #carousel>
+        <div 
+          class="carousel-track" 
+          [style.transform]="getTransformStyle()"
+          [class.carousel-track--animating]="isAnimating">
+          
+          <div 
+            class="destination-card" 
+            *ngFor="let destination of destinations;"
+            (click)="onDestinationClick(destination)"
+            [attr.aria-label]="'View ' + destination.name + ', ' + destination.country">
+            
+            <div class="destination-card__image">
+              <img 
+                [src]="destination.image" 
+                [alt]="destination.name + ', ' + destination.country"
+                loading="lazy">
+              <div class="destination-card__overlay"></div>
+            </div>
+            
+            <div class="destination-card__content">
+              <h3 class="destination-card__country">{{ destination.country }}</h3>
+              <p class="destination-card__travelers">{{ destination.travelers }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dots Indicator (Mobile) -->
+    <div class="dots-indicator" *ngIf="itemsPerView === 1">
+      <button 
+        *ngFor="let dot of [].constructor(destinations.length); let i = index"
+        class="dot"
+        [class.dot--active]="i === currentIndex"
+        (click)="currentIndex = i"
+        [attr.aria-label]="'Go to slide ' + (i + 1)">
+      </button>
+    </div>
+  </div>
+</section>

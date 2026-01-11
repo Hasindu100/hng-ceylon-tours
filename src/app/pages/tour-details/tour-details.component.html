@@ -1,0 +1,152 @@
+<div class="tour-details-container" [style.visibility]="isVisible ? 'visible' : 'hidden'" *ngIf="tourData">
+  <!-- Header Section -->
+  <div class="tour-header">
+    <div class="header-badge">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
+        <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"></path>
+      </svg>
+      <span>Tour Details</span>
+    </div>
+    <h2 class="tour-title">Your Journey Awaits</h2>
+  </div>
+
+  <!-- Route Information -->
+
+  <div class="route-info">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="location-card pickup">
+          <div class="location-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </div>
+          <div class="location-details">
+            <span class="location-label">Pickup</span>
+            <p class="location-name">{{ tourData.pickupLocation }}</p>
+          </div>
+        </div>
+        <div class="route-connector">
+          <div class="connector-line"></div>
+          <div class="connector-dots">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+        </div>
+        <div class="location-card dropoff">
+          <div class="location-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
+              <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"></path>
+            </svg>
+          </div>
+          <div class="location-details">
+            <span class="location-label">Destination</span>
+            <p class="location-name">{{ tourData.dropLocation }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat-card distance">
+            <div class="stat-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 19l8-8m0 0l8 8m-8-8v12M4 5l8 8m0 0l8-8"></path>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <span class="stat-label">Distance</span>
+              <p class="stat-value">{{ tourData.distance }} <span class="stat-unit">km</span></p>
+            </div>
+            <div class="stat-decoration"></div>
+          </div>
+
+          <div class="stat-card duration">
+            <div class="stat-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 6v6l4 2"></path>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <span class="stat-label">Duration</span>
+              <p class="stat-value">{{ formatDuration(tourData.duration) }}</p>
+            </div>
+            <div class="stat-decoration"></div>
+          </div>
+
+          <!-- <div class="stat-card rate">
+            <div class="stat-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M13 7h-2l-4 14m12-14l-4 14m-6-7h8"></path>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <span class="stat-label">Rate per km</span>
+              <p class="stat-value">{{ calculatePricePerKm() }} <span class="stat-unit">LKR</span></p>
+            </div>
+            <div class="stat-decoration"></div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <!-- Map Section -->
+      <div class="map-container">
+        <div class="map-placeholder">
+          <div id="map"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <!-- Price Section -->
+      <div class="price-section">
+        <div class="price-card">
+          <div class="price-header">
+            <span class="price-label">Total Tour Price</span>
+            <div class="price-badge">Best Value</div>
+          </div>
+          <div class="price-amount">
+            <span class="currency">$</span>
+            <span class="amount">{{ tourData.price.toLocaleString('en-us') }}</span>
+          </div>
+          <div class="price-details">
+            <div class="detail-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Professional driver included</span>
+            </div>
+            <div class="detail-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Fuel & tolls covered</span>
+            </div>
+            <div class="detail-item">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Flexible pickup time</span>
+            </div>
+          </div>
+          <button class="book-button">
+            <span>Book This Tour</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14m-7-7l7 7-7 7"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-loader *ngIf="isLoading"></app-loader>
+

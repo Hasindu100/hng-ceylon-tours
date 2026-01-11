@@ -1,0 +1,77 @@
+<section class="yala-hero">
+  <div class="hero-background">
+    <div class="hero-overlay"></div>
+    <img 
+      src="assets/images/hero/slide-3.jpg" 
+      alt="Leopard in Yala National Park" 
+      class="hero-image"
+      (load)="onHeroImageLoad()"
+    >
+  </div>
+  
+  <div class="hero-content">
+    <div class="container">
+      <div class="hero-text">
+        <h1 class="hero-title">Yala</h1>
+        <p class="hero-description">
+          Premier wildlife sanctuary famous for leopards, elephants, and 
+          diverse ecosystems including beaches
+        </p>
+        <button 
+          class="cta-button"
+          (click)="onPlanVisit()"
+          type="button"
+          aria-label="Plan your visit to Yala National Park"
+        >
+          <span class="button-icon">📅</span>
+          <span class="button-text">Plan Your Visit</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="overview-container">
+  <!-- Header Section -->
+  <div class="header-section">
+    <h1 class="main-title">Overview</h1>
+    <p class="description">
+      This 11-day Sri Lanka itinerary combines cultural exploration, historical landmarks, scenic 
+      landscapes, and beach relaxation. It offers a well-balanced mix of activities, ensuring travelers 
+      experience the country's diverse offerings.
+    </p>
+  </div>
+
+  <!-- Highlights Section -->
+  <div class="highlights-section">
+    <h2 class="section-title">Highlights</h2>
+    
+    <div class="highlights-list">
+      <div 
+        class="highlight-item" 
+        *ngFor="let highlight of highlights; trackBy: trackByTitle"
+        [attr.data-type]="highlight.type"
+      >
+        <div class="highlight-icon">
+          <i [class]="getIconClass(highlight.type)" aria-hidden="true"></i>
+        </div>
+        
+        <div class="highlight-content">
+          <div class="highlight-header">
+            <span class="highlight-title">{{ highlight.title }}</span>
+            <span 
+              class="highlight-subtitle" 
+              *ngIf="highlight.subtitle"
+            >
+              {{ highlight.subtitle }}
+            </span>
+          </div>
+          
+          <p class="highlight-description">
+            {{ highlight.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

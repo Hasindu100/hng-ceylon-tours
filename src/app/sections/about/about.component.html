@@ -1,0 +1,51 @@
+<div class="hero-container">
+  <!-- Top Section with Title and Description -->
+  <div class="hero-header">
+    <div class="container" [ngClass]="{'showmore': isClickedShowMore}">
+      <h1 class="hero-title">{{ title }}</h1>
+      <p class="hero-description">{{ description }}</p>
+      <p class="hero-experience">{{ experienceDescription }}</p>
+
+      <div class="features-section">
+        <h3 class="features-title">{{ featuresTitle }}</h3>
+        <p class="features-subtitle">{{ featuresSubtitle }}</p>
+        
+        <div class="features-grid">
+          <div class="feature-item" *ngFor="let feature of features">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="#4A90E2" stroke-width="2" fill="#4A90E2" fill-opacity="0.1"/>
+                <path d="m9 12 2 2 4-4" stroke="#4A90E2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <p class="feature-text">{{ feature }}</p>
+          </div>
+        </div>
+        
+        <div class="features-cta">
+          <p class="cta-text">{{ ctaText }} <a href="#" class="cta-link">{{ ctaLinkText }}</a>.</p>
+        </div>
+      </div>
+    </div>
+    <div class="ext-welcome-txt">
+      <span class="welcome-more" (click)="onClickShowMore()"></span>
+    </div>
+  </div>
+
+  <!-- Hero Image Section -->
+  <div class="hero-image-section" *ngIf="!isClickedShowMore">
+    <div class="hero-image-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <h2 class="hero-main-title">
+          <span class="extraordinary">Extraordinary Experiences</span>
+          <span class="designed">Designed just</span>
+          <span class="for-you">for you</span>
+        </h2>
+        <button class="cta-button" (click)="onStartPlanning()">
+          Start Planning Your Experience
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<app-hero-banner [title]="'Things To Do'" [subTitle]="'Start Your Sri Lankan Journey With Us Today!'"></app-hero-banner>
+<section class="day-tours-section">
+  <div class="container">
+    <h1 class="section-title">Things to do in Sri Lanka</h1>
+    
+    <div class="tours-grid">
+      <div 
+        *ngFor="let thingsTodo of thingsTodoList; trackBy: trackByTourId"
+        class="tour-card"
+        tabindex="0"
+        routerLink="single2" [queryParams]="{id: thingsTodo.id}"
+        role="button">
+        
+        <div class="tour-image-container">
+          <img 
+            [src]="getImageURl(thingsTodo.images)" 
+            [alt]=""
+            class="tour-image"
+            loading="lazy">
+          <div class="image-overlay"></div>
+        </div>
+        
+        <div class="tour-info">
+          <h2 class="tour-title">{{ thingsTodo.title }}</h2>
+          <p class="things-todo-content">{{ getContent(thingsTodo.content) | truncate:80}}</p>
+          <!-- <p class="tour-price">{{ tour.startingPrice }}</p> -->
+
+          <div class="read-more">
+            <span>Read more</span>
+            <i class="fa fa-arrow-circle-right"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

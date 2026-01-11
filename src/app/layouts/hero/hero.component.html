@@ -1,0 +1,184 @@
+<div class="tour-landing">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <!-- Background Image Overlay -->
+    <div class="hero-overlay"></div>
+
+    <!-- Navigation Arrows -->
+    <!-- <button class="nav-arrow nav-arrow-left" (click)="previousSlide()" aria-label="Previous slide">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <button class="nav-arrow nav-arrow-right" (click)="nextSlide()" aria-label="Next slide">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button> -->
+
+    <!-- Hero Content -->
+    <div class="hero-content">
+      <div class="hero-text">
+        <!-- <p class="welcome-text">Welcome To HNG Ceylon Tours</p> -->
+        <h1 class="hero-title">Discover Sri Lanka</h1>
+        <p class="hero-subtitle">
+          Discover Enchanting Landscapes With Your Private Taxi And Driver.
+          <br>
+          Navigate Through Lush Tea Plantations, Historic Cities, And Stunning Beaches.
+        </p>
+
+        <!-- Features -->
+        <div class="features">
+          <div class="feature-badge" *ngFor="let feature of features">
+            <span class="feature-icon">{{ feature.icon }}</span>
+            <span class="feature-text">{{ feature.text }}</span>
+          </div>
+        </div>
+
+        <!-- CTA Button -->
+        <button class="cta-button" routerLink="/tours" (click)="planJourney()">
+          PLAN YOUR JOURNEY
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search Section -->
+  <section class="search-section" style="display: none;">
+    <div class="search-container">
+      <!-- Tab Navigation -->
+      <div class="tab-navigation">
+        <button 
+          class="tab-button" 
+          [class.active]="activeTab === 'tour'"
+          (click)="setActiveTab('tour')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M3 12L5 10M5 10L12 3L19 10M5 10V20C5 20.5523 5.44772 21 6 21H9M19 10L21 12M19 10V20C19 20.5523 18.5523 21 18 21H15M9 21C9.55228 21 10 20.5523 10 20V16C10 15.4477 10.4477 15 11 15H13C13.5523 15 14 15.4477 14 16V20C14 20.5523 14.4477 21 15 21M9 21H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Tour
+        </button>
+        <button 
+          class="tab-button" 
+          [class.active]="activeTab === 'carRental'"
+          (click)="setActiveTab('carRental')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M5 17H4C3.44772 17 3 16.5523 3 16V12C3 11.4477 3.44772 11 4 11H5M19 17H20C20.5523 17 21 16.5523 21 16V12C21 11.4477 20.5523 11 20 11H19M5 17C5 18.1046 4.10457 19 3 19H2M5 17V11M19 17C19 18.1046 19.8954 19 21 19H22M19 17V11M5 11H19M5 11L7 6H17L19 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Car Rental
+        </button>
+      </div>
+
+      <!-- Search Form -->
+      <form [formGroup]="searchForm" (ngSubmit)="onSearchTourDetails()" class="search-form">
+        <div class="form-row">
+          <!-- Destination -->
+          <div class="form-group">
+            <div class="frm-header">
+              <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" fill="currentColor"/>
+              </svg>
+              <label for="destination">Pickup Location:</label>
+            </div>      
+            <div class="input-wrapper">
+                <ng-select
+                  id="pickupLocation"
+                  formControlName="pickupLocation"
+                  class="form-input drp-location">
+                  <ng-option [value]="'0'">Select Pickup location . . .</ng-option>
+                  <ng-option *ngFor="let location of locationData" [value]="location.id">{{ location.locationName }}</ng-option>
+                </ng-select>
+            </div>
+          </div>
+
+          <!-- Destination -->
+          <div class="form-group">
+            <div class="frm-header">
+              <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" fill="currentColor"/>
+              </svg>
+              <label for="destination">Drop Location:</label>
+            </div>
+            
+            <div class="input-wrapper">
+                <ng-select
+                  id="destination"
+                  formControlName="destination"
+                  class="form-input drp-location">
+                  <ng-option [value]="'0'">Select Drop location . . .</ng-option>
+                  <ng-option *ngFor="let location of locationData" [value]="location.id">{{ location.locationName }}</ng-option>
+                </ng-select>
+            </div>
+          </div>
+
+          <!-- Check In Date -->
+          <div class="form-group">
+            <div class="frm-header">
+              <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M8 2V5M16 2V5M3.5 9.09H20.5M21 8.5V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V8.5C3 5.5 4.5 3.5 8 3.5H16C19.5 3.5 21 5.5 21 8.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <label for="pickupDate">Date:</label>
+            </div>
+            <div class="input-wrapper">
+              <input 
+                type="date" 
+                id="pickupDate"
+                formControlName="pickupDate"
+                class="form-input">
+            </div>
+          </div>
+
+          <!-- Check Out Date -->
+          <div class="form-group">
+            <div class="frm-header">
+              <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M8 2V5M16 2V5M3.5 9.09H20.5M21 8.5V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V8.5C3 5.5 4.5 3.5 8 3.5H16C19.5 3.5 21 5.5 21 8.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <label for="pickupTime">Time:</label>
+            </div>
+            <div class="input-wrapper">
+              <input 
+                type="time" 
+                id="pickupTime"
+                formControlName="pickupTime"
+                class="form-input">
+            </div>
+          </div>
+
+          <!-- Guest Counter -->
+          <div class="form-group">
+            <div class="frm-header">
+              <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M20.59 22C20.59 18.13 16.74 15 12 15C7.26 15 3.41 18.13 3.41 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <label for="guests">Guest:</label>
+            </div>
+            <div class="input-wrapper guest-wrapper">
+              <button type="button" class="guest-control" (click)="removeGuest()" [disabled]="guestCount <= 1">-</button>
+              <span class="guest-count">{{ guestCount }} Guest{{ guestCount > 1 ? 's' : '' }}</span>
+              <button type="button" class="guest-control" (click)="addGuest()">+</button>
+            </div>
+          </div>
+
+          <!-- Search Button -->
+          <div class="form-group">
+            <button type="submit" class="search-button" [disabled]="!searchForm.valid">
+              Search
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Why Choose Section -->
+  <!-- <section class="why-choose-section">
+    <h2 class="section-title">Why Choose HNG Ceylon Tours</h2>
+  </section> -->
+</div>

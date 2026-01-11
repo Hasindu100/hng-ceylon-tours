@@ -1,0 +1,129 @@
+<div class="wildlife-tour-container" *ngIf="tourDetails">
+  <!-- Header Section -->
+  <header class="tour-header" [style.background-image]="'url(' + headerBackgroundImageUrl + ')'">
+    <div class="header-overlay"></div>
+    <div class="header-content">
+      <div class="container">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+          <div class="nav-left">
+            <div class="search-section">
+              <span class="search-label">How Can I Help You?</span>
+              <div class="search-controls">
+                <select class="tour-type-select">
+                  <option>Sri Tours</option>
+                  <option>Adventure Tours</option>
+                  <option>Cultural Tours</option>
+                </select>
+                <select class="months-select">
+                  <option>All Months to Travel</option>
+                  <option>January - March</option>
+                  <option>April - June</option>
+                  <option>July - September</option>
+                  <option>October - December</option>
+                </select>
+                <button class="search-btn">
+                  <i class="search-icon"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Title Section -->
+        <div class="title-section">
+          <h1 class="main-title">{{tourDetails.title}}</h1>
+          
+          <!-- Tour Details Cards -->
+          <div class="tour-details">
+            <div class="detail-card duration-card">
+              <div class="card-header">Duration</div>
+              <div class="card-content">{{ tourDetails.days }} Days</div>
+            </div>
+            <div class="detail-card type-card">
+              <div class="card-header">Tour Type</div>
+              <div class="card-content">{{ tourDetails.tourType.tourType }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <ng-container *ngFor="let crumb of breadcrumbs; let last = last">
+          <a *ngIf="crumb.link && !last" [href]="crumb.link" class="breadcrumb-link">{{ crumb.label }}</a>
+          <span *ngIf="!crumb.link || last" class="breadcrumb-current">{{ crumb.label }}</span>
+          <span *ngIf="!last" class="breadcrumb-separator"> > </span>
+        </ng-container>
+      </nav>
+
+      <div class="content-grid">
+        <!-- Left Column - Overview and Images -->
+        <div class="left-column">
+          <section class="overview-section">
+            <h2 class="section-title">Overview</h2>
+            <p class="overview-text" [innerHTML]="tourDetails.content">
+              
+            </p>
+          </section>
+
+          <!-- Image Gallery -->
+          <section class="image-gallery">
+            <div class="gallery-grid">
+              <div 
+                *ngFor="let image of tourDetails.tourImages; let i = index" 
+                class="gallery-item"
+                [class.large]="i === 0 || i === 3 || i === 6"
+              >
+                <img [src]="image" class="gallery-image">
+                <div class="image-overlay"></div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Right Column - Booking Information -->
+        <div class="right-column">
+          <div class="booking-card">
+            <!-- Availability Badge -->
+            <div class="availability-badge">
+              <span class="availability-text">November - April</span>
+            </div>
+
+            <!-- Pricing -->
+            <div class="pricing-section">
+              <div class="price-label">Starting From</div>
+              <div class="price">$ {{ tourDetails.price }} USD</div>
+              <div class="price-note">{{ priceNote }}</div>
+            </div>
+
+            <!-- Inquiry Button -->
+            <div class="inquiry-section">
+              <button class="inquiry-btn" (click)="onInquiryClick()">
+                <i class="inquiry-icon"></i>
+                <span>Interested ?</span>
+                <small>Click here to Send an Inquiry</small>
+              </button>
+            </div>
+
+            <!-- Tour Highlights -->
+            <div class="highlights-section">
+              <h3 class="highlights-title">Tour Highlights</h3>
+              <ul class="highlights-list">
+                <li *ngFor="let highlight of tourDetails.highlight" class="highlight-item">
+                  <span class="highlight-bullet">•</span>
+                  <span class="highlight-text">{{ highlight }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

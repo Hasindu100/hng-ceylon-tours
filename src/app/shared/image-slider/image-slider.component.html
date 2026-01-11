@@ -1,0 +1,107 @@
+<div class="vihara-slider-container" 
+     (mouseenter)="onMouseEnter()" 
+     (mouseleave)="onMouseLeave()">
+  <!-- Background Image with smooth transition -->
+  <div 
+    class="background-image"
+    [style.background-image]="'url(' + backgroundImage + ')'">
+    
+    <!-- Overlay -->
+    <div class="overlay"></div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Title Section -->
+      <div class="title-section">
+        <h1 class="main-title">{{ mainTitle }}</h1>
+        <p class="main-description">{{ mainDescription }}</p>
+        
+        <!-- Auto Play Control -->
+        <button 
+          class="auto-play-btn"
+          (click)="toggleAutoPlay()"
+          [class.playing]="isAutoPlaying"
+          title="Toggle auto play">
+          <svg *ngIf="isAutoPlaying" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <rect x="6" y="4" width="4" height="16" fill="currentColor"/>
+            <rect x="14" y="4" width="4" height="16" fill="currentColor"/>
+          </svg>
+          <svg *ngIf="!isAutoPlaying" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <polygon points="5,3 19,12 5,21" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Image Slider -->
+      <div class="image-slider">
+        <!-- Navigation Arrow Left -->
+        <button 
+          class="nav-arrow nav-arrow-left"
+          (click)="onPrevious()"
+          aria-label="Previous slide">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <!-- Slider Track -->
+        <div class="slider-track">
+          <div 
+            class="slider-items"
+            [style.transform]="'translateX(-' + (currentIndex * 220) + 'px)'">
+            
+            <div 
+              *ngFor="let image of sliderImages; let i = index"
+              class="slider-item"
+              [class.active]="i === currentIndex"
+              [class.background-source]="i === 0"
+              (click)="onSlideClick(image, i)">
+              
+              <div class="slider-item-image">
+                <img 
+                  [src]="image" 
+                  [alt]=""
+                  loading="lazy">
+                <div class="image-overlay"></div>
+                
+                <!-- Background indicator -->
+                <div *ngIf="i === 0" class="bg-indicator">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </div>
+              </div>
+              
+              <!-- <div class="slider-item-content">
+                <h3 class="item-title">{{ item.title }}</h3>
+                <p class="item-subtitle" *ngIf="item.subtitle">{{ item.subtitle }}</p>
+              </div> -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Arrow Right -->
+        <button 
+          class="nav-arrow nav-arrow-right"
+          (click)="onNext()"
+          aria-label="Next slide">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Slide Indicators -->
+      <div class="slide-indicators">
+        <button
+          *ngFor="let item of originalSliderItems; let i = index"
+          class="indicator"
+          [class.active]="getCurrentSlideIndex() === i"
+          (click)="onIndicatorClick(i)"
+          [attr.aria-label]="'Go to slide ' + (i + 1)">
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

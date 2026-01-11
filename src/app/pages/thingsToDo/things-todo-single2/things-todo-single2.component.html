@@ -1,0 +1,147 @@
+<div class="hero-container">
+  <div class="hero-content">
+    <div class="hero-image">
+      <div class="image-circle">
+        <img [src]="bannerImage" alt="Anuradhapura Stupa" class="stupa-image">
+      </div>
+    </div>
+    
+    <div class="hero-text">
+      <h1 class="tour-title">{{thingsTodoDetails.title}}</h1>
+      <p class="tour-description">
+        Go deep into Sri Lankan history with an Anuradhapura Day Tour...
+      </p>
+      
+      <div class="action-buttons">
+        <button 
+          class="btn btn-explore" 
+          (click)="onExploreMore()"
+          type="button">
+          EXPLORE MORE
+        </button>
+        <button 
+          class="btn btn-book" 
+          (click)="onBookTour()"
+          type="button">
+          BOOK THIS TOUR
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="things-todo-main-container">
+    <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <ng-container *ngFor="let crumb of breadcrumbs; let last = last">
+          <a *ngIf="crumb.link && !last" [href]="crumb.link" class="breadcrumb-link">{{ crumb.label }}</a>
+          <span *ngIf="!crumb.link || last" class="breadcrumb-current">{{ crumb.label }}</span>
+          <span *ngIf="!last" class="breadcrumb-separator"> > </span>
+        </ng-container>
+      </nav>
+
+      <div class="content-grid">
+        <!-- Left Column - Overview and Images -->
+        <div class="left-column">
+          <section class="overview-section">
+            <h2 class="section-title">Overview</h2>
+            <p class="overview-text" [innerHTML]="thingsTodoDetails.content"></p>
+          </section>
+
+
+        </div>
+
+        <!-- Right Column - Booking Information -->
+        <div class="right-column">
+          <section class="map-section">
+            <div class="map-container">
+              <app-map-display [latitude]="thingsTodoDetails?.latitude" [longitude]="thingsTodoDetails?.longitude"></app-map-display>
+              <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63472.358405107465!2d80.07783180109824!3d6.1276877778426275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae177fbcae7226d%3A0x373eeb50aad15308!2sHikkaduwa!5e0!3m2!1sen!2slk!4v1759327589210!5m2!1sen!2slk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+            </div>
+            <div class="extra-info">
+              <h3>Useful Tips</h3>
+              <ul class="highlights-list">
+                <li class="highlight-item" *ngFor="let tip of thingsTodoDetails?.usefulTips">
+                  <span class="highlight-bullet">•</span>
+                  <span class="highlight-text">{{tip}}</span>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div class="image-slider">
+        <h3 class="slider-caption">Places you will visit</h3>
+        <app-image-slider [images]="thingsTodoDetails?.images"></app-image-slider>
+      </div>
+      
+    </div>
+  </main>
+</div>
+
+<div class="carousel-container">
+        <div class="speed-controls">
+            <button class="speed-btn active" onclick="changeSpeed(20)">Slow</button>
+            <button class="speed-btn" onclick="changeSpeed(10)">Normal</button>
+            <button class="speed-btn" onclick="changeSpeed(5)">Fast</button>
+        </div>
+
+        <div class="carousel" id="carousel">
+            <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=600&fit=crop" alt="Mountain Lake">
+                <div class="content-overlay">
+                    <div class="content-title">Mountain Lake</div>
+                    <div class="content-description">Serene alpine lake surrounded by majestic peaks</div>
+                </div>
+            </div>
+            
+            <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=600&fit=crop" alt="Forest Path">
+                <div class="content-overlay">
+                    <div class="content-title">Forest Path</div>
+                    <div class="content-description">Mystical woodland trail through ancient trees</div>
+                </div>
+            </div>
+            
+            <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=400&h=600&fit=crop" alt="Ocean Waves">
+                <div class="content-overlay">
+                    <div class="content-title">Ocean Waves</div>
+                    <div class="content-description">Powerful waves crashing against rocky shores</div>
+                </div>
+            </div>
+            
+            <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=600&fit=crop&sat=-100" alt="Desert Dunes">
+                <div class="content-overlay">
+                    <div class="content-title">Desert Dunes</div>
+                    <div class="content-description">Golden sand dunes under endless sky</div>
+                </div>
+            </div>
+            
+            <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=600&fit=crop" alt="Forest Stream">
+                <div class="content-overlay">
+                    <div class="content-title">Forest Stream</div>
+                    <div class="content-description">Crystal clear water flowing through lush forest</div>
+                </div>
+            </div>
+            
+            <div class="carousel-item">
+                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=600&fit=crop&hue=180" alt="Sunset Sky">
+                <div class="content-overlay">
+                    <div class="content-title">Sunset Sky</div>
+                    <div class="content-description">Breathtaking sunset painting the sky in gold</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-controls">
+            <button class="control-btn" onclick="pauseCarousel()" title="Pause/Play">⏯️</button>
+            <button class="control-btn" onclick="resetCarousel()" title="Reset">🔄</button>
+        </div>
+    </div>

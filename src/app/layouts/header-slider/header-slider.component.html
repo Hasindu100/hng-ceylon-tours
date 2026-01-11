@@ -1,0 +1,22 @@
+<header class="wildlife-header">
+  <!-- Image Slider -->
+  <div class="hero-overlay"></div>
+  <div class="slider-container">
+    <div class="slider-wrapper">
+      <div 
+        *ngFor="let image of sliderImages; let i = index" 
+        class="slide"
+        [class.active]="i === currentSlide"
+        [style.background-image]="'url(' + image + ')'">
+      </div>
+    </div>
+  </div>
+
+  <!-- Header Content -->
+  <div class="hero-content">
+    <div class="container">
+      <h1 class="hero-title">Welcome to HNG Ceylon Tours</h1>
+      <p class="hero-sub-title">Let's plan your perfect Sri Lankan adventure</p>
+    </div>
+  </div>
+</header>

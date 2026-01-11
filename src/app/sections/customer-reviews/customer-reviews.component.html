@@ -1,0 +1,142 @@
+<section class="why-tourslanka">
+  <div class="container">
+    <!-- Header Section -->
+    <div class="header-section">
+      <h1 class="main-title">Why HNG Ceylon Tours?</h1>
+      <p class="main-description">
+        Since our inception in 1999, we have been specialists in crafting tailor-made private tours in Sri Lanka. Our team of 
+        professionals possess the right knowledge and skills to provide customized, well-curated itineraries to suit your 
+        requirement. Our commitment is to make sure that you feel at home with our warm & friendly service, which is truly 
+        synonymous with Tourslanka.
+      </p>
+    </div>
+
+    <!-- Content Section -->
+    <div class="content-section">
+      <!-- Left Side - Illustration -->
+      <div class="illustration-container">
+        <div class="illustration-wrapper">
+          <!-- Palm Trees -->
+          <div class="palm-tree palm-tree-left">
+            <div class="palm-trunk"></div>
+            <div class="palm-leaves">
+              <div class="leaf leaf-1"></div>
+              <div class="leaf leaf-2"></div>
+              <div class="leaf leaf-3"></div>
+              <div class="leaf leaf-4"></div>
+              <div class="leaf leaf-5"></div>
+            </div>
+          </div>
+          
+          <div class="palm-tree palm-tree-right">
+            <div class="palm-trunk"></div>
+            <div class="palm-leaves">
+              <div class="leaf leaf-1"></div>
+              <div class="leaf leaf-2"></div>
+              <div class="leaf leaf-3"></div>
+              <div class="leaf leaf-4"></div>
+              <div class="leaf leaf-5"></div>
+            </div>
+          </div>
+
+          <!-- Map of Sri Lanka -->
+          <div class="sri-lanka-map">
+            <div class="map-shape"></div>
+            <div class="map-text">
+              <div class="tourslanka-text">
+                Tourslanka
+              </div>
+              <div class="private-tours-text">
+                Private Sri Lanka Tours
+              </div>
+            </div>
+          </div>
+
+          <!-- Calendar -->
+          <div class="calendar">
+            <div class="calendar-header">25</div>
+            <div class="calendar-body">
+              <div class="calendar-grid">
+                <div class="calendar-row">
+                  <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Elephant -->
+          <div class="elephant">
+            <div class="elephant-body">
+              <div class="elephant-head">
+                <div class="elephant-trunk">
+                  <div class="trunk-segment segment-1"></div>
+                  <div class="trunk-segment segment-2"></div>
+                  <div class="trunk-segment segment-3"></div>
+                </div>
+                <div class="elephant-ear left-ear"></div>
+                <div class="elephant-ear right-ear"></div>
+                <div class="elephant-eye left-eye"></div>
+                <div class="elephant-eye right-eye"></div>
+                <div class="elephant-tusk left-tusk"></div>
+                <div class="elephant-tusk right-tusk"></div>
+              </div>
+              <div class="elephant-legs">
+                <div class="leg front-left"></div>
+                <div class="leg front-right"></div>
+                <div class="leg back-left"></div>
+                <div class="leg back-right"></div>
+              </div>
+              <div class="elephant-tail"></div>
+            </div>
+          </div>
+
+          <!-- Suitcase -->
+          <div class="suitcase">
+            <div class="suitcase-body">
+              <div class="suitcase-handle"></div>
+              <div class="suitcase-sticker sticker-1"></div>
+              <div class="suitcase-sticker sticker-2"></div>
+              <div class="suitcase-sticker sticker-3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side - Features -->
+      <div class="features-container">
+        <div class="feature-item" *ngFor="let feature of features">
+          <div class="feature-icon">
+            <div class="icon-wrapper" [ngClass]="'icon-' + feature.icon">
+              <!-- Clock Icon -->
+              <div *ngIf="feature.icon === 'clock'" class="clock-icon">
+                <div class="clock-face">
+                  <div class="clock-hand hour-hand"></div>
+                  <div class="clock-hand minute-hand"></div>
+                  <div class="clock-center"></div>
+                </div>
+              </div>
+              
+              <!-- Plane Icon -->
+              <div *ngIf="feature.icon === 'plane'" class="plane-icon">
+                <div class="plane-body"></div>
+                <div class="plane-wing"></div>
+                <div class="plane-tail"></div>
+              </div>
+              
+              <!-- User Icon -->
+              <div *ngIf="feature.icon === 'user'" class="user-icon">
+                <div class="user-head"></div>
+                <div class="user-body"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="feature-content">
+            <h3 class="feature-title">{{ feature.title }}</h3>
+            <p class="feature-description">{{ feature.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
