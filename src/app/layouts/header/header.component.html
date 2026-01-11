@@ -59,7 +59,7 @@
                 <circle cx="25" cy="25" r="12" fill="none" stroke="currentColor" stroke-width="2"/>
                 <path d="M15 25 L35 25 M25 15 L25 35" stroke="currentColor" stroke-width="2"/>
               </svg> -->
-              <img src="../../../assets/images/logo/header-logo-3.png">
+              <img src="images/logo/header-logo-3.png">
             </div>
             <!-- <div class="logo-text">
               <span class="logo-title">Off 2 Sri Lanka Tours</span>
@@ -77,14 +77,14 @@
               [class.active]="item.active"
               [class.has-dropdown]="item.hasDropdown"
             >
-              <a 
-                [href]="item.route" 
+              <span 
+                [routerLink]="item.route" 
                 class="nav-link"
                 (click)="onNavItemClick(item)"
               >
                 {{ item.label }}
                 <i *ngIf="item.hasDropdown" class="icon-chevron-down dropdown-icon"></i>
-              </a>
+          </span>
               
               <!-- Dropdown Menu (placeholder) -->
               <div *ngIf="item.hasDropdown" class="dropdown-menu">
