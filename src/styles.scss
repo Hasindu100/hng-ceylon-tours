@@ -19,8 +19,10 @@
   --card4-gradient-color1: #11998e;
   --card4-gradient-color2: #38ef7d;
   --primary-color: #4ECDC4;
+  --secondary-color: #6b2cf5;
   --white: #fff;
   --background-color1: #f8f9fa;
+  --invalid-border-color: rgb(192, 8, 8);
 }
 
 html {
@@ -40,4 +42,8 @@ body {
 // Smooth transitions
 * {
   transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.is-invalid {
+  border-color: var(--invalid-border-color) !important;
 }

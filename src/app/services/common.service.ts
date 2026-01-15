@@ -6,7 +6,9 @@ import { LocationVM } from '../models/tour';
   providedIn: 'root'
 })
 export class CommonService {
-  loadTourDetails$ = new Subject<LocationVM>();
+  loadTourDetails$ = new BehaviorSubject<any>(null);
+  selectedVehicleTypeId: number = 1;
+  selectedVehicleTypeName: string = 'Car';
 
   constructor() { }
 }

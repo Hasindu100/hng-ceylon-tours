@@ -212,6 +212,7 @@
     gap: 10px;
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(255, 87, 34, 0.3);
+    margin-top: 20px;
 
     &:hover:not(:disabled) {
       transform: translateY(-2px);
@@ -220,9 +221,9 @@
     }
 
     &:disabled {
-      background: #d1d5db;
       cursor: not-allowed;
       box-shadow: none;
+      opacity: 0.5;
     }
   }
 }
@@ -259,5 +260,47 @@
 
   .ng-select-focused .ng-select-container {
     box-shadow: none !important;
+  }
+}
+
+.second-row {
+  margin-top: 20px;
+}
+
+.vehicle-type-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.vehicle-card {
+  width: 60px;
+  background-color: #ccc;
+  padding: 5px;
+  height: 60px;
+  position: relative;
+  text-align: center;
+  display: block;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &.selected, &:hover {
+    background-color: #6b2cf5;
+    color: #fff;
+  }
+
+  .vehicle-img {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: 5px;
+    top: -5px;
+  }
+
+  .vehicle-type-name {
+    position: relative;
+    top: 35px;
+    font-size: 12px;
+    line-height: 1;
   }
 }

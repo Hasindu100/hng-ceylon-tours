@@ -1,3 +1,4 @@
+<div id="details" #tourDetailsSection></div>
 <div class="tour-details-container" [style.visibility]="isVisible ? 'visible' : 'hidden'" *ngIf="tourData">
   <!-- Header Section -->
   <div class="tour-header">
@@ -54,23 +55,37 @@
         <div class="stats-grid">
           <div class="stat-card distance">
             <div class="stat-icon">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 478.63"><path fill="#1F1F1F" d="M42.379 270.346c-45.751-23.252-40.501-49.168 5.459-46.46l10.292 19.292 15.528-48.293c-18.077-5.956-31.288-23.081-31.288-43.037V45.282C42.37 20.346 62.717 0 87.653 0h336.712c24.87 0 45.283 20.419 45.283 45.282v106.566c0 14.443-6.917 27.399-17.586 35.714l13.332 53.574 9.167-17.25c47.252-2.75 51.46 24.71 1.458 48.418l8.126 12.458c32.876 33.793 29.792 67.534 24.667 150.995v27.415c0 8.5-6.959 15.458-15.458 15.458h-65.962c-8.499 0-15.458-6.958-15.458-15.458v-12.415H100.173v12.415c0 8.5-6.959 15.458-15.459 15.458H18.753c-8.5 0-15.459-6.958-15.459-15.458v-35.624c0-.833.083-1.624.167-2.417-5-64.044-12.041-121.785 38.918-154.785zm384.914-73.314c-.97.062-1.945.099-2.928.099H98.323L80.131 257.72h361.762l-14.6-60.688zM126.59 346.296l-58.585-7.376c-13.834-1.542-17.542 4.291-12.833 16.208l6.333 15.377c2.041 3.957 4.751 6.833 7.917 8.834 3.708 2.291 8.167 3.415 13.125 3.624l52.251.417c12.626-.042 18.085-5.083 14.126-16.667-3.249-10.876-10.666-17.709-22.334-20.417zm258.843 0l58.585-7.376c13.834-1.542 17.542 4.291 12.833 16.208l-6.332 15.377c-2.042 3.957-4.751 6.833-7.918 8.834-3.708 2.291-8.167 3.415-13.125 3.624l-52.251.417c-12.626-.042-18.085-5.083-14.126-16.667 3.249-10.876 10.666-17.709 22.334-20.417z"/><path fill="#FFD549" d="M87.652 13.192h336.713c17.657 0 32.09 14.499 32.09 32.09v106.567c0 17.591-14.499 32.091-32.09 32.091H87.652c-17.591 0-32.09-14.434-32.09-32.091V45.282c0-17.657 14.433-32.09 32.09-32.09z"/><path fill="#FFCB1E" d="M456.455 45.282v106.567c0 17.582-14.508 32.091-32.09 32.091H87.652L456.455 45.282z"/><path fill="#1F1F1F" fill-rule="nonzero" d="M191.45 79.697h-17.94v57.534h-24.747V79.697h-17.94V59.9h60.627v19.797zm25.551 57.534h-26.107L210.938 59.9h38.233l20.044 77.331h-26.107l-2.846-12.25h-20.415l-2.846 12.25zm12.372-53.575l-5.072 21.653h11.383l-4.948-21.653h-1.363zM300.458 59.9l8.536 20.663h1.239l8.536-20.663h26.85l-17.198 37.367 17.198 39.964h-27.468l-9.279-22.271h-1.115l-9.155 22.271h-26.231l16.827-39.223L272.371 59.9h28.087zm55.989 77.331V59.9h24.746v77.331h-24.746z"/></svg>
+              
+            </div>
+            <div class="stat-content">
+              <span class="stat-label">Vehicle Type</span>
+              <p class="stat-value">{{tourData.vehicleType}}</p>
+            </div>
+            <div class="stat-decoration"></div>
+          </div>
+
+          <div class="stat-card distance">
+            <div class="stat-icon">
+              <!-- <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M4 19l8-8m0 0l8 8m-8-8v12M4 5l8 8m0 0l8-8"></path>
-              </svg>
+              </svg> -->
+              <svg height="200px" width="200px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 502.228 502.228" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#FFCD00;" d="M428.614,296.927V455l-319.586-53.326v-60.475l-19.999,25.144l-20.001-25.147v94.356l399.586,66.674 V296.926c-6.129,2.686-12.891,4.188-20,4.188C441.504,301.114,434.742,299.613,428.614,296.927z"></path> <path style="fill:#FFDA44;" d="M109.028,146.134v-45.581l319.586-53.326v158.073c6.129-2.686,12.891-4.187,20-4.187 c7.109,0,13.871,1.501,20,4.188V0L69.028,66.674v79.459c6.418-1.546,13.115-2.37,20.001-2.37 C95.914,143.763,102.61,144.588,109.028,146.134z"></path> <path style="fill:#2488FF;" d="M398.613,251.113c0,20.461,12.359,38.082,30,45.813c6.129,2.686,12.891,4.187,20,4.187v-100 c-7.109,0-13.871,1.501-20,4.187C410.973,213.032,398.613,230.652,398.613,251.113z"></path> <path style="fill:#005ECE;" d="M498.614,251.113c0-20.461-12.36-38.081-30-45.812c-6.129-2.686-12.891-4.188-20-4.188v100 c7.109,0,13.871-1.501,20-4.188C486.254,289.195,498.614,271.574,498.614,251.113z"></path> <path style="fill:#CD2A00;" d="M174.444,229.178c0-40.215-27.937-74.018-65.416-83.044c-6.418-1.546-13.114-2.371-19.999-2.371 v53.573c17.553,0,31.842,14.281,31.842,31.842c0,17.553-14.289,31.842-31.842,31.842v105.324l19.999-25.144l47.019-59.116 C167.908,267.086,174.444,248.291,174.444,229.178z"></path> <path style="fill:#D8D7DA;" d="M120.87,229.178c0-17.561-14.289-31.842-31.842-31.842v63.683 C106.581,261.02,120.87,246.731,120.87,229.178z"></path> <path style="fill:#FF3501;" d="M89.029,261.02c-17.561,0-31.842-14.289-31.842-31.842c0-17.561,14.281-31.842,31.842-31.842 v-53.573c-6.886,0-13.583,0.825-20.001,2.37c-37.482,9.026-65.414,42.829-65.414,83.045c0,19.113,6.535,37.907,18.428,52.945 l46.986,59.074l20.001,25.147V261.02z"></path> <path style="fill:#FFFFFF;" d="M57.187,229.178c0,17.553,14.281,31.842,31.842,31.842v-63.683 C71.468,197.337,57.187,211.618,57.187,229.178z"></path> </g> </g></svg>
             </div>
             <div class="stat-content">
               <span class="stat-label">Distance</span>
-              <p class="stat-value">{{ tourData.distance }} <span class="stat-unit">km</span></p>
+              <p class="stat-value">{{ getDistance(tourData.distance) }} <span class="stat-unit">km</span></p>
             </div>
             <div class="stat-decoration"></div>
           </div>
 
           <div class="stat-card duration">
             <div class="stat-icon">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <!-- <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="12" cy="12" r="10"></circle>
                 <path d="M12 6v6l4 2"></path>
-              </svg>
+              </svg> -->
+              <svg viewBox="-6 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Group_35" data-name="Group 35" transform="translate(-257 -464)"> <g id="Group_34" data-name="Group 34"> <path id="Path_42" data-name="Path 42" d="M282,475c0,3-3.134,7-7,7s-7-4-7-7Z" fill="#7d50f9"></path> <path id="Path_43" data-name="Path 43" d="M282,501a7,7,0,0,0-14,0Z" fill="#7d50f9"></path> </g> <path id="Path_44" data-name="Path 44" d="M289,475v-1a2,2,0,0,1,2-2,2,2,0,0,0,2-2v-4a2,2,0,0,0-2-2H259a2,2,0,0,0-2,2v4a2,2,0,0,0,2,2,2,2,0,0,1,2,2v1a14.013,14.013,0,0,0,8.834,13A14.013,14.013,0,0,0,261,501v1a2,2,0,0,1-2,2,2,2,0,0,0-2,2v4a2,2,0,0,0,2,2h32a2,2,0,0,0,2-2v-4a2,2,0,0,0-2-2,2,2,0,0,1-2-2v-1a14.013,14.013,0,0,0-8.834-13A14.013,14.013,0,0,0,289,475Zm-30-9h32l0,4H259Zm32,44H259v-4h32Zm-4-9v1a3.959,3.959,0,0,0,.556,2H262.444a3.959,3.959,0,0,0,.556-2v-1a12.009,12.009,0,0,1,11-11.949V491h2v-1.949A12.009,12.009,0,0,1,287,501Zm-11-14.051V485h-2v1.949A12.009,12.009,0,0,1,263,475v-1a3.959,3.959,0,0,0-.556-2h25.112a3.959,3.959,0,0,0-.556,2v1A12.009,12.009,0,0,1,276,486.949Z" fill="#303033"></path> </g> </g></svg>
             </div>
             <div class="stat-content">
               <span class="stat-label">Duration</span>

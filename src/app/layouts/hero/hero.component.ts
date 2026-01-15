@@ -95,7 +95,9 @@ export class HeroComponent {
         destinationLonLang: [(destination?.longitude || 0), (destination?.latitude || 0)],
         pickupDate: new Date(this.PickupDate?.value),
         pickupTime: new Date(this.PickupTime?.value),
-        noOfGuests: this.searchForm.value.guests
+        noOfGuests: this.searchForm.value.guests,
+        vehicleTypeId: 0,
+        vehicleTypeName: ''
       };
       console.log('Location Details:', locationDetails);
       // You can use a service to share this data with other components

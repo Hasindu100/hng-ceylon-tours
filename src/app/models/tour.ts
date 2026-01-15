@@ -21,5 +21,7 @@ export interface LocationVM {
     destinationLonLang: [number, number],
     pickupDate: Date,
     pickupTime: Date,
-    noOfGuests: number
+    noOfGuests: number,
+    vehicleTypeId: number,
+    vehicleTypeName: string
 }

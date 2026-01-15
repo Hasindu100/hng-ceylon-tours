@@ -52,7 +52,8 @@
                 <ng-select
                   id="pickupLocation"
                   formControlName="pickupLocation"
-                  class="form-input drp-location">
+                  class="form-input drp-location"
+                  [ngClass]="{'is-invalid' : PickupLocation?.touched && PickupLocation?.invalid}">
                   <ng-option [value]="'0'">Select Pickup location . . .</ng-option>
                   <ng-option *ngFor="let location of locationData" [value]="location.id">{{ location.locationName }}</ng-option>
                 </ng-select>
@@ -72,7 +73,8 @@
                 <ng-select
                   id="destination"
                   formControlName="destination"
-                  class="form-input drp-location">
+                  class="form-input drp-location"
+                  [ngClass]="{'is-invalid' : Destination?.touched && Destination?.invalid}">
                   <ng-option [value]="'0'">Select Drop location . . .</ng-option>
                   <ng-option *ngFor="let location of locationData" [value]="location.id">{{ location.locationName }}</ng-option>
                 </ng-select>
@@ -128,10 +130,23 @@
               <button type="button" class="guest-control" (click)="addGuest()">+</button>
             </div>
           </div>
-
-          
         </div>
-        <div class="form-row">
+        <div class="row second-row">
+          <div class="col-md-4">
+            <!-- Vehicle Type  -->
+            <div class="form-group">
+              <div class="frm-header">
+                <label>Vehicle Type:</label>
+              </div>
+              <div class="vehicle-type-wrapper">
+                <div *ngFor="let type of vehicleTypes" class="vehicle-card" [ngClass]="{'selected': selectedVehicleType == type.vehicleTypeId}" (click)="onSelectVehicleType(type.vehicleTypeId, type.vehicleTypeName)">
+                  <img class="vehicle-img" [src]="type.image" alt="">
+                  <div class="vehicle-type-name">{{type.vehicleTypeName}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
             <!-- Search Button -->
             <div class="form-group btn-section">
                 <button type="submit" class="search-button" [disabled]="!searchForm.valid">
@@ -141,6 +156,7 @@
                 </svg>
                 </button>
             </div>
+          </div>
         </div>
       </form>
     </div>
