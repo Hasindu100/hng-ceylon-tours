@@ -1,4 +1,4 @@
-@import 'leaflet/dist/leaflet.css';
+
 
 .controls { margin-bottom: 8px; display: flex; gap: 12px; flex-wrap: wrap; }
     .info { margin-bottom: 8px; }
@@ -21,8 +21,26 @@
 }
 
 
+::ng-deep .leaflet-routing-container {
+  display: none !important; /* hides the entire panel */
+}
+
+
+.city-label.leaflet-tooltip {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: #0b3d91;
+  font-weight: 600;
+  text-shadow: 0 0 2px #fff;
+  padding: 0;
+}
+
+
+
+
 :host {
-  --primary-color: #fa2a2a;
+  --red-color: #fa2a2a;
   --secondary-color: #004E89;
   --accent-color: #F7931E;
   --success-color: #06A77D;
@@ -49,7 +67,7 @@
   font-family: 'DM Sans', sans-serif;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 48px 24px;
+  padding: 0px 24px 48px 24px;
   transform: translateY(30px);
   transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -82,10 +100,10 @@
   align-items: center;
   gap: 8px;
   padding: 8px 20px;
-  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  background: #6b2cf5;;
   color: white;
   border-radius: 100px;
-  font-size: 14px;
+  font-size: 24px;
   font-weight: 600;
   margin-bottom: 16px;
   box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
@@ -172,11 +190,11 @@
 .location-card.dropoff .location-icon {
   //background: linear-gradient(135deg, #ec7711, #fa7143);
   background: #fff;
-  border-color: var(--primary-color);
+  border-color: var(--red-color);
 }
 
 .location-card.dropoff .location-icon svg {
-  color: var(--primary-color);
+  color: var(--red-color);
 }
 
 .location-icon:hover {
@@ -215,7 +233,7 @@
 .connector-line {
   width: 3px;
   height: 40px;
-  background: linear-gradient(180deg, var(--accent-color), var(--primary-color));
+  background: linear-gradient(180deg, var(--accent-color), var(--red-color));
   border-radius: 10px;
   position: relative;
   animation: growDown 0.6s ease-out 0.4s both;
@@ -239,7 +257,7 @@
 .dot {
   width: 6px;
   height: 6px;
-  background: var(--primary-color);
+  background: var(--red-color);
   border-radius: 50%;
   animation: fadeIn 0.3s ease-out both;
 }
@@ -362,18 +380,18 @@
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
+  gap: 10px;
 }
 
 .stat-card {
   background: var(--card-bg);
   border-radius: var(--radius-md);
-  padding: 10px;
+  padding: 5px 10px;
   box-shadow: var(--shadow-sm);
   border: 2px solid var(--border-color);
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
   position: relative;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -406,7 +424,7 @@
 .stat-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
-  border-color: var(--primary-color);
+  border-color: var(--secondary-color);
 }
 
 .stat-decoration {
@@ -420,16 +438,8 @@
   transition: all 0.4s ease;
 }
 
-.stat-card.distance .stat-decoration {
+.stat-card .stat-decoration {
   background: var(--secondary-color);
-}
-
-.stat-card.duration .stat-decoration {
-  background: var(--success-color);
-}
-
-.stat-card.rate .stat-decoration {
-  background: var(--primary-color);
 }
 
 .stat-card:hover .stat-decoration {
@@ -448,19 +458,9 @@
   transition: all 0.3s ease;
 }
 
-.stat-card.distance .stat-icon {
+.stat-card .stat-icon {
   background: linear-gradient(135deg, #DBEAFE, #BFDBFE);
   color: var(--secondary-color);
-}
-
-.stat-card.duration .stat-icon {
-  background: linear-gradient(135deg, #D1FAE5, #A7F3D0);
-  color: var(--success-color);
-}
-
-.stat-card.rate .stat-icon {
-  background: linear-gradient(135deg, #FEE2E2, #FECACA);
-  color: var(--primary-color);
 }
 
 .stat-card:hover .stat-icon {
@@ -483,7 +483,7 @@
 
 .stat-value {
   font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 32px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--text-primary);
   margin: 0;
@@ -555,7 +555,7 @@
 
 .price-badge {
   padding: 6px 16px;
-  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  background: linear-gradient(135deg, var(--red-color), var(--accent-color));
   color: white;
   border-radius: 100px;
   font-size: 12px;
@@ -564,6 +564,7 @@
   letter-spacing: 0.05em;
   box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
   animation: shimmer 2s ease-in-out infinite;
+  white-space: nowrap;
 }
 
 @keyframes shimmer {
@@ -625,7 +626,7 @@
 .book-button {
   width: 100%;
   padding: 18px 32px;
-  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  background: linear-gradient(135deg, var(--red-color), var(--accent-color));
   color: white;
   border: none;
   border-radius: var(--radius-md);
@@ -692,6 +693,7 @@
 
   .stats-grid {
     grid-template-columns: 1fr;
+    margin-top: 30px;
   }
 
   .price-card {
@@ -707,10 +709,15 @@
   }
 
   .stat-value {
-    font-size: 28px;
+    font-size: 16px;
   }
 }
 
 .hide-tour {
   display: none;
+}
+
+
+.details {
+  scroll-margin-top: 50px;
 }

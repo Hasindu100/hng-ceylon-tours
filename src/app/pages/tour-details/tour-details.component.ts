@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import { CommonService } from 'src/app/services/common.service';
@@ -38,18 +38,30 @@ export class TourDetailsComponent {
         { lat: 7.2906, lng: 80.5209 },
         { lat: 7.9570, lng: 80.7603 }
       ]
-    }
+    },
+    vehicleTypeId: 0,
+    vehicleType: ''
   };
 
   isVisible = false;
   hasData: boolean = false;
   priceRatePerKM: number = 0.4; // USD per kilometer
   isLoading: boolean = false;
+  coffeeIcon: any;
+
+  @ViewChild('tourDetailsSection') tourDetailsSection!: ElementRef<HTMLDivElement>;
 
   constructor(private commonService: CommonService) { }
 
   ngAfterViewInit() {
-    
+    this.coffeeIcon = L.icon({
+      iconUrl: 'assets/icons/marker-icon.png', // your image
+      iconRetinaUrl: 'assets/icons/marker-icon.png', // optional retina
+      iconSize: [20, 20],       // width, height of the image
+      iconAnchor: [10, 20],     // point of the icon which will correspond to marker's location
+      popupAnchor: [0, -40],    // point from which the popup should open relative to the iconAnchor
+      tooltipAnchor: [0, -20]   // tooltip offset
+    });
   }
 
   ngAfterViewChecked() {
@@ -73,6 +85,7 @@ export class TourDetailsComponent {
       }).addTo(this.map);
 
       // Initial markers
+      (L.Marker.prototype as any).options.icon = this.coffeeIcon;
       this.startMarker = L.marker([this.fromLat, this.fromLon]).addTo(this.map);
       this.endMarker = L.marker([this.toLat, this.toLon]).addTo(this.map);
     }
@@ -86,7 +99,9 @@ export class TourDetailsComponent {
         distance: 150, // Placeholder, should be calculated
         duration: 180, // Placeholder, should be calculated
         price: 10000, // Placeholder, should be calculated
-        mapRoute: undefined
+        mapRoute: undefined,
+        vehicleTypeId: data.vehicleTypeId,
+        vehicleType: data.vehicleTypeName
       };
       this.fromLon = data.pickupLonLang[0];
       this.fromLat = data.pickupLonLang[1];
@@ -121,6 +136,9 @@ export class TourDetailsComponent {
     }).format(price);
   }
 
+  getDistance(distance: number) {
+    return distance.toFixed(2);
+  }
 
   calculatePricePerKm(): any {
     if (this.tourData) {
@@ -158,8 +176,26 @@ export class TourDetailsComponent {
       // Add start/end markers
       const startLatLng = latLngs[0];
       const endLatLng = latLngs[latLngs.length - 1];
+
       this.startMarker = L.marker(startLatLng).addTo(this.map).bindPopup('Start');
       this.endMarker = L.marker(endLatLng).addTo(this.map).bindPopup('End');
+
+      const pickupLocation = this.tourData?.pickupLocation ?? '';
+      const destination = this.tourData?.dropLocation ?? '';
+
+      this.startMarker.bindTooltip(pickupLocation, {
+        permanent: true,     // 👈 keep it visible
+        direction: 'top',    // 'top' | 'right' | 'left' | 'bottom' | 'center'
+        offset: L.point(0, -8), // nudge the label slightly above the marker
+        className: 'city-label' // custom CSS class (optional)
+      });
+
+      this.endMarker.bindTooltip(destination, {
+        permanent: true,
+        direction: 'top',
+        offset: L.point(0, -8),
+        className: 'city-label'
+      });
       
       // Show metrics
       this.distanceKm = distanceKm;
@@ -205,7 +241,19 @@ export class TourDetailsComponent {
     //const latLngs: [number, number][] = coords.map(([lon, lat]) => [lat, lon]);
     const latLngs: [number, number][] = [[this.fromLat, this.fromLon], [this.toLat, this.toLon]];
     this.isLoading = false;
+    this.scrollToSection();
     return { distanceKm: km, durationMin: min, latLngs };
+  }
+
+  
+  scrollToSection() {
+    const el = this.tourDetailsSection.nativeElement;
+    const y = el.getBoundingClientRect().top + window.scrollY;
+    //const header = document.querySelector('.app-header2') as HTMLElement | null;
+    const header = document.getElementById('header');
+    const offset = header?.offsetHeight ?? 0; // extra gap
+
+    window.scrollTo({ top: y - offset, behavior: 'smooth' });
   }
 }
 
@@ -218,6 +266,8 @@ export interface TourDetails {
   mapRoute?: {
     coordinates: { lat: number; lng: number }[];
   };
+  vehicleTypeId: number,
+  vehicleType: string
 }
 
 export interface RouteResult {

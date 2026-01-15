@@ -12,7 +12,7 @@ isMobileMenuOpen = false;
 
   // Contact information
   phone = '+94773870335';
-  email = 'info@off2srilanka.com';
+  email = 'hngceylontours@gmail.com';
 
   // Navigation items
   navigationItems = [
@@ -26,10 +26,10 @@ isMobileMenuOpen = false;
 
   // Social media links
   socialLinks = [
-    { icon: 'facebook', url: '#', label: 'Facebook' },
-    { icon: 'instagram', url: '#', label: 'Instagram' },
-    { icon: 'whatsapp', url: '#', label: 'WhatsApp' },
-    { icon: 'tripadvisor', url: '#', label: 'TripAdvisor' }
+    { icon: 'fa fa-facebook', url: '#', label: 'Facebook' },
+    { icon: 'fa fa-instagram', url: '#', label: 'Instagram' },
+    { icon: 'fa fa-whatsapp', url: '#', label: 'WhatsApp' },
+    { icon: 'fa fa-tripadvisor', url: '#', label: 'TripAdvisor' }
   ];
 
   tourTypeList: any[] = [];

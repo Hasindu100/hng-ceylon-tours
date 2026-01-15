@@ -21,6 +21,13 @@ export class TourHeroComponent {
     { icon: '✓', text: 'Local Guide' }
   ];
 
+  vehicleTypes = [
+    { vehicleTypeId: 1, vehicleTypeName: 'Car', image: 'assets/images/vehicle/car.png'},
+    { vehicleTypeId: 2, vehicleTypeName: 'Mini Car', image: 'assets/images/vehicle/mini-car.png'},
+    { vehicleTypeId: 3, vehicleTypeName: 'Van', image: 'assets/images/vehicle/van.png'},
+    { vehicleTypeId: 4, vehicleTypeName: 'Mini Van', image: 'assets/images/vehicle/mini-van.png'},
+  ]
+
   get PickupLocation() {
     return this.searchForm.get('pickupLocation');
   }
@@ -41,12 +48,16 @@ export class TourHeroComponent {
     private locationService: LocationService,
     private commonService: CommonService) {
     this.searchForm = this.fb.group({
-      pickupLocation: ['0', Validators.required],
-      destination: ['0', Validators.required],
+      pickupLocation: ['0', [Validators.required, Validators.min(1)]],
+      destination: ['0', [Validators.required, Validators.min(1)]],
       pickupDate: ['', Validators.required],
       pickupTime: ['', Validators.required],
       guests: [1, [Validators.required, Validators.min(1)]]
     });
+  }
+
+  get selectedVehicleType() {
+    return this.commonService.selectedVehicleTypeId;
   }
 
   ngOnInit(): void {
@@ -95,7 +106,9 @@ export class TourHeroComponent {
         destinationLonLang: [(destination?.longitude || 0), (destination?.latitude || 0)],
         pickupDate: new Date(this.PickupDate?.value),
         pickupTime: new Date(this.PickupTime?.value),
-        noOfGuests: this.searchForm.value.guests
+        noOfGuests: this.searchForm.value.guests,
+        vehicleTypeId: this.commonService.selectedVehicleTypeId,
+        vehicleTypeName: this.commonService.selectedVehicleTypeName
       };
       console.log('Location Details:', locationDetails);
       // You can use a service to share this data with other components
@@ -116,5 +129,10 @@ export class TourHeroComponent {
   nextSlide(): void {
     console.log('Next slide');
     // Implement carousel logic
+  }
+
+  onSelectVehicleType(vehicleTypeId: number,  vehicleTypeName: string) {
+    this.commonService.selectedVehicleTypeId = vehicleTypeId;
+    this.commonService.selectedVehicleTypeName = vehicleTypeName;
   }
 }
