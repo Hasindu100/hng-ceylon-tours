@@ -109,7 +109,7 @@ export class TourDetailsComponent {
       this.toLat = data.destinationLonLang[1];
       this.hasData = true;
       this.isLoading = true;
-      this.drawRoute2();
+      this.drawRoute();
     });
     // Use sample data if no input provided
     // if (!this.tourData) {
@@ -141,6 +141,22 @@ export class TourDetailsComponent {
   }
 
   calculatePricePerKm(): any {
+    switch(this.tourData?.vehicleTypeId) {
+      case 1:
+        this.priceRatePerKM = 0.4;
+        break;
+      case 2:
+        this.priceRatePerKM = 0.3;
+        break;
+      case 3:
+        this.priceRatePerKM = 0.6;
+        break;
+      case 4:
+        this.priceRatePerKM = 0.5;
+        break;
+      default:
+        break;
+    }
     if (this.tourData) {
       const pricePerKm = this.tourData.distance * this.priceRatePerKM;
       return pricePerKm.toFixed(2);
@@ -148,12 +164,14 @@ export class TourDetailsComponent {
     return 0;
   }
 
-  async drawRoute2(): Promise<void> {
+  async drawRoute(): Promise<void> {
     // Clean previous
     this.routeLayer?.remove(); this.routeLayer = undefined;
     this.startMarker?.remove(); this.startMarker = undefined;
     this.endMarker?.remove(); this.endMarker = undefined;
     this.distanceKm = null; this.durationMin = null;
+
+    this.removeOnlyMarkers();
 
     try {
       // ORS needs [lon, lat]
@@ -255,6 +273,17 @@ export class TourDetailsComponent {
 
     window.scrollTo({ top: y - offset, behavior: 'smooth' });
   }
+
+  
+  removeOnlyMarkers() {
+    if (!this.map) return;
+    this.map.eachLayer((layer: any) => {
+      if (layer instanceof L.Marker) {
+        this.map.removeLayer(layer);
+      }
+    });
+  }
+
 }
 
 export interface TourDetails {
