@@ -1,0 +1,93 @@
+<!-- Hero Banner -->
+<app-hero-banner 
+  [title]="'Frequently Asked Questions'" 
+  [subTitle]="'Find answers to common questions about our services'">
+</app-hero-banner>
+
+<!-- FAQ Container -->
+<div class="faq-container">
+  <div class="faq-wrapper">
+    <!-- Header Section -->
+    <section class="faq-header">
+      <h1 class="faq-title">How Can We Help You?</h1>
+      <p class="faq-subtitle">
+        Explore our comprehensive FAQ section to find answers to your questions about bookings, payments, vehicles, tours, and more.
+      </p>
+      <p class="faq-help-text">
+        Can't find what you're looking for? <a href="/contact" class="faq-link">Contact our support team</a> and we'll be happy to assist you.
+      </p>
+    </section>
+
+    <!-- Category Navigation -->
+    <section class="category-navigation">
+      <div class="category-tabs">
+        <button 
+          *ngFor="let category of categories"
+          class="category-tab"
+          [class.active]="activeCategory === category"
+          (click)="setActiveCategory(category)"
+        >
+          <span class="category-name">{{ getCategoryLabel(category) }}</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- FAQ Items Section -->
+    <section class="faq-content">
+      <div class="faq-list">
+        <div class="faq-items-wrapper">
+          <div 
+            *ngFor="let faqItem of filterByCategory(activeCategory); let last = last"
+            class="faq-item"
+            [class.open]="faqItem.isOpen"
+          >
+            <!-- FAQ Question -->
+            <div class="faq-question" (click)="toggleFAQ(faqItem)">
+              <div class="question-content">
+                <h3 class="question-text">{{ faqItem.question }}</h3>
+              </div>
+              <div class="question-icon">
+                <svg 
+                  class="icon" 
+                  [class.rotate]="faqItem.isOpen"
+                  width="24" 
+                  height="24" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  stroke-width="2"
+                >
+                  <path d="M19 12l-7 7-7-7"></path>
+                </svg>
+              </div>
+            </div>
+
+            <!-- FAQ Answer -->
+            <div class="faq-answer" [class.show]="faqItem.isOpen">
+              <div class="answer-content">
+                <p>{{ faqItem.answer }}</p>
+              </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="faq-divider" *ngIf="!last"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="faq-cta">
+      <div class="cta-content">
+        <h2 class="cta-title">Still have questions?</h2>
+        <p class="cta-description">
+          Our dedicated support team is here to help. Reach out to us and we'll provide personalized assistance for your travel needs.
+        </p>
+        <div class="cta-buttons">
+          <a href="/contact" class="cta-button primary">Contact Us</a>
+          <a href="/" class="cta-button secondary">Back to Home</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

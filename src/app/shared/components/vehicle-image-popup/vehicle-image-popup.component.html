@@ -1,0 +1,22 @@
+<div class="overlay">
+  <div class="modal1">
+    <button class="close-btn" title="close" (click)="closePopup()">✕</button>
+
+    <div class="content">
+      <!-- Main Image -->
+      <div class="main-image">
+        <img [src]="selectedImage" />
+      </div>
+
+      <!-- Image Grid -->
+      <div class="image-grid">
+        <img
+          *ngFor="let img of imageList"
+          [src]="img"
+          (click)="selectImage(img)"
+          [class.active]="img === selectedImage"
+        />
+      </div>
+    </div>
+  </div>
+</div>

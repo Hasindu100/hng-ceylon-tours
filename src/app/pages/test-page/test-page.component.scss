@@ -1,0 +1,5 @@
+
+.phone-form { display: grid; gap: 10px; max-width: 420px; height: 500px; margin-top: 300px; }
+.phone-row { display: flex; align-items: center; gap: 8px; }
+.dial { background:#f3f3f3; padding: 8px 10px; border: 1px solid #ccc; border-radius: 6px; }
+.error { color:#c62828; }

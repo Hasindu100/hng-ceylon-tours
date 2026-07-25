@@ -1,0 +1,359 @@
+<div class="airport-pickup-form-container">
+    <div class="airport-pickup search-form-section" *ngIf="step == 1">
+        <!-- Search Form -->
+        <form [formGroup]="searchForm" (ngSubmit)="onSearchTourDetails()" class="search-form">
+            <div class="form-row">
+                <!-- Destination -->
+                <div class="form-group">
+                    <div class="frm-header">
+                        <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z"
+                                fill="currentColor" />
+                        </svg>
+                        <label for="destination">Pickup Location:</label>
+                    </div>
+                    <div class="input-wrapper">
+                        <ng-select id="pickupLocation" formControlName="pickupLocation" class="form-input drp-location"
+                            [ngClass]="{'is-invalid' : PickupLocation?.touched && PickupLocation?.invalid}"
+                            (change)="onChangeDropLocationChange()"
+                            (search)="searchLocations($event.term)">
+                            <ng-option [value]="'0'">Select Pickup location . . .</ng-option>
+                            <ng-option *ngFor="let location of pickupLocationData" [value]="location.id">{{
+                                location.locationName }}</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+
+                <!-- Destination -->
+                <div class="form-group">
+                    <div class="frm-header">
+                        <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z"
+                                fill="currentColor" />
+                        </svg>
+                        <label for="destination">Drop Location:</label>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <ng-select id="destination" formControlName="destination" class="form-input drp-location"
+                            [ngClass]="{'is-invalid' : Destination?.touched && Destination?.invalid}">
+                            <ng-option [value]="'0'">Select Drop location . . .</ng-option>
+                            <ng-option *ngFor="let location of locationData" [value]="location.id">{{
+                                location.locationName }}</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+
+                <!-- Check In Date -->
+                <div class="form-group">
+                    <div class="frm-header">
+                        <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M8 2V5M16 2V5M3.5 9.09H20.5M21 8.5V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V8.5C3 5.5 4.5 3.5 8 3.5H16C19.5 3.5 21 5.5 21 8.5Z"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <label for="pickupDate">Date:</label>
+                    </div>
+                    <div class="input-wrapper pickup-date" [ngClass]="{'is-invalid' : PickupDate?.invalid}">
+                        <input type="date" id="pickupDate" formControlName="pickupDate" class="form-input">
+                    </div>
+                </div>
+
+                <!-- Check Out Date -->
+                <div class="form-group">
+                    <div class="frm-header">
+                        <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path
+                                    d="M12 7V12L14.5 13.5M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                                    stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                </path>
+                            </g>
+                        </svg>
+                        <label for="pickupTime">Time:</label>
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="time" id="pickupTime" formControlName="pickupTime" class="form-input"
+                            [ngClass]="{'is-invalid' : PickupTime?.touched && PickupTime?.invalid}">
+                    </div>
+                </div>
+            </div>
+            <div class="row second-row">
+                <div class="col-md-12 vehicle-selector-section">
+                    <!-- Vehicle Type  -->
+                    <div class="vehicle-selector-container form-group">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="vehicle-selection">
+                                    <h3 class="vehicle-type-label">Select a vehicle</h3>
+                                    <div class="vehicle-type-wrapper">
+                                        <div *ngFor="let vehicle of vehicleTypes" class="vehicle-card"
+                                            [ngClass]="{'selected': selectedVehicleTypeId === vehicle.vehicleTypeId}"
+                                            (click)="selectVehicle(vehicle.vehicleTypeId)">
+                                            <img class="vehicle-img" [src]="getVehicleTypeImage(vehicle.vehicleTypeId)"
+                                                alt="">
+                                            <div class="vehicle-type-name">{{vehicle.name}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="vehicle-info">
+                                    <div class="vehicle-name">
+                                        {{ getSelectedVehicleType() }} <a (click)="openVehicleImagePopup()" class="view-link">View</a>
+                                    </div>
+                                </div>
+                                <div class="vehicle-details">
+                                    <div class="feature-item">
+                                        <span class="feature-icon">
+                                            <svg fill="#000000" viewBox="0 -1.41 122.88 122.88" id="Layer_1"
+                                                data-name="Layer 1" xmlns="http://www.w3.org/2000/svg">
+                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                    stroke-linejoin="round"></g>
+                                                <g id="SVGRepo_iconCarrier">
+                                                    <defs>
+                                                        <style>
+                                                            .cls-1 {
+                                                                fill-rule: evenodd;
+                                                            }
+                                                        </style>
+                                                    </defs>
+                                                    <title>guest-traveler</title>
+                                                    <path class="cls-1"
+                                                        d="M90.54,38.25c2.23-.75,4.58.44,6.13,2.3h18.46a.51.51,0,0,1,.51.51v4.86a.51.51,0,0,1-.51.51H111.9V62.62h-3.73V46.43H98.11a9.11,9.11,0,0,1-2.36,3.36V62.62H92V52.41a57.27,57.27,0,0,1-8,3.38,84.35,84.35,0,0,1-9,2.79,18,18,0,0,1-15.71-4,41.48,41.48,0,0,1-3.49-3.35l-.34-.36-3,17.75a62.39,62.39,0,0,0,7.2,4.17c7.78,3.63,14.18,6.63,15.55,18.85.25,2.14.14,14.68,0,20.84H86a1.8,1.8,0,0,1-.67-1.43v-1.89a4.77,4.77,0,0,1-4.71-4.76v-36a4.78,4.78,0,0,1,4.76-4.76h1.09a.91.91,0,0,0,0,.23l1.19,4.54a7.4,7.4,0,0,0,1.79,3.38A4.22,4.22,0,0,0,92.58,73h4.77v2.55c0,.41,1.92.73,2.32.73H106a.72.72,0,0,0,.73-.72V73h5a4.36,4.36,0,0,0,3.16-1.32,6.81,6.81,0,0,0,1.72-3.4l1-4.48a1,1,0,0,0,0-.24h.51a4.78,4.78,0,0,1,4.76,4.76v36.05a4.77,4.77,0,0,1-4.71,4.76V111a1.8,1.8,0,0,1-.67,1.43h5.38v7.58H0v-7.58H19.83c1.41-3.79,2.86-7.83,4.28-11.89,2.93-8.39,5.74-17,7.8-23.84a22,22,0,0,1-3.21-5.06A11.33,11.33,0,0,1,27.82,65l4.33-21.82c-1.55-.08-3.34-.54-4.8.1-2.83,1.24-7,6.52-9.47,9l-3.31,3.35c-2.55,2.58-4.25,5.44-8.15,5.13-4.84-.38-8.3-5.76-4.89-9.89l7.63-7.72c3.67-3.73,7.16-8.12,11.69-10.68C24.49,30.41,28.45,29,35,29.28c2.4,0,4.94.27,7.34.5l2.8.24c11,.71,16.12,6.5,20.12,11,1.77,2,3.29,3.7,4.94,4.49.78.37,2-.15,3.39-.73L83.76,41l6.78-2.72ZM61.15,112.47c.14-6.94.29-16.73.18-18.62-.09-1.35-1-4.92-2.42-5.57a59.35,59.35,0,0,0-5.83-2.17c-2.75-.91-5-1.83-7.72-2.58-2,6.58-4.68,14.52-7.57,22.09l-2.73,6.85Zm52.87,0H89.49a1.77,1.77,0,0,0,.67-1.43v-1.89h23.19V111a1.77,1.77,0,0,0,.67,1.43ZM88.91,100.24a.88.88,0,0,1,0-1.76h25.82a.88.88,0,0,1,0,1.76Zm0-8.51a.88.88,0,0,1,0-1.76h25.82a.88.88,0,1,1,0,1.76Zm0-8.51a.88.88,0,0,1,0-1.76h25.82a.88.88,0,1,1,0,1.76Zm26.73-18.75H88.5l.9,3.43a5.63,5.63,0,0,0,1.34,2.58,2.49,2.49,0,0,0,1.83.78h19.17a2.65,2.65,0,0,0,1.92-.81,5.09,5.09,0,0,0,1.24-2.51l.74-3.47ZM44.82.71a13.17,13.17,0,1,1-7.56,6.66A13.13,13.13,0,0,1,44.82.71Z">
+                                                    </path>
+                                                </g>
+                                            </svg>
+                                        </span>
+                                        <span class="feature-text">{{ getPassengersCount() }} passengers</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <span class="feature-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                    stroke-linejoin="round"></g>
+                                                <g id="SVGRepo_iconCarrier">
+                                                    <path
+                                                        d="M13 2h-2v4H9V4H7v2h2v2h2v3H8V9H6V7H4v2h2v2H2v2h4v2H4v2h2v-2h2v-2h3v3H9v2H7v2h2v-2h2v4h2v-4h2v2h2v-2h-2v-2h-2v-3h3v2h2v2h2v-2h-2v-2h4v-2h-4V9h2V7h-2v2h-2v2h-3V8h2V6h2V4h-2v2h-2V2z"
+                                                        fill="#000000"></path>
+                                                </g>
+                                            </svg>
+                                        </span>
+                                        <span class="feature-text">Air Condition</span>
+                                    </div>
+                                </div>
+                                <div class="price-section">
+                                    <button class="k-button btn-tour-primary btn-booking" (click)="nextStep()"
+                                        [disabled]="!searchForm.valid">
+                                        <span class="price-tag">Book Now - $ {{ totalTourPrice }}</span>
+                                    </button>
+                                    <div class="tax-info">All charges & taxes are included</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="airport-pickup personal-info-form-section" *ngIf="step == 2 &&  searchFormData">
+        <!-- airportPickupPersonalInfoForm -->
+         <form [formGroup]="personalInfoForm" class="booking-form">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="trip-summary-card">
+                    <!-- Header Section -->
+                    <div class="summary-card-header">
+                        <div class="vehicle-details-container">
+                            <div class="vehicle-icon">
+                                <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css">  .st0{fill:#000000;}  </style> <g> <path class="st0" d="M34.313,250.891c2.297-5.016,6.688-13.281,14.438-27.813c3.531-6.672,7.5-14.047,11.563-21.625H24.719 C11.063,201.453,0,212.516,0,226.188c0,13.641,11.063,24.703,24.719,24.703H34.313z"></path> <path class="st0" d="M487.281,201.453h-35.594c4.078,7.578,8.031,14.953,11.563,21.625c7.75,14.531,12.125,22.797,14.438,27.813 h9.594c13.656,0,24.719-11.063,24.719-24.703C512,212.516,500.938,201.453,487.281,201.453z"></path> <path class="st0" d="M39.391,465.188c0,18.406,14.938,33.328,33.328,33.328c18.406,0,33.313-14.922,33.313-33.328v-31.516H39.391 V465.188z"></path> <path class="st0" d="M405.938,465.188c0,18.406,14.938,33.328,33.344,33.328s33.328-14.922,33.328-33.328v-31.516h-66.672V465.188z "></path> <path class="st0" d="M467.875,257.109c1.688,0.484-61.688-115.828-64.719-122.109c-8-16.672-27.781-26.703-47.063-26.703 c-22.281,0-84.344,0-84.344,0s-93.563,0-115.859,0c-19.297,0-39.031,10.031-47.047,26.703 c-3.031,6.281-66.391,122.594-64.719,122.109c0,0-20.5,20.438-22.063,22.063c-8.625,9.281-8,17.297-8,25.313c0,0,0,75.297,0,92.563 c0,17.281,3.063,26.734,23.438,26.734h437c20.375,0,23.469-9.453,23.469-26.734c0-17.266,0-92.563,0-92.563 c0-8.016,0.594-16.031-8.063-25.313C488.406,277.547,467.875,257.109,467.875,257.109z M96.563,221.422 c0,0,40.703-73.313,43.094-78.109c4.125-8.203,15.844-14.141,27.828-14.141h177.031c12,0,23.703,5.938,27.828,14.141 c2.406,4.797,43.109,78.109,43.109,78.109c3.75,6.75,0.438,19.313-10.672,19.313H107.219 C96.109,240.734,92.813,228.172,96.563,221.422z M91.125,384.469c-20.656,0-37.406-16.734-37.406-37.391 c0-20.672,16.75-37.406,37.406-37.406s37.391,16.734,37.391,37.406C128.516,367.734,111.781,384.469,91.125,384.469z M312.781,394.578c0,2.734-2.219,4.953-4.938,4.953H204.172c-2.734,0-4.953-2.219-4.953-4.953v-45.672 c0-2.703,2.219-4.906,4.953-4.906h103.672c2.719,0,4.938,2.203,4.938,4.906V394.578z M420.875,384.469 c-20.656,0-37.422-16.734-37.422-37.391c0-20.672,16.766-37.406,37.422-37.406s37.406,16.75,37.406,37.406 S441.531,384.469,420.875,384.469z"></path> <path class="st0" d="M152.906,49.25c0.016-10.047,8.172-18.203,18.219-18.219h169.75c10.031,0.016,18.188,8.172,18.203,18.219 v49.172h17.547V49.25c0-19.75-16-35.75-35.75-35.766h-169.75c-19.75,0.016-35.75,16.016-35.766,35.766v49.172h17.547V49.25z"></path> <path class="st0" d="M195.141,92.938h8.891c0.438,0,0.719-0.266,0.719-0.672V56.328c0-0.281,0.156-0.422,0.406-0.422h12.063 c0.406,0,0.719-0.266,0.719-0.672v-7.469c0-0.406-0.313-0.688-0.719-0.688h-35.25c-0.438,0-0.719,0.281-0.719,0.688v7.469 c0,0.406,0.281,0.672,0.719,0.672h12.047c0.281,0,0.422,0.141,0.422,0.422v35.938C194.438,92.672,194.719,92.938,195.141,92.938z"></path> <path class="st0" d="M237.438,47.078c-0.5,0-0.781,0.281-0.922,0.688l-16.391,44.5c-0.156,0.406,0,0.672,0.469,0.672h9.203 c0.484,0,0.766-0.203,0.906-0.672l2.672-8.031h16.688l2.719,8.031c0.156,0.469,0.438,0.672,0.938,0.672h9.094 c0.5,0,0.625-0.266,0.5-0.672l-16.125-44.5c-0.156-0.406-0.406-0.688-0.922-0.688H237.438z M247.25,75.813h-11l5.406-16.047h0.203 L247.25,75.813z"></path> <path class="st0" d="M269.844,92.938h9.688c0.625,0,0.906-0.203,1.188-0.672l8.531-13.969h0.219l8.5,13.969 c0.281,0.469,0.531,0.672,1.188,0.672h9.734c0.516,0,0.641-0.406,0.453-0.813l-14.313-22.859l13.297-21.375 c0.234-0.406,0.078-0.813-0.406-0.813h-9.734c-0.563,0-0.844,0.203-1.141,0.688l-7.578,12.391h-0.219l-7.563-12.391 c-0.266-0.484-0.547-0.688-1.125-0.688h-9.75c-0.469,0-0.625,0.406-0.406,0.813l13.266,21.375l-14.234,22.859 C269.156,92.531,269.359,92.938,269.844,92.938z"></path> <path class="st0" d="M320.422,47.766v44.5c0,0.406,0.281,0.672,0.688,0.672h8.922c0.406,0,0.688-0.266,0.688-0.672v-44.5 c0-0.406-0.281-0.688-0.688-0.688h-8.922C320.703,47.078,320.422,47.359,320.422,47.766z"></path> </g> </g></svg>
+                            </div>
+                            <div class="vehicle-details">
+                                <div class="vehicle-type">Vehicle Type</div>
+                                <div class="vehicle-type-name-val">{{ getSelectedVehicleType() }}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="price-info">
+                        <span class="price">$ {{ searchFormData.totalTourPrice }}</span>
+                        </div>
+                    </div>
+
+                    <!-- Location Section -->
+                    <div class="location-section">
+                        <div class="location-item">
+                        <div class="location-label">Pick</div>
+                        <div class="location-value" [title]="searchFormData.pickupLocation">{{ searchFormData.pickupLocation }}</div>
+                        </div>
+
+                        <div class="arrow-separator">→</div>
+
+                        <div class="location-item">
+                        <div class="location-label">Drop</div>
+                        <div class="location-value" [title]="searchFormData.destination">{{ searchFormData.destination }}</div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-md-6 non-functional-details">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="input-section" for="country" [ngClass]="{'is-invalid' : Country?.touched && Country?.invalid}">
+                                    <div class="input-container">
+                                        <div class="input-label">Country*</div>
+                                        <ng-select
+                                            id="country"
+                                            [items]="countryList"
+                                            bindLabel="name"
+                                            bindValue="iso2"
+                                            formControlName="country"
+                                            [searchable]="true"
+                                            [clearable]="false"
+                                            [virtualScroll]="true"
+                                            class="country-ng-select input-field"
+                                            placeholder="Select a country">
+
+                                            <ng-option value="'0'">Select your country</ng-option>
+
+                                            <!-- Custom item with flag + name + dial code -->
+                                            <ng-template ng-option-tmp let-item="item">
+                                                <img *ngIf="item.flagPng"
+                                                    [src]="item.flagPng"
+                                                    alt="{{ item.name }} flag"
+                                                    width="18" height="12"
+                                                    class="flag-img" />
+                                                <span class="opt-text">{{ item.name }}</span>
+                                                <span class="dial-chip">{{ item.dialCode }}</span>
+                                            </ng-template>
+
+                                            <!-- Selected value rendering -->
+                                            <ng-template ng-label-tmp let-item="item">
+                                                <img *ngIf="item.flagPng"
+                                                    [src]="item.flagPng"
+                                                    alt="{{ item.name }} flag"
+                                                    width="18" height="12"
+                                                    class="flag-img" />
+                                                <span class="opt-text">{{ item.name }}</span>
+                                                <span class="dial-chip">{{ item.dialCode }}</span>
+                                            </ng-template>
+                                        </ng-select>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="input-section" for="adultCount" [ngClass]="{'is-invalid' : AdultCount?.touched && AdultCount?.invalid}">
+                                    <div class="input-container">
+                                        <div class="input-label">Adult Count</div>
+                                        <input 
+                                            type="number"
+                                            id="adultCount" 
+                                            class="input-field"
+                                            min="1"
+                                            formControlName="adultCount">
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="input-section" for="childCount" [ngClass]="{'is-invalid' : ChildCount?.touched && ChildCount?.invalid}">
+                                    <div class="input-container">
+                                        <div class="input-label">Child Count</div>
+                                        <input 
+                                            type="number"
+                                            id="childCount" 
+                                            class="input-field"
+                                            min="0"
+                                            formControlName="childCount">
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-row personal-info-fields">
+                <div class="form-group">
+                    <label class="input-section" for="firstName" [ngClass]="{'is-invalid' : FirstName?.touched && FirstName?.invalid}">
+                        <div class="input-container">
+                            <div class="input-label">First Name</div>
+                            <input 
+                                type="text"
+                                id="firstName" 
+                                class="input-field"
+                                formControlName="firstName">
+                        </div>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="input-section" for="lastName" [ngClass]="{'is-invalid' : LastName?.touched && LastName?.invalid}">
+                        <div class="input-container">
+                            <div class="input-label">Last Name</div>
+                            <input 
+                                type="text"
+                                id="lastName" 
+                                class="input-field"
+                                formControlName="lastName">
+                        </div>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="input-section" for="email" [ngClass]="{'is-invalid' : Email?.touched && Email?.invalid}">
+                        <div class="input-container">
+                            <div class="input-label">Email</div>
+                            <input 
+                                type="text"
+                                id="email" 
+                                class="input-field"
+                                formControlName="email">
+                        </div>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="input-section" for="mobileNumber" [ngClass]="{'is-invalid' : MobileNumber?.touched && MobileNumber?.invalid}">
+                        <div class="input-container">
+                            <div class="input-label">Mobile Number</div>
+                            <input 
+                                type="text"
+                                id="mobileNumber" 
+                                class="input-field"
+                                formControlName="mobileNumber">
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group btn-section">
+                    <button type="submit" class="k-button btn-tour-secondary" (click)="previousStep()">
+                        Back
+                    </button>
+                    <button type="submit" class="k-button btn-tour-primary" (click)="pickupDetailsOnSubmit()" [disabled]="!searchForm.valid">
+                        Create Booking
+                    </button>
+                </div>
+            </div>
+         </form>
+      </div>
+</div>
+<app-vehicle-image-popup *ngIf="showVehicleImagePopup" [imageList]="selectedVehicleType?.images" (closeImagePopup)="onCloseVehicleImagePopup()"></app-vehicle-image-popup>

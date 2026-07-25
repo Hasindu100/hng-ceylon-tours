@@ -1,0 +1,332 @@
+.checkout-container {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  padding: 20px 0;
+  margin-top: 100px;
+}
+
+/* Header Styles */
+.checkout-header {
+  margin-bottom: 30px;
+}
+
+.checkout-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+}
+
+.checkout-subtitle {
+  font-size: 14px;
+  color: #6c757d;
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+
+/* Card Styles */
+.card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  background-color: #ffffff;
+}
+
+.card-body {
+  padding: 24px;
+}
+
+/* Section Title */
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+
+/* Form Styles */
+.form-label {
+  font-size: 13px;
+  color: #6c757d;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.form-control {
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: #1a1a1a;
+}
+
+.form-control:focus {
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 0.2rem rgba(26, 115, 232, 0.1);
+}
+
+.form-control[readonly] {
+  background-color: #f8f9fa;
+  cursor: not-allowed;
+}
+
+/* Add-ons Section */
+.addon-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.addon-text {
+  font-size: 14px;
+  color: #1a1a1a;
+}
+
+.form-check-input {
+  width: 48px;
+  height: 26px;
+  cursor: pointer;
+  border: 2px solid #ccc;
+}
+
+.form-check-input:checked {
+  background-color: #1a73e8;
+  border-color: #1a73e8;
+}
+
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.2rem rgba(26, 115, 232, 0.25);
+}
+
+/* Payment Method Styles */
+.payment-option {
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.payment-option:hover {
+  border-color: #1a73e8;
+}
+
+.payment-option.selected {
+  border-color: #1a73e8;
+  background-color: #f0f7ff;
+}
+
+.payment-option input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-right: 12px;
+  accent-color: #1a73e8;
+}
+
+.payment-label {
+  flex: 1;
+  cursor: pointer;
+  margin: 0;
+}
+
+.payment-icons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.payment-icon {
+  height: 28px;
+  width: auto;
+}
+
+.payment-icon-amex {
+  height: 24px;
+  width: auto;
+}
+
+/* Booking Details Styles */
+.booking-detail-item {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.booking-detail-item:last-child {
+  margin-bottom: 0;
+}
+
+.booking-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: #f0f7ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.booking-icon svg {
+  width: 20px;
+  height: 20px;
+  color: #1a73e8;
+}
+
+.booking-detail-content {
+  flex: 1;
+}
+
+.detail-label {
+  font-size: 13px;
+  color: #6c757d;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.detail-value {
+  font-size: 14px;
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+/* Payment Details Styles */
+.payment-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.payment-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.payment-label-text {
+  font-size: 14px;
+  color: #6c757d;
+}
+
+.payment-amount {
+  font-size: 14px;
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+.total-row {
+  padding-top: 12px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.total-row .payment-label-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.payment-amount-total {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+/* Advance Payment Section */
+.advance-payment-section {
+  background-color: #fffbf0;
+  border: 1px solid #ffd966;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.advance-payment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.advance-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.advance-amount {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.advance-payment-note {
+  font-size: 12px;
+  color: #6c757d;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Footer Buttons */
+.checkout-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.btn-back {
+  padding: 12px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.btn-confirm {
+  padding: 12px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-confirm:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Styles */
+@media (max-width: 991px) {
+  .checkout-title {
+    font-size: 24px;
+  }
+
+  .checkout-subtitle {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 767px) {
+  .checkout-footer {
+    flex-direction: column-reverse;
+  }
+
+  .btn-back,
+  .btn-confirm {
+    width: 100%;
+  }
+
+  .card-body {
+    padding: 20px;
+  }
+
+  .payment-icons {
+    flex-wrap: wrap;
+  }
+}

@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
+import { TourDetails } from 'src/app/models/tourDetails';
 import { CommonService } from 'src/app/services/common.service';
 
 @Component({
@@ -25,23 +26,6 @@ export class TourDetailsComponent {
   distanceKm: number | null = null;
   durationMin: number | null = null;
   apiKey: string = 'eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImQyYmRkMTlhYTE4NTRhYmQ5NTlhMDNjMjUxM2EyNGNkIiwiaCI6Im11cm11cjY0In0';
-  
-  sampleTourData: TourDetails = {
-    pickupLocation: 'Bandaranaike International Airport',
-    dropLocation: 'Sigiriya Rock Fortress',
-    distance: 148.5,
-    duration: 195,
-    price: 12500,
-    mapRoute: {
-      coordinates: [
-        { lat: 7.1807, lng: 79.8844 },
-        { lat: 7.2906, lng: 80.5209 },
-        { lat: 7.9570, lng: 80.7603 }
-      ]
-    },
-    vehicleTypeId: 0,
-    vehicleType: ''
-  };
 
   isVisible = false;
   hasData: boolean = false;
@@ -93,23 +77,29 @@ export class TourDetailsComponent {
 
   ngOnInit(): void {
     this.commonService.loadTourDetails$.subscribe((data) => {
-      this.tourData = {
-        pickupLocation: data.pickupLocation,
-        dropLocation: data.destination,
-        distance: 150, // Placeholder, should be calculated
-        duration: 180, // Placeholder, should be calculated
-        price: 10000, // Placeholder, should be calculated
-        mapRoute: undefined,
-        vehicleTypeId: data.vehicleTypeId,
-        vehicleType: data.vehicleTypeName
-      };
-      this.fromLon = data.pickupLonLang[0];
-      this.fromLat = data.pickupLonLang[1];
-      this.toLon = data.destinationLonLang[0];
-      this.toLat = data.destinationLonLang[1];
-      this.hasData = true;
-      this.isLoading = true;
-      this.drawRoute();
+      if(data) {
+        this.tourData = {
+          pickupLocation: data.pickupLocation,
+          dropLocation: data.destination,
+          distance: 150, // Placeholder, should be calculated
+          duration: 180, // Placeholder, should be calculated
+          price: 10000, // Placeholder, should be calculated
+          mapRoute: undefined,
+          vehicleTypeId: data.vehicleTypeId,
+          vehicleTypeName: data.vehicleTypeName,
+          pickupDate: data.pickupDate,
+          pickupTime: data.pickupTime,
+          noOfGuests: data.noOfGuests
+        };
+        this.fromLon = data.pickupLonLang[0];
+        this.fromLat = data.pickupLonLang[1];
+        this.toLon = data.destinationLonLang[0];
+        this.toLat = data.destinationLonLang[1];
+        this.hasData = true;
+        this.isLoading = true;
+        this.drawRoute();
+      }
+      
     });
     // Use sample data if no input provided
     // if (!this.tourData) {
@@ -221,6 +211,8 @@ export class TourDetailsComponent {
       this.tourData!.distance = distanceKm;
       this.tourData!.duration = durationMin;
       this.tourData!.price = this.calculatePricePerKm();
+
+      sessionStorage.setItem('tourDetails', JSON.stringify(this.tourData));
     } catch (err: any) {
       console.error(err);
       alert(err?.message ?? 'Routing failed. Check coordinates and API key.');
@@ -283,20 +275,6 @@ export class TourDetailsComponent {
       }
     });
   }
-
-}
-
-export interface TourDetails {
-  pickupLocation: string;
-  dropLocation: string;
-  distance: number; // in kilometers
-  duration: number; // in minutes
-  price: number;
-  mapRoute?: {
-    coordinates: { lat: number; lng: number }[];
-  };
-  vehicleTypeId: number,
-  vehicleType: string
 }
 
 export interface RouteResult {

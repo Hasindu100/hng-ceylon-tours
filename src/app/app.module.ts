@@ -39,6 +39,28 @@ import { TourDetailsComponent } from './pages/tour-details/tour-details.componen
 import { NgSelectModule } from '@ng-select/ng-select';
 import { TourHeroComponent } from './layouts/tour-hero/tour-hero.component';
 import { LoaderComponent } from './shared/loader/loader.component';
+import { BookingDetailsFormComponent } from './pages/booking-details-form/booking-details-form.component';
+import { HttpClientModule } from '@angular/common/http';
+import { TestPageComponent } from './pages/test-page/test-page.component';
+import { OrderSummaryComponent } from './sections/order-summary/order-summary.component';
+import { TourHero2Component } from './layouts/tour-hero2/tour-hero2.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { getAuth, provideAuth } from '@angular/fire/auth';
+import { CdkMenuModule } from '@angular/cdk/menu';
+import { BookingHistoryComponent } from './pages/booking-history/booking-history.component';
+import { BookingStepsComponent } from './sections/booking-steps/booking-steps.component';
+import { RideFeaturesComponent } from './sections/ride-features/ride-features.component';
+import { BookingHistoryTempComponent } from './pages/booking-history-temp/booking-history-temp.component';
+import { ToastrModule } from 'ngx-toastr';
+import { PaymentSuccessComponent } from './pages/payment-success/payment-success.component';
+import { AirportPickupFormComponent } from './sections/tour-hero/airport-pickup-form/airport-pickup-form.component';
+import { AirportDropFormComponent } from './sections/tour-hero/airport-drop-form/airport-drop-form.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CustomTourFormComponent } from './sections/tour-hero/custom-tour-form/custom-tour-form.component';
+import { VehicleImagePopupComponent } from './shared/components/vehicle-image-popup/vehicle-image-popup.component';
+import { RoadMapPopupComponent } from './shared/components/road-map-popup/road-map-popup.component';
+import { FaqComponent } from './pages/faq/faq.component';
+import { TermsConditionsComponent } from './pages/terms-conditions/terms-conditions.component';
 
 @NgModule({
   declarations: [
@@ -72,17 +94,39 @@ import { LoaderComponent } from './shared/loader/loader.component';
     TourDetailsComponent,
     TourHeroComponent,
     LoaderComponent,
+    BookingDetailsFormComponent,
+    TestPageComponent,
+    OrderSummaryComponent,
+    TourHero2Component,
+    CheckoutComponent,
+    BookingHistoryComponent,
+    BookingStepsComponent,
+    RideFeaturesComponent,
+    BookingHistoryTempComponent,
+    PaymentSuccessComponent,
+    AirportPickupFormComponent,
+    AirportDropFormComponent,
+    CustomTourFormComponent,
+    VehicleImagePopupComponent,
+    RoadMapPopupComponent,
+    FaqComponent,
+    TermsConditionsComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     GoogleMapsModule,
     CommonModule,
     NgSelectModule,
+    HttpClientModule,
+    CdkMenuModule,
+    ToastrModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth())
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,300 @@
+<div class="booking-container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-container">
+                <div class="form-card">
+                    <!-- Header -->
+                    <div class="form-header">
+                    <h2>Complete Your Booking</h2>
+                    </div>
+
+                    <!-- Step Indicator -->
+                    <div class="step-indicator">
+                    <div class="step-item" [class.active]="currentStep >= 1" [class.completed]="currentStep > 1">
+                        <div class="step-circle">
+                        <span *ngIf="currentStep > 1">✓</span>
+                        <span *ngIf="currentStep <= 1">1</span>
+                        </div>
+                        <div class="step-label">Personal Info</div>
+                    </div>
+                    
+                    <div class="step-line" [class.active]="currentStep > 1"></div>
+                    
+                    <div class="step-item" [class.active]="currentStep >= 2" [class.completed]="currentStep > 2">
+                        <div class="step-circle">
+                        <span *ngIf="currentStep > 2">✓</span>
+                        <span *ngIf="currentStep <= 2">2</span>
+                        </div>
+                        <div class="step-label">Details</div>
+                    </div>
+                    
+                    <div class="step-line" [class.active]="currentStep > 2"></div>
+                    
+                    <div class="step-item" [class.active]="currentStep >= 3" [class.completed]="currentStep > 3">
+                        <div class="step-circle">
+                        <span *ngIf="currentStep > 3">✓</span>
+                        <span *ngIf="currentStep <= 3">3</span>
+                        </div>
+                        <div class="step-label">Emergency</div>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                
+                <!-- Step 1: Personal Information -->
+                <div class="step-content"  [hidden]="currentStep != 1">
+                    <!-- <h3>Personal Information</h3> -->
+                    
+                    <div class="form-group">
+                        <label class="input-section" [class.error]="isFieldInvalid('fullName')" for="fullName">
+                            <div class="input-container">
+                                <div class="input-label">Full Name</div>
+                                <input 
+                                    type="text"
+                                    id="fullName" 
+                                    class="input-field"
+                                    formControlName="fullName"
+                                    [class.error]="isFieldInvalid('fullName')">
+                            </div>
+                        </label>
+                        <!-- <input 
+                            type="text" 
+                            id="fullName" 
+                            formControlName="fullName"
+                            placeholder="Enter your full name"
+                            [class.error]="isFieldInvalid('fullName')"> -->
+                        <span class="error-message" *ngIf="isFieldInvalid('fullName')">
+                            {{ getErrorMessage('fullName') }}
+                        </span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="input-section" [class.error]="isFieldInvalid('email')" for="email">
+                            <div class="input-container">
+                                <div class="input-label">Email</div>
+                                <input 
+                                    type="email" 
+                                    id="email"
+                                    class="input-field" 
+                                    formControlName="email"
+                                    placeholder="your.email@example.com">
+                            </div>
+                        </label>
+                        <!-- <input 
+                            type="email" 
+                            id="email" 
+                            formControlName="email"
+                            placeholder="your.email@example.com"
+                            [class.error]="isFieldInvalid('email')"> -->
+                        <span class="error-message" *ngIf="isFieldInvalid('email')">
+                            {{ getErrorMessage('email') }}
+                        </span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="input-section" [class.error]="isFieldInvalid('country')" for="country">
+                            <div class="input-container">
+                                <div class="input-label">Country*</div>
+                                <ng-select
+                                    id="country"
+                                    [items]="countryList"
+                                    bindLabel="name"
+                                    bindValue="iso2"
+                                    formControlName="country"
+                                    [searchable]="true"
+                                    [clearable]="false"
+                                    [virtualScroll]="true"
+                                    (change)="onCountryChange()"
+                                    class="country-ng-select input-field"
+                                    placeholder="Select a country">
+
+                                    <ng-option value="'0'">Select your country</ng-option>
+
+                                    <!-- Custom item with flag + name + dial code -->
+                                    <ng-template ng-option-tmp let-item="item">
+                                        <img *ngIf="item.flagPng"
+                                            [src]="item.flagPng"
+                                            alt="{{ item.name }} flag"
+                                            width="18" height="12"
+                                            class="flag-img" />
+                                        <span class="opt-text">{{ item.name }}</span>
+                                        <span class="dial-chip">{{ item.dialCode }}</span>
+                                    </ng-template>
+
+                                    <!-- Selected value rendering -->
+                                    <ng-template ng-label-tmp let-item="item">
+                                        <img *ngIf="item.flagPng"
+                                            [src]="item.flagPng"
+                                            alt="{{ item.name }} flag"
+                                            width="18" height="12"
+                                            class="flag-img" />
+                                        <span class="opt-text">{{ item.name }}</span>
+                                        <span class="dial-chip">{{ item.dialCode }}</span>
+                                    </ng-template>
+                                </ng-select>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="input-section" [class.error]="isFieldInvalid('phone')" for="phone">
+                            <div class="input-container">
+                                <div class="input-label">Mobile phone number*</div>
+                                <input 
+                                    type="tel" 
+                                    id="phone" 
+                                    class="mobile-input-field" 
+                                    formControlName="phone"
+                                    [class.error]="isFieldInvalid('phone')"
+                                    #phoneInput>
+                            </div>
+                        </label>
+                        
+                        <span class="error-message" *ngIf="isFieldInvalid('phone')">
+                            {{ getErrorMessage('phone') }}
+                        </span>
+                    </div>
+
+                    <!-- <div class="form-group">
+                        <input 
+                            type="text" 
+                            id="country" 
+                            formControlName="country"
+                            placeholder="Enter your country"
+                            [class.error]="isFieldInvalid('country')">
+                        <span class="error-message" *ngIf="isFieldInvalid('country')">
+                            {{ getErrorMessage('country') }}
+                        </span>
+                    </div> -->
+                </div>
+
+                <!-- Step 2: Additional Details -->
+                <div class="step-content" *ngIf="currentStep === 2">
+                    <h3>Additional Details</h3>
+                    
+                    <div class="form-row">
+                    <div class="form-group">
+                        <label for="numberOfAdults">Number of Adults *</label>
+                        <input 
+                        type="number" 
+                        id="numberOfAdults" 
+                        formControlName="numberOfAdults"
+                        min="1"
+                        [class.error]="isFieldInvalid('numberOfAdults')">
+                        <span class="error-message" *ngIf="isFieldInvalid('numberOfAdults')">
+                        {{ getErrorMessage('numberOfAdults') }}
+                        </span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numberOfChildren">Number of Children</label>
+                        <input 
+                        type="number" 
+                        id="numberOfChildren" 
+                        formControlName="numberOfChildren"
+                        min="0">
+                    </div>
+                    </div>
+
+                    <div class="form-group">
+                    <label for="specialRequests">Special Requests (Optional)</label>
+                    <textarea 
+                        id="specialRequests" 
+                        formControlName="specialRequests"
+                        rows="4"
+                        placeholder="Any special requirements or requests? (dietary needs, accessibility, etc.)"></textarea>
+                    </div>
+                </div>
+
+                <!-- Step 3: Emergency Contact & Confirmation -->
+                <div class="step-content" *ngIf="currentStep === 3">
+                    <h3>Emergency Contact</h3>
+                    
+                    <div class="form-group">
+                    <label for="emergencyContactName">Emergency Contact Name *</label>
+                    <input 
+                        type="text" 
+                        id="emergencyContactName" 
+                        formControlName="emergencyContactName"
+                        placeholder="Enter emergency contact name"
+                        [class.error]="isFieldInvalid('emergencyContactName')">
+                    <span class="error-message" *ngIf="isFieldInvalid('emergencyContactName')">
+                        {{ getErrorMessage('emergencyContactName') }}
+                    </span>
+                    </div>
+
+                    <div class="form-group">
+                    <label for="emergencyContactPhone">Emergency Contact Phone *</label>
+                    <input 
+                        type="tel" 
+                        id="emergencyContactPhone" 
+                        formControlName="emergencyContactPhone"
+                        placeholder="+94 XX XXX XXXX"
+                        [class.error]="isFieldInvalid('emergencyContactPhone')">
+                    <span class="error-message" *ngIf="isFieldInvalid('emergencyContactPhone')">
+                        {{ getErrorMessage('emergencyContactPhone') }}
+                    </span>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input 
+                        type="checkbox" 
+                        formControlName="termsAccepted"
+                        [class.error]="isFieldInvalid('termsAccepted')">
+                        <span>I agree to the terms and conditions *</span>
+                    </label>
+                    <span class="error-message" *ngIf="isFieldInvalid('termsAccepted')">
+                        You must accept the terms and conditions
+                    </span>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="button-group">
+                    <button 
+                    type="button" 
+                    class="btn btn-secondary" 
+                    *ngIf="currentStep > 1"
+                    (click)="previousStep()">
+                    Previous
+                    </button>
+
+                    <button 
+                    type="button" 
+                    class="btn btn-primary" 
+                    *ngIf="currentStep < totalSteps"
+                    (click)="nextStep()">
+                    Next
+                    </button>
+
+                    <button 
+                    type="submit" 
+                    class="btn btn-primary" 
+                    *ngIf="currentStep === totalSteps"
+                    [disabled]="isSubmitting">
+                    {{ isSubmitting ? 'Submitting...' : 'Submit Booking' }}
+                    </button>
+                </div>
+                </form>
+
+                <!-- Success Message -->
+                <div class="success-message" *ngIf="submitSuccess">
+                <div class="success-icon">✓</div>
+                <h3>Booking Submitted Successfully!</h3>
+                <p>We've sent the details to your email and WhatsApp.</p>
+                </div>
+
+                <!-- Error Message -->
+                <div class="error-message-box" *ngIf="submitError">
+                <p>There was an error submitting your booking. Please try again.</p>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <!-- <app-order-summary [tourDetails]="searchDetails"></app-order-summary> -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="phone-form">
+  <label>
+    Country
+    
+<ng-select
+    [items]="countries"
+    bindLabel="name"
+    bindValue="iso2"
+    formControlName="countryIso"
+    [searchable]="true"
+    [clearable]="false"
+    [virtualScroll]="true"
+    (change)="onCountryChange()"
+    class="country-ng-select"
+    placeholder="Select a country">
+
+    <!-- Custom item with flag + name + dial code -->
+    <ng-template ng-option-tmp let-item="item">
+      <img *ngIf="item.flagPng"
+           [src]="item.flagPng"
+           alt="{{ item.name }} flag"
+           width="18" height="12"
+           class="flag-img" />
+      <span class="opt-text">{{ item.name }}</span>
+      <span class="dial-chip">{{ item.dialCode }}</span>
+    </ng-template>
+
+    <!-- Selected value rendering -->
+    <ng-template ng-label-tmp let-item="item">
+      <img *ngIf="item.flagPng"
+           [src]="item.flagPng"
+           alt="{{ item.name }} flag"
+           width="18" height="12"
+           class="flag-img" />
+      <span class="opt-text">{{ item.name }}</span>
+      <span class="dial-chip">{{ item.dialCode }}</span>
+    </ng-template>
+  </ng-select>
+
+  </label>
+
+  <label class="phone-row">
+    <span class="dial">{{ selectedDialCode }}</span>
+    <input
+      type="tel"
+      formControlName="national"
+      inputmode="numeric"
+      [placeholder]="nationalPlaceholder"
+      (input)="digitsOnly($event)"
+      autocomplete="tel-national"
+    />
+  </label>
+
+  <small>E.164: {{ e164 || '—' }}</small>
+  <div class="error" *ngIf="form.controls['national'].invalid && form.controls['national'].touched">
+    {{ errorText }}
+  </div>
+
+  <button type="submit" [disabled]="form.invalid">Save</button>
+</form>
+
+
+
+<input
+  type="tel"
+  class="form-control"
+  #phoneInput
+/>

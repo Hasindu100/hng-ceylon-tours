@@ -1,0 +1,357 @@
+<div class="airport-pickup-form-container">
+    <div class="airport-pickup search-form-section" *ngIf="step == 1">
+        <!-- Search Form -->
+        <form [formGroup]="searchForm" (ngSubmit)="onSearchTourDetails()" class="search-form">
+            <div class="form-row">
+                <!-- Destination -->
+                <div class="form-group">
+                    <div class="frm-header">
+                        <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z"
+                                fill="currentColor" />
+                        </svg>
+                        <label for="destination">Pickup Location:</label>
+                    </div>
+                    <div class="input-wrapper">
+                        <ng-select id="pickupLocation" formControlName="pickupLocation" class="form-input drp-location"
+                            [ngClass]="{'is-invalid' : PickupLocation?.touched && PickupLocation?.invalid}"
+                            (change)="onChangeDropLocationChange()">
+                            <ng-option [value]="'0'">Select Pickup location . . .</ng-option>
+                            <ng-option *ngFor="let location of locationData" [value]="location.id">{{
+                                location.locationName }}</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+
+                <!-- Destination -->
+                <div class="form-group">
+                    <div class="frm-header">
+                        <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z"
+                                fill="currentColor" />
+                        </svg>
+                        <label for="destination">Drop Location:</label>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <ng-select id="destination" formControlName="destination" class="form-input drp-location"
+                            [ngClass]="{'is-invalid' : Destination?.touched && Destination?.invalid}">
+                            <ng-option [value]="'0'">Select Drop location . . .</ng-option>
+                            <ng-option *ngFor="let location of locationData" [value]="location.id">{{
+                                location.locationName }}</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+
+                <!-- Check In Date -->
+                <div class="form-group">
+                    <div class="frm-header">
+                        <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M8 2V5M16 2V5M3.5 9.09H20.5M21 8.5V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V8.5C3 5.5 4.5 3.5 8 3.5H16C19.5 3.5 21 5.5 21 8.5Z"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <label for="pickupDate">Start Date:</label>
+                    </div>
+                    <div class="input-wrapper pickup-date" [ngClass]="{'is-invalid' : PickupDate?.invalid}">
+                        <input type="date" id="pickupDate" formControlName="pickupDate" class="form-input">
+                    </div>
+                </div>
+
+                <!-- Check Out Date -->
+                <div class="form-group">
+                    <div class="frm-header">
+                        <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path
+                                    d="M12 7V12L14.5 13.5M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                                    stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                </path>
+                            </g>
+                        </svg>
+                        <label for="noOfDays">No. of Days:</label>
+                    </div>
+                    <div class="input-wrapper">
+                        <select 
+                            id="noOfDays"
+                            formControlName="noOfDays"
+                            class="form-input"
+                            [ngClass]="{'is-invalid' : NoOfDays?.touched && NoOfDays?.invalid}">
+                            <option value="">Select number of days</option>
+                            <option *ngFor="let day of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]" [value]="day">{{ day }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row second-row">
+                <div class="col-md-12 vehicle-selector-section">
+                    <!-- Vehicle Type  -->
+                    <div class="vehicle-selector-container form-group">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="vehicle-selection">
+                                    <h3 class="vehicle-type-label">Select a vehicle</h3>
+                                    <div class="vehicle-type-wrapper">
+                                        <div *ngFor="let vehicle of vehicleTypes" class="vehicle-card"
+                                            [ngClass]="{'selected': selectedVehicleTypeId === vehicle.vehicleTypeId}"
+                                            (click)="selectVehicle(vehicle.vehicleTypeId)">
+                                            <img class="vehicle-img" [src]="getVehicleTypeImage(vehicle.vehicleTypeId)"
+                                                alt="">
+                                            <div class="vehicle-type-name">{{vehicle.name}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="vehicle-info">
+                                    <div class="vehicle-name">
+                                        {{ getSelectedVehicleType() }} <a (click)="openVehicleImagePopup()" class="view-link">View</a>
+                                    </div>
+                                </div>
+                                <div class="vehicle-details">
+                                    <div class="feature-item">
+                                        <span class="feature-icon">
+                                            <svg fill="#000000" viewBox="0 -1.41 122.88 122.88" id="Layer_1"
+                                                data-name="Layer 1" xmlns="http://www.w3.org/2000/svg">
+                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                    stroke-linejoin="round"></g>
+                                                <g id="SVGRepo_iconCarrier">
+                                                    <defs>
+                                                        <style>
+                                                            .cls-1 {
+                                                                fill-rule: evenodd;
+                                                            }
+                                                        </style>
+                                                    </defs>
+                                                    <title>guest-traveler</title>
+                                                    <path class="cls-1"
+                                                        d="M90.54,38.25c2.23-.75,4.58.44,6.13,2.3h18.46a.51.51,0,0,1,.51.51v4.86a.51.51,0,0,1-.51.51H111.9V62.62h-3.73V46.43H98.11a9.11,9.11,0,0,1-2.36,3.36V62.62H92V52.41a57.27,57.27,0,0,1-8,3.38,84.35,84.35,0,0,1-9,2.79,18,18,0,0,1-15.71-4,41.48,41.48,0,0,1-3.49-3.35l-.34-.36-3,17.75a62.39,62.39,0,0,0,7.2,4.17c7.78,3.63,14.18,6.63,15.55,18.85.25,2.14.14,14.68,0,20.84H86a1.8,1.8,0,0,1-.67-1.43v-1.89a4.77,4.77,0,0,1-4.71-4.76v-36a4.78,4.78,0,0,1,4.76-4.76h1.09a.91.91,0,0,0,0,.23l1.19,4.54a7.4,7.4,0,0,0,1.79,3.38A4.22,4.22,0,0,0,92.58,73h4.77v2.55c0,.41,1.92.73,2.32.73H106a.72.72,0,0,0,.73-.72V73h5a4.36,4.36,0,0,0,3.16-1.32,6.81,6.81,0,0,0,1.72-3.4l1-4.48a1,1,0,0,0,0-.24h.51a4.78,4.78,0,0,1,4.76,4.76v36.05a4.77,4.77,0,0,1-4.71,4.76V111a1.8,1.8,0,0,1-.67,1.43h5.38v7.58H0v-7.58H19.83c1.41-3.79,2.86-7.83,4.28-11.89,2.93-8.39,5.74-17,7.8-23.84a22,22,0,0,1-3.21-5.06A11.33,11.33,0,0,1,27.82,65l4.33-21.82c-1.55-.08-3.34-.54-4.8.1-2.83,1.24-7,6.52-9.47,9l-3.31,3.35c-2.55,2.58-4.25,5.44-8.15,5.13-4.84-.38-8.3-5.76-4.89-9.89l7.63-7.72c3.67-3.73,7.16-8.12,11.69-10.68C24.49,30.41,28.45,29,35,29.28c2.4,0,4.94.27,7.34.5l2.8.24c11,.71,16.12,6.5,20.12,11,1.77,2,3.29,3.7,4.94,4.49.78.37,2-.15,3.39-.73L83.76,41l6.78-2.72ZM61.15,112.47c.14-6.94.29-16.73.18-18.62-.09-1.35-1-4.92-2.42-5.57a59.35,59.35,0,0,0-5.83-2.17c-2.75-.91-5-1.83-7.72-2.58-2,6.58-4.68,14.52-7.57,22.09l-2.73,6.85Zm52.87,0H89.49a1.77,1.77,0,0,0,.67-1.43v-1.89h23.19V111a1.77,1.77,0,0,0,.67,1.43ZM88.91,100.24a.88.88,0,0,1,0-1.76h25.82a.88.88,0,0,1,0,1.76Zm0-8.51a.88.88,0,0,1,0-1.76h25.82a.88.88,0,1,1,0,1.76Zm0-8.51a.88.88,0,0,1,0-1.76h25.82a.88.88,0,1,1,0,1.76Zm26.73-18.75H88.5l.9,3.43a5.63,5.63,0,0,0,1.34,2.58,2.49,2.49,0,0,0,1.83.78h19.17a2.65,2.65,0,0,0,1.92-.81,5.09,5.09,0,0,0,1.24-2.51l.74-3.47ZM44.82.71a13.17,13.17,0,1,1-7.56,6.66A13.13,13.13,0,0,1,44.82.71Z">
+                                                    </path>
+                                                </g>
+                                            </svg>
+                                        </span>
+                                        <span class="feature-text">{{ getPassengersCount() }} passengers</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <span class="feature-icon">
+                                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                    stroke-linejoin="round"></g>
+                                                <g id="SVGRepo_iconCarrier">
+                                                    <path
+                                                        d="M13 2h-2v4H9V4H7v2h2v2h2v3H8V9H6V7H4v2h2v2H2v2h4v2H4v2h2v-2h2v-2h3v3H9v2H7v2h2v-2h2v4h2v-4h2v2h2v-2h-2v-2h-2v-3h3v2h2v2h2v-2h-2v-2h4v-2h-4V9h2V7h-2v2h-2v2h-3V8h2V6h2V4h-2v2h-2V2z"
+                                                        fill="#000000"></path>
+                                                </g>
+                                            </svg>
+                                        </span>
+                                        <span class="feature-text">Air Condition</span>
+                                    </div>
+                                </div>
+                                <div class="price-section">
+                                    <button class="k-button btn-tour-primary btn-booking" (click)="nextStep()"
+                                        [disabled]="!searchForm.valid">
+                                        <span class="price-tag">Next</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="airport-pickup personal-info-form-section" *ngIf="step == 2 &&  searchFormData">
+        <!-- airportPickupPersonalInfoForm -->
+         <form [formGroup]="personalInfoForm" class="booking-form">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group additional-info-section">
+                        <label class="input-section" for="aditionalInfo">
+                            <div class="input-container">
+                                <div class="input-label">Aditional Info (Optional)</div>
+                                <textarea 
+                                    type="number"
+                                    id="aditionalInfo" 
+                                    class="input-field"
+                                    rows="4"
+                                    ></textarea>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="input-section" for="tourType" [ngClass]="{'is-invalid' : CustomTourType?.touched && CustomTourType?.invalid}">
+                                    <div class="input-container">
+                                        <div class="input-label">*Tour Type</div>
+                                        <ng-select 
+                                            id="tourType"
+                                            formControlName="customTourType"
+                                            class="input-field">
+                                            <ng-option [value]="'0'">Select tour type</ng-option>
+                                            <ng-option *ngFor="let tourType of tourTypes" [value]="tourType.id">{{ tourType.tourType }}</ng-option>
+                                        </ng-select>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="input-section" for="country" [ngClass]="{'is-invalid' : Country?.touched && Country?.invalid}">
+                                    <div class="input-container">
+                                        <div class="input-label">*Country</div>
+                                        <ng-select
+                                            id="country"
+                                            [items]="countryList"
+                                            bindLabel="name"
+                                            bindValue="iso2"
+                                            formControlName="country"
+                                            [searchable]="true"
+                                            [clearable]="false"
+                                            [virtualScroll]="true"
+                                            class="country-ng-select input-field"
+                                            placeholder="Select a country">
+
+                                            <ng-option value="'0'">Select your country</ng-option>
+
+                                            <!-- Custom item with flag + name + dial code -->
+                                            <ng-template ng-option-tmp let-item="item">
+                                                <img *ngIf="item.flagPng"
+                                                    [src]="item.flagPng"
+                                                    alt="{{ item.name }} flag"
+                                                    width="18" height="12"
+                                                    class="flag-img" />
+                                                <span class="opt-text">{{ item.name }}</span>
+                                                <span class="dial-chip">{{ item.dialCode }}</span>
+                                            </ng-template>
+
+                                            <!-- Selected value rendering -->
+                                            <ng-template ng-label-tmp let-item="item">
+                                                <img *ngIf="item.flagPng"
+                                                    [src]="item.flagPng"
+                                                    alt="{{ item.name }} flag"
+                                                    width="18" height="12"
+                                                    class="flag-img" />
+                                                <span class="opt-text">{{ item.name }}</span>
+                                                <span class="dial-chip">{{ item.dialCode }}</span>
+                                            </ng-template>
+                                        </ng-select>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="input-section" for="adultCount" [ngClass]="{'is-invalid' : AdultCount?.touched && AdultCount?.invalid}">
+                                    <div class="input-container">
+                                        <div class="input-label">*Adult Count</div>
+                                        <input 
+                                            type="number"
+                                            id="adultCount" 
+                                            class="input-field"
+                                            min="1"
+                                            formControlName="adultCount">
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="input-section" for="childCount" [ngClass]="{'is-invalid' : ChildCount?.touched && ChildCount?.invalid}">
+                                    <div class="input-container">
+                                        <div class="input-label">*Child Count</div>
+                                        <input 
+                                            type="number"
+                                            id="childCount" 
+                                            class="input-field"
+                                            min="0"
+                                            formControlName="childCount">
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="form-row personal-info-fields">
+                <div class="form-group">
+                    <label class="input-section" for="firstName" [ngClass]="{'is-invalid' : FirstName?.touched && FirstName?.invalid}">
+                        <div class="input-container">
+                            <div class="input-label">*First Name</div>
+                            <input 
+                                type="text"
+                                id="firstName" 
+                                class="input-field"
+                                formControlName="firstName">
+                        </div>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="input-section" for="lastName" [ngClass]="{'is-invalid' : LastName?.touched && LastName?.invalid}">
+                        <div class="input-container">
+                            <div class="input-label">*Last Name</div>
+                            <input 
+                                type="text"
+                                id="lastName" 
+                                class="input-field"
+                                formControlName="lastName">
+                        </div>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="input-section" for="email" [ngClass]="{'is-invalid' : Email?.touched && Email?.invalid}">
+                        <div class="input-container">
+                            <div class="input-label">*Email</div>
+                            <input 
+                                type="text"
+                                id="email" 
+                                class="input-field"
+                                formControlName="email">
+                        </div>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label class="input-section" for="mobileNumber" [ngClass]="{'is-invalid' : MobileNumber?.touched && MobileNumber?.invalid}">
+                        <div class="input-container">
+                            <div class="input-label">*Mobile Number</div>
+                            <input 
+                                type="text"
+                                id="mobileNumber" 
+                                class="input-field"
+                                formControlName="mobileNumber">
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group btn-section">
+                    <button type="submit" class="k-button btn-tour-secondary" (click)="previousStep()">
+                        Back
+                    </button>
+                    <button type="submit" class="k-button btn-tour-primary" (click)="pickupDetailsOnSubmit()" [disabled]="!searchForm.valid || !personalInfoForm.valid">
+                        Create Booking
+                    </button>
+                </div>
+            </div>
+         </form>
+      </div>
+</div>
+<app-vehicle-image-popup *ngIf="showVehicleImagePopup" [imageList]="selectedVehicleType?.images" (closeImagePopup)="onCloseVehicleImagePopup()"></app-vehicle-image-popup>

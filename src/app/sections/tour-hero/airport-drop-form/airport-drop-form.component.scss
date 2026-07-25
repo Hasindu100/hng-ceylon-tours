@@ -1,0 +1,527 @@
+
+.search-form,
+.booking-form {
+  padding: 30px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  align-items: end;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+::ng-deep app-airport-drop-form .form-group {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+    margin-left: 10px;
+  }
+
+  .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .form-input {
+      width: 100%;
+      padding: 0px 16px;
+      border: 2px solid #e5e7eb;
+      border-radius: 10px;
+      font-size: 15px;
+      color: #374151;
+      transition: all 0.3s ease;
+      background: #f9fafb;
+      height: 50px;
+
+      &:focus {
+        outline: none;
+        border-color: #6b2cf5;
+        background: white;
+        box-shadow: 0 0 0 3px rgba(107, 44, 245, 0.1);
+      }
+
+      &::placeholder {
+        color: #9ca3af;
+      }
+    }
+
+    .drp-location {
+      padding-right: 5px;
+      padding-left: 5px;
+    }
+
+    .input-icon {
+      position: absolute;
+      right: 15px;
+      color: #9ca3af;
+      pointer-events: none;
+    }
+
+    &.guest-wrapper {
+      background: #f9fafb;
+      border: 2px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 0 16px;
+      transition: all 0.3s ease;
+
+      &:focus-within {
+        border-color: #6b2cf5;
+        background: white;
+        box-shadow: 0 0 0 3px rgba(107, 44, 245, 0.1);
+      }
+
+      .guest-control {
+        background: none;
+        border: none;
+        font-size: 20px;
+        font-weight: 600;
+        color: #6b2cf5;
+        cursor: pointer;
+        padding: 8px 12px;
+        transition: all 0.2s ease;
+
+        &:hover:not(:disabled) {
+          background: #f3f4f6;
+          border-radius: 6px;
+        }
+
+        &:disabled {
+          color: #d1d5db;
+          cursor: not-allowed;
+        }
+      }
+
+      .guest-count {
+        flex: 1;
+        text-align: center;
+        font-size: 15px;
+        color: #374151;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .pickup-date.is-invalid input {
+    border-color: var(--invalid-border-color) !important;
+  }
+
+  &.btn-section {
+    justify-content: end;
+    flex-direction: initial;
+    margin-top: 20px;
+    gap: 20px;
+  }
+
+  .search-button {
+    width: 200px;
+    padding: 16px 24px;
+    background: linear-gradient(135deg, #ff5722 0%, #ff6b3d 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 87, 34, 0.3);
+    margin-top: 20px;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255, 87, 34, 0.4);
+      background: linear-gradient(135deg, #f4511e 0%, #ff5722 100%);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      box-shadow: none;
+      opacity: 0.5;
+    }
+  }
+}
+
+.second-row {
+  margin-top: 20px;
+}
+
+.vehicle-selector-container {
+  border: 1px solid #d0d0d0;
+  border-radius: 12px;
+  padding: 16px 20px;
+  background-color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+}
+
+.vehicle-type-wrapper {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+}
+
+.vehicle-type-label {
+  font-size: 16px;
+}
+
+.vehicle-card {
+  width: 70px;
+  padding: 5px;
+  height: 70px;
+  position: relative;
+  text-align: center;
+  display: block;
+  border-radius: 6px;
+  cursor: pointer;
+  min-width: 70px;
+  transition: all 0.3s ease;
+  border: 2px solid var(--primary-color);
+
+  &.selected,
+  &:hover {
+    background-color: var(--secondary-color);
+    color: #fff;
+
+    .vehicle-img {
+      filter: brightness(0) invert(1);
+    }
+  }
+
+  .vehicle-img {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: 10px;
+    top: -5px;
+  }
+
+  .vehicle-type-name {
+    position: relative;
+    top: 35px;
+    font-size: 12px;
+    line-height: 1;
+  }
+}
+
+.vehicle-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.vehicle-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #000000;
+  white-space: nowrap;
+}
+
+.view-link {
+  color: #0066cc;
+  text-decoration: none;
+  margin-left: 6px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.vehicle-details {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  padding: 5px 0px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #333333;
+}
+
+.feature-icon {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+
+.feature-text {
+  color: #999;
+}
+
+.price-section {
+  .price-tag {
+    font-size: 16px;
+    font-weight: 800;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .tax-info {
+    font-size: 12px;
+    color: #999;
+    text-align: center;
+  }
+}
+
+// styles related to personal info section
+.personal-info-form-section {
+  .input-section {
+    align-items: center;
+    border-radius: 8px;
+    cursor: text;
+    display: flex;
+    gap: var(--spacing-1x);
+    height: 50px;
+    border: 2px solid #ccc;
+    padding: 4px 8px;
+    display: block !important;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .input-label {
+    font-size: .75rem;
+    color: var(--label-color);
+    font-weight: 400;
+    line-height: 1rem;
+    overflow: hidden;
+    pointer-events: none;
+    text-overflow: ellipsis;
+    touch-action: manipulation;
+    transform-origin: bottom left;
+    transition: transform .1s, font-size .1s;
+    white-space: nowrap;
+    margin-bottom: 2px;
+  }
+
+  .input-field {
+    background: transparent;
+    border: none !important;
+    box-shadow: none !important;
+    color: var(--label-primary);
+    font-family: inherit;
+    font-size: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: inherit;
+    line-height: 1.375rem;
+    outline: 0;
+    padding: 0px !important;
+    width: 100%;
+  }
+
+  .personal-info-fields {
+    margin-top: 10px;
+  }
+
+  .form-group label {
+    margin-left: 0px;
+  }
+}
+
+::ng-deep .iti__selected-country-primary {
+  padding-left: 0px !important;
+}
+
+::ng-deep .personal-info-form-section {
+  .ng-select .ng-select-container {
+    height: 22px !important;
+    min-height: 22px !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .ng-select .ng-value-container {
+    padding: 0 !important;
+  }
+
+  .ng-select .ng-input {
+    top: 0 !important;
+  }
+}
+
+.trip-summary-card {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  border: 1px solid #ccc;
+}
+
+.summary-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vehicle-details-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.vehicle-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333333;
+}
+
+.vehicle-type {
+  font-size: 13px;
+  font-weight: 400;
+  color: #666666;
+  line-height: 1.2;
+}
+
+.vehicle-type-name-val {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+  line-height: 1.2;
+}
+
+.price-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: 600;
+  color: #000000;
+}
+
+/* Location Section */
+.location-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 6px;
+  padding: 12px 14px;
+}
+
+.location-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 50%;
+}
+
+.location-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: #999999;
+  text-transform: capitalize;
+}
+
+.location-value {
+  font-size: 13px;
+  font-weight: 400;
+  color: #000000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.arrow-separator {
+  font-size: 18px;
+  color: #666666;
+  flex-shrink: 0;
+  line-height: 1;
+  padding: 0 4px;
+}
+
+@media (max-width: 768px) {
+  .search-section {
+    margin-top: -180px;
+  }
+
+  .vehicle-info {
+    margin-top: 20px;
+  }
+
+  .vehicle-details {
+    padding-left: 0;
+    padding-top: 16px;
+    width: 100%;
+  }
+
+  .form-group.btn-section {
+    justify-content: space-between;
+
+    .btn-back, .btn-next {
+      width: 50%;
+      font-size: 12px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .personal-info-form-section {
+    .col-md-6 {
+      padding: 0px;
+    }
+  }
+
+  .trip-summary-card {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .summary-card-header {
+    display: block;
+  }
+
+  .price-info {
+    align-self: flex-end;
+  }
+
+  .location-section {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .location-value {
+    white-space: normal;
+  }
+
+  .arrow-separator {
+    align-self: center;
+    transform: rotate(90deg);
+  }
+
+  .non-functional-details {
+    .form-group {
+      margin-bottom: 20px;
+    }
+  }
+}

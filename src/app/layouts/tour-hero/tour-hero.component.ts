@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import flatpickr from 'flatpickr';
 import { LocationVM } from 'src/app/models/tour';
+import { TourDetails } from 'src/app/models/tourDetails';
 import { CommonService } from 'src/app/services/common.service';
 import { LocationService } from 'src/app/services/location.service';
 
@@ -11,15 +13,9 @@ import { LocationService } from 'src/app/services/location.service';
 })
 export class TourHeroComponent {
   searchForm: FormGroup;
-  activeTab: string = 'tour';
+  activeTab: string = 'airportpickup';
   guestCount: number = 1;
   locationData: any[] = [];
-
-  features = [
-    { icon: '✓', text: 'Private Taxi' },
-    { icon: '✓', text: 'Custom Tours' },
-    { icon: '✓', text: 'Local Guide' }
-  ];
 
   vehicleTypes = [
     { vehicleTypeId: 1, vehicleTypeName: 'Car', image: 'assets/images/vehicle/car.png'},
@@ -64,16 +60,45 @@ export class TourHeroComponent {
     // Set default dates to today
     const today = new Date().toISOString().split('T')[0];
     this.searchForm.patchValue({
-      pickupDate: today,
-      pickupTime: today.concat('T09:00')
+      pickupDate: today
     });
     this.getLocationData();
+  }
+
+  ngAfterViewInit(): void {
+    flatpickr('#pickupDate', {
+      altInput: true,
+      altFormat: 'F j, Y',
+      dateFormat: 'Y-m-d',
+      defaultDate: new Date(),
+      minDate: 'today',
+    });
+  }
+
+  setSearchFormData() {
+    var searchFormSession = sessionStorage.getItem('tourDetails');
+    if (searchFormSession) {
+      let searchDetails: TourDetails = JSON.parse(searchFormSession);
+      this.searchForm.patchValue({
+        pickupLocation: this.locationData.find(loc => loc.locationName === searchDetails.pickupLocation)?.id || '0',
+        destination: this.locationData.find(loc => loc.locationName === searchDetails.dropLocation)?.id || '0',
+        pickupDate: searchDetails.pickupDate,
+        pickupTime: searchDetails.pickupTime,
+        guests: searchDetails.noOfGuests
+      });
+      this.commonService.selectedVehicleTypeId = searchDetails.vehicleTypeId;
+      this.commonService.selectedVehicleTypeName = searchDetails.vehicleTypeName;
+      this.guestCount = searchDetails.noOfGuests || 1;
+
+      this.onSearchTourDetails();
+    }
   }
 
   getLocationData() {
     this.locationService.loadLocationData().subscribe(data => {
       console.log('Location Data:', data);
       this.locationData = data;
+      this.setSearchFormData();
     });
   }
 
@@ -104,8 +129,8 @@ export class TourHeroComponent {
         destination: destination?.locationName || '',
         pickupLonLang: [(pickupLocation?.longitude || 0), (pickupLocation?.latitude || 0)],
         destinationLonLang: [(destination?.longitude || 0), (destination?.latitude || 0)],
-        pickupDate: new Date(this.PickupDate?.value),
-        pickupTime: new Date(this.PickupTime?.value),
+        pickupDate: this.PickupDate?.value,
+        pickupTime: this.PickupTime?.value,
         noOfGuests: this.searchForm.value.guests,
         vehicleTypeId: this.commonService.selectedVehicleTypeId,
         vehicleTypeName: this.commonService.selectedVehicleTypeName

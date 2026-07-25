@@ -7,27 +7,27 @@ import { Component } from '@angular/core';
 })
 export class AboutComponent {
   isClickedShowMore: boolean = false;
-  title = 'Sri Lanka Tours Private & Tailored';
+  title = 'Explore Sri Lanka with Comfort & Confidence';
   
-  description = 'Discover Sri Lanka with our Private & Tailored Tours. Meet friendly people, learn of the rich history, explore untouched sites, marvel the wildlife, relax on a beautiful beach. Located at the southern tip of India, Sri Lanka is an island nation surrounded by the warm blue waters of the Indian Ocean.';
+  description = 'From airport arrivals to unforgettable island adventures, GetYourCab delivers private transportation tailored to your travel needs. Skip the hassle of finding local transport and enjoy seamless travel with trusted professional drivers.';
   
-  experienceDescription = 'Counting over 20 years of experience as a Tour Operator in Sri Lanka providing tailor-made tours, Tourslanka is widely recognized for its friendly service, reliability and professionalism. We are independently owned and have been in business since 1999. You can be assured of a speedy response, accurate information, reliable and friendly service delivered with traditional Sri Lankan warmth.';
+  experienceDescription = `Book airport pickups, airport drop-offs, or fully customized sightseeing tours in just a few clicks. Whether you're traveling solo, as a couple, with family, or in a group, we make every journey safe, comfortable, and memorable.`;
 
 
-  featuresTitle = 'A private tour of this magical island is on top of the wish list of many!';
-  featuresSubtitle = 'By taking one of our private escorted tours to Sri Lanka, you will be able to:';
+  featuresTitle = 'Why Travel Sri Lanka with GetYourCab?';
+  featuresSubtitle = 'By booking with GetYourCab, you will be able to:';
   
   features = [
-    'Meet extremely friendly, hospitable and easygoing people.',
-    'Stay at authentic hotels and experience our unique itineraries.',
-    'Learn about the rich, vibrant and colorful history dating back over 2500 years!',
-    'Explore ruined cities, palaces, temples, fortresses, royal pleasure gardens and ancient dagobas – second only to the great pyramids of Egypt.',
-    'Enjoy the beautiful lakes, magnificent waterfalls, historic canals, flat and wild rivers, calm and quiet lagoons and marshes.',
-    'Marvel at the abundance of animal life with our own sub-species of elephant, leopards, with many birds, butterflies amphibians and plants unique to this island.',
-    'Relax in an island with some of the most beautiful beaches, bays and underwater attractions you could find in the world.',
-    'Be humbled by panoramic mountains, narrow passes and gaps provide you with some of the finest and most spectacular views you could find anywhere.',
-    'Be mesmerized by the astounding variety and depth of handicraft, music, dance and art forms evolved through thousands of years.',
-    'Tempt your senses to the to the exotic sights, sounds, smells and tastes that can only be Sri Lanka.'
+    'From airport pickup to your final drop-off, we handle every transfer smoothly so you can focus on enjoying your journey.',
+    'No fixed schedules or rigid plans. Every tour can be customized to match your interests, pace, and travel style.',
+    'Travel from tropical beaches to misty mountains, wildlife parks, and ancient cities — all within a single island.',
+    'Our tours are powered by local knowledge, ensuring authentic experiences, hidden locations, and genuine cultural connections.',
+    'Witness elephants in the wild, spot rare birds, and explore national parks that are among the most biodiverse in Asia.',
+    'Walk through ancient kingdoms, sacred temples, and UNESCO heritage sites that still shape Sri Lanka’s culture today.',
+    'Travel in comfortable vehicles with professional drivers and carefully planned routes for a safe and stress-free experience.',
+    'Enjoy village life, local cuisine, scenic train rides, nature walks, and meaningful moments beyond standard tourist stops.',
+    'Book your airport transfers and tours easily through our modern, user‑friendly platform with clear information and support.',
+    'More than a holiday — every journey with GetYourCab is designed to create memories you will cherish forever.'
   ];
 
   ctaText = 'Let us help you create your ideal private escorted';

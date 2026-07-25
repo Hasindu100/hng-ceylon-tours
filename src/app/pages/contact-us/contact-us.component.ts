@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { EmailService } from 'src/app/services/email.service';
 
 declare var L: any;
 
@@ -16,14 +18,14 @@ contactForm: FormGroup;
     {
       icon: 'fa-solid fa-phone-volume',
       title: 'Phone',
-      value: '+1 (555) 123-4567',
-      link: 'tel:+15551234567'
+      value: '+94773870335',
+      link: 'tel:+94773870335'
     },
     {
       icon: 'fa-solid fa-envelope',
       title: 'Email',
-      value: 'hello@company.com',
-      link: 'mailto:hello@company.com'
+      value: 'hngceylontours@gmail.com',
+      link: 'mailto:hngceylontours@gmail.com'
     },
     {
       icon: 'fa-solid fa-location-dot',
@@ -46,7 +48,9 @@ contactForm: FormGroup;
     { platform: 'youtube', url: 'https://youtube.com', color: '#ff0000' }
   ];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, 
+    private emailService: EmailService,
+    private toastrService: ToastrService) {
     this.contactForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required, Validators.minLength(2)]],
@@ -95,15 +99,30 @@ contactForm: FormGroup;
   onSubmit(): void {
     if (this.contactForm.valid) {
       this.isSubmitting = true;
-      
-      // Simulate API call
-      setTimeout(() => {
-        console.log('Form submitted:', this.contactForm.value);
-        this.isSubmitting = false;
-        this.contactForm.reset();
-        // Show success message
-        alert('Message sent successfully!');
-      }, 2000);
+
+      var fullName = this.contactForm.get('firstName')?.value + ' ' + this.contactForm.get('lastName')?.value;
+      const emailObj = {
+        to: 'hasindushehara5@gmail.com',
+        subject: this.contactForm.get('subject')?.value,
+        text: "",
+        userName: fullName,
+        userPhone: this.contactForm.get('phone')?.value,
+        userEmail: this.contactForm.get('email')?.value,
+        userMessage: this.contactForm.get('message')?.value,
+        reason: 'user_contact'
+      }
+
+      this.emailService.sendEmail(emailObj).subscribe({
+        next: (response) => {
+          this.isSubmitting = false;
+          this.contactForm.reset();
+          this.toastrService.success('Message sent successfully!');
+        },
+        error: (error) => {
+          this.isSubmitting = false;
+          this.toastrService.error('Failed to send message. Please try again later.');
+        }
+      });
     } else {
       this.markFormGroupTouched();
     }
