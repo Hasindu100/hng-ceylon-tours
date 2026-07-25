@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~flatpickr/dist/flatpickr.min.css";
+@import url('~@angular/cdk/overlay-prebuilt.css');
 // Reset and Base Styles
 * {
   margin: 0;
@@ -18,11 +20,23 @@
   --card3-gradient-color2: #a8c0ff;
   --card4-gradient-color1: #11998e;
   --card4-gradient-color2: #38ef7d;
-  --primary-color: #4ECDC4;
-  --secondary-color: #6b2cf5;
-  --white: #fff;
+  --primary-color2: #4ECDC4;
+  --secondary-color2: #6b2cf5;
+  --white: #FFFFFC;
   --background-color1: #f8f9fa;
   --invalid-border-color: rgb(192, 8, 8);
+  --border-color2: rgba(206, 212, 218, 1);
+
+  --primary-color2: #376996;
+  --primary-color: #1f3e66;
+  --secondary-color: #FA7921;
+  --primary-dark-color: #040926;
+  --border-color: #d3e6ff;
+  --primary-text-color: #1f3e66;
+  --secondary-text-color: #666;
+  --label-color: #999;
+  --light-background-color: #eff5ff;
+  --primary-light-color: #3e679b;
 }
 
 html {
@@ -46,4 +60,91 @@ body {
 
 .is-invalid {
   border-color: var(--invalid-border-color) !important;
+}
+
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.btn-primary {
+  background-color: var(--secondary-color);
+  color: var(--white);
+
+  &:hover {
+    background-color: var(--secondary-color);
+    color: var(--white);
+  }
+}
+
+.btn-outline-secondary {
+  background-color: var(--white);
+  color: var(--secondary-color);
+  border: 1px solid var(--border-color);
+
+  &:hover {
+    background-color: var(--white);
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+  }
+}
+
+::ng-deep .ng-select {
+  .ng-value-container {
+    padding: 0 !important;
+
+    .ng-value {
+      .flag-img {
+        margin-right: 5px !important;
+      }
+    }
+  }
+
+  .ng-select-container {
+    border: none !important;
+    background: #f9fafb !important;
+    height: 46px !important;
+  }
+
+  .ng-select-focused .ng-select-container {
+    box-shadow: none !important;
+  }
+}
+
+.k-button {
+  height: 50px;
+  width: fit-content;
+  min-width: 100px;
+  padding: 10px 20px;
+  margin: 10px 0px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.btn-tour-primary {
+  background: var(--secondary-color);
+  color: var(--white);
+  border: none;
+}
+
+.btn-tour-secondary {
+  color: var(--secondary-color);
+  background-color: #fff;
+  border: 1px solid var(--secondary-color);
+}
+
+.btn-booking {
+  width: 100%;
 }

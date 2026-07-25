@@ -94,7 +94,7 @@
   }
 }
 
-.form-group {
+::ng-deep app-tour-hero .form-group {
   display: flex;
   flex-direction: column;
 
@@ -188,6 +188,10 @@
         font-weight: 500;
       }
     }
+  }
+
+  .pickup-date.is-invalid input{
+    border-color: var(--invalid-border-color) !important;
   }
 
   &.btn-section {
@@ -302,5 +306,54 @@
     top: 35px;
     font-size: 12px;
     line-height: 1;
+  }
+}
+
+.tab-navigation {
+  display: flex;
+  border-bottom: 1px solid #e5e7eb;
+
+  .tab-button {
+    flex: 1;
+    padding: 20px;
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    color: #6b7280;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+
+    svg {
+      transition: color 0.3s ease;
+    }
+
+    &:hover {
+      color: #374151;
+      background: #f9fafb;
+    }
+
+    &.active {
+      color: #6b2cf5;
+      border-bottom-color: #6b2cf5;
+      background: #faf5ff;
+
+      svg {
+        color: #6b2cf5;
+      }
+    }
+  }
+
+  .tab-button:first-child {
+    border-radius: 16px 0px 0px 0px;
+  }
+
+  .tab-button:nth-child(2) {
+    border-radius: 0px 16px 0px 0px;
   }
 }

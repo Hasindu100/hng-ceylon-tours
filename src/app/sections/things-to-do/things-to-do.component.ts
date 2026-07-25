@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ThingsTodoService } from 'src/app/services/things-todo.service';
 
 @Component({
   selector: 'app-things-to-do',
   templateUrl: './things-to-do.component.html',
   styleUrls: ['./things-to-do.component.scss']
 })
-export class ThingsToDoComponent {
+export class ThingsToDoComponent implements OnInit {
   destinations: Destination[] = [
     {
       id: 1,
@@ -37,6 +38,15 @@ export class ThingsToDoComponent {
     }
   ];
 
+  thingsTodoList: any[] = [];
+  selectedIdsList: string[] = ['4662bH1CO11hqxfB183H', 'AiY9ASH4847Lw0CXRlAP', 'JyLOogSmCdiKAhekYvsA', 'MgXs96icsizkeu4xWhEl'];
+
+  constructor(private thingsTodoService: ThingsTodoService) { }
+
+  ngOnInit(): void {
+    this.getAllThingsTodoList();
+  }
+
   onDestinationClick(destination: Destination): void {
     console.log('Destination clicked:', destination.title);
     // Add your navigation logic here
@@ -45,8 +55,23 @@ export class ThingsToDoComponent {
   onDestinationHover(destination: Destination): void {
     // Add hover analytics or effects here
   }
-}
 
+  getAllThingsTodoList() {
+    this.thingsTodoService.getAllThingsTodoList().subscribe((res: any) => {
+      this.thingsTodoList = res;
+      this.thingsTodoList = this.thingsTodoList.filter((item: any) => this.selectedIdsList.includes(item.id));
+    });
+  }
+
+  getImageURl(imagePaths: string[]) {
+    var imageUrl = 'assets/images/placeholder-image.jpg';
+    if (imagePaths.length > 0) {
+      imageUrl = imagePaths[0];
+    }
+    return imageUrl
+  }
+}
+  
 export interface Destination {
   id: number;
   title: string;

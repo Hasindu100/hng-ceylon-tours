@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 export class ToursService {
   public getTours = new Subject<any>();
   getTours$ = this.getTours.asObservable();
+  airportPickupTourInfo: any;
 
   constructor(private fs: Firestore) { }
 

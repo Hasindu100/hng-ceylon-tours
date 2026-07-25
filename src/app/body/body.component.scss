@@ -1,0 +1,14 @@
+::ng-deep {
+    app-body:has(app-booking-details-form), app-body:has(app-checkout) {
+        .top-bar {
+            display: none;
+        }
+        .hero-overlay {
+            top: 0 !important;
+            background: var(--white) !important;
+        }
+        .nav-menu {
+            display: none !important;
+        }
+    }
+}

@@ -8,22 +8,23 @@
     
     <div class="hero-text">
       <h1 class="tour-title">{{thingsTodoDetails.title}}</h1>
-      <p class="tour-description">
+      <!-- <p class="tour-description">
         Go deep into Sri Lankan history with an Anuradhapura Day Tour...
-      </p>
+      </p> -->
       
       <div class="action-buttons">
-        <button 
+        <!-- <button 
           class="btn btn-explore" 
           (click)="onExploreMore()"
           type="button">
           EXPLORE MORE
-        </button>
+        </button> -->
         <button 
           class="btn btn-book" 
-          (click)="onBookTour()"
+          [routerLink]="'/contact'"
           type="button">
-          BOOK THIS TOUR
+          <i class="icon-phone"></i>
+          Contact us for more details
         </button>
       </div>
     </div>
@@ -47,7 +48,7 @@
         <!-- Left Column - Overview and Images -->
         <div class="left-column">
           <section class="overview-section">
-            <h2 class="section-title">Overview</h2>
+            <!-- <h2 class="section-title">Overview</h2> -->
             <p class="overview-text" [innerHTML]="thingsTodoDetails.content"></p>
           </section>
 
@@ -75,15 +76,15 @@
       </div>
 
       <div class="image-slider">
-        <h3 class="slider-caption">Places you will visit</h3>
-        <app-image-slider [images]="thingsTodoDetails?.images"></app-image-slider>
+        <!-- <app-image-slider [images]="thingsTodoDetails?.images"></app-image-slider> -->
+        <app-gallery [imageList]="thingsTodoDetails?.images" [title]="'Some captures of the destination'"></app-gallery>
       </div>
       
     </div>
   </main>
 </div>
 
-<div class="carousel-container">
+<!-- <div class="carousel-container">
         <div class="speed-controls">
             <button class="speed-btn active" onclick="changeSpeed(20)">Slow</button>
             <button class="speed-btn" onclick="changeSpeed(10)">Normal</button>
@@ -144,4 +145,4 @@
             <button class="control-btn" onclick="pauseCarousel()" title="Pause/Play">⏯️</button>
             <button class="control-btn" onclick="resetCarousel()" title="Reset">🔄</button>
         </div>
-    </div>
+    </div> -->

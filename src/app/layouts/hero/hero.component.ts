@@ -16,9 +16,9 @@ export class HeroComponent {
   locationData: any[] = [];
 
   features = [
-    { icon: '✓', text: 'Private Taxi' },
-    { icon: '✓', text: 'Custom Tours' },
-    { icon: '✓', text: 'Local Guide' }
+    { icon: '✓', text: 'Airport Pickup' },
+    { icon: '✓', text: 'Airport Drop' },
+    { icon: '✓', text: 'Custom Tours' }
   ];
 
   get PickupLocation() {

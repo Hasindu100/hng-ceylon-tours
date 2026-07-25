@@ -2,8 +2,8 @@
   <div class="container">
     <!-- Header Section -->
     <div class="header">
-      <h2 class="title">Exploring Popular Destination</h2>
-      <p class="subtitle">Lorem ipsum dolor sit amet consectetur.</p>
+      <h2 class="title">{{ title }}</h2>
+      <p class="subtitle">{{ description }}</p>
     </div>
 
     <!-- Carousel Section -->
@@ -40,22 +40,20 @@
           
           <div 
             class="destination-card" 
-            *ngFor="let destination of destinations;"
-            (click)="onDestinationClick(destination)"
-            [attr.aria-label]="'View ' + destination.name + ', ' + destination.country">
+            *ngFor="let imageUrl of imageList;">
             
             <div class="destination-card__image">
               <img 
-                [src]="destination.image" 
-                [alt]="destination.name + ', ' + destination.country"
+                [src]="imageUrl" 
+                [alt]="imageUrl"
                 loading="lazy">
               <div class="destination-card__overlay"></div>
             </div>
             
-            <div class="destination-card__content">
+            <!-- <div class="destination-card__content">
               <h3 class="destination-card__country">{{ destination.country }}</h3>
               <p class="destination-card__travelers">{{ destination.travelers }}</p>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

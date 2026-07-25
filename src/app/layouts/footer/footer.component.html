@@ -1,64 +1,41 @@
 <footer class="footer">
+  <!-- Decorative top border -->
+  <div class="footer-top-accent"></div>
+
   <div class="footer-container">
     <!-- Company Info Section -->
     <div class="footer-section company-info">
       <div class="logo-section">
-        <img src="assets/images/logo/footer-logo.png" alt="Tourslanka" class="footer-logo">
-        <!-- <p class="tagline">Private Sri Lanka Tours</p> -->
-      </div>
-      <!-- Newsletter Section -->
-      <div class="footer-section newsletter-section">
-        <!-- <h3 class="section-title newsletter-title">Get the latest updates on Tourslanka</h3>
-        <form class="newsletter-form" (ngSubmit)="onNewsletterSubmit()">
-          <div class="input-group">
-            <input 
-              type="email" 
-              [(ngModel)]="newsletterEmail"
-              name="newsletterEmail"
-              placeholder="Enter your email"
-              class="newsletter-input"
-              required>
-            <button type="submit" class="newsletter-btn">
-              <i class="fas fa-arrow-right"></i>
-            </button>
-          </div>
-        </form> -->
-        
-        <!-- Social Media Links -->
-        <div class="social-links">
-          <a 
-            *ngFor="let social of socialLinks" 
-            (click)="openSocialLink(social.url)"
-            [attr.aria-label]="social.platform"
-            class="social-link">
-            <i [class]="social.icon"></i>
-          </a>
+        <div class="logo-wrapper">
+          <img src="assets/images/logo/footer-logo.png" alt="HNG Ceylon Tours" class="footer-logo">
         </div>
+        <p class="company-description">Explore the extraordinary beauty of Sri Lanka with expert-guided tours and unforgettable experiences.</p>
       </div>
     </div>
 
-    <!-- <div class="mask">
-        <img src="assets/images/about/mask3.png" alt="Sri Lankan Traditional Mask" class="mask-image">
-    </div> -->
-
-    <!-- Contact Details -->
+    <!-- Contact Details Section -->
     <div class="footer-section contact-details">
-      <h3 class="section-title">{{ contactInfo.companyName }}</h3>
+      <div class="section-header">
+        <i class="fas fa-map-marker-alt icon"></i>
+        <h3 class="section-title">Contact Info</h3>
+      </div>
+
       <div class="contact-item">
+        <i class="fas fa-location-dot"></i>
         <p class="address">
           {{ contactInfo.address }}<br>
           {{ contactInfo.country }}
         </p>
       </div>
       <div class="contact-item">
+        <i class="fas fa-phone"></i>
         <p class="phone">
-          <span class="label">Tel:</span> 
           <a href="tel:{{ contactInfo.phone }}">{{ contactInfo.phone }}</a>
         </p>
       </div>
       <div class="contact-item">
+        <i class="fas fa-envelope"></i>
         <p class="email">
-          <span class="label">E-mail:</span> 
           <a href="mailto:{{ contactInfo.email }}">{{ contactInfo.email }}</a>
         </p>
       </div>
@@ -66,20 +43,16 @@
 
     <!-- Quick Links Section -->
     <div class="footer-section links-section">
-      <h3 class="section-title">Quick Links</h3>
+      <div class="section-header">
+        <i class="fas fa-link icon"></i>
+        <h3 class="section-title">Quick Links</h3>
+      </div>
       <ul class="footer-links">
         <li *ngFor="let link of quickLinks">
-          <a (click)="navigateTo(link.url)" class="footer-link">{{ link.label }}</a>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Popular Activities -->
-    <div class="footer-section links-section">
-      <h3 class="section-title">Popular Activities</h3>
-      <ul class="footer-links">
-        <li *ngFor="let link of popularActivitiesLinks">
-          <a (click)="navigateTo(link.url)" class="footer-link">{{ link.label }}</a>
+          <a (click)="navigateTo(link.url)" class="footer-link">
+            <span class="link-icon">→</span>
+            {{ link.label }}
+          </a>
         </li>
       </ul>
     </div>
@@ -89,23 +62,32 @@
   <div class="footer-bottom">
     <div class="footer-bottom-content">
       <!-- Payment Methods -->
-      <div class="payment-methods">
-        <img src="../../../assets/images/cards/Visa_Inc._logo.svg" alt="Visa" class="payment-logo">
-        <img src="../../../assets/images/cards/Mastercard-logo.svg" alt="Mastercard" class="payment-logo">
+      <div class="payment-section">
+        <p class="payment-label">We Accept</p>
+        <div class="payment-methods">
+          <div class="payment-badge">
+            <img src="../../../assets/images/cards/Visa_Inc._logo.svg" alt="Visa" class="payment-logo">
+          </div>
+          <div class="payment-badge">
+            <img src="../../../assets/images/cards/Mastercard-logo.svg" alt="Mastercard" class="payment-logo">
+          </div>
+        </div>
       </div>
 
-      <!-- Copyright -->
+      <!-- Copyright & Links -->
       <div class="copyright">
-        <p>© 2025 HNG Ceylon Tours All rights reserved.
-        </p>
+        <p>© 2025 HNG Ceylon Tours. All rights reserved. | <a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a></p>
+      </div>
+
+      <!-- Design Credit -->
+      <div class="design-credit">
+        <p>Crafted with <i class="fas fa-heart"></i> for your unforgettable journey</p>
       </div>
 
       <!-- Back to Top Button -->
-      <div class="back-to-top">
-        <button class="back-to-top-btn" (click)="scrollToTop()" aria-label="Back to top">
-          <i class="fas fa-chevron-up"></i>
-        </button>
-      </div>
+      <button class="back-to-top-btn" (click)="scrollToTop()" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+      </button>
     </div>
   </div>
 </footer>

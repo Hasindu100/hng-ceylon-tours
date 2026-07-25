@@ -6,7 +6,7 @@
 
     <div class="destinations-grid">
       <!-- Ella, Sri Lanka -->
-      <article 
+      <!-- <article 
         class="destination-card destination-card--single"
         (click)="onDestinationClick(destinations[0])"
         (mouseenter)="onDestinationHover(destinations[0])"
@@ -21,10 +21,10 @@
         <div class="destination-card__content">
           <h2 class="destination-card__title">{{ destinations[0].title }}</h2>
         </div>
-      </article>
+      </article> -->
 
       <!-- Polonnaruwa The Medieval Kingdom -->
-      <article 
+      <!-- <article 
         class="destination-card destination-card--wide"
         (click)="onDestinationClick(destinations[1])"
         (mouseenter)="onDestinationHover(destinations[1])"
@@ -39,10 +39,10 @@
         <div class="destination-card__content">
           <h2 class="destination-card__title">{{ destinations[1].title }}</h2>
         </div>
-      </article>
+      </article> -->
 
       <!-- Sigiriya - The Rock Fortress In The Sky -->
-      <article 
+      <!-- <article 
         class="destination-card destination-card--wide"
         (click)="onDestinationClick(destinations[2])"
         (mouseenter)="onDestinationHover(destinations[2])"
@@ -57,10 +57,10 @@
         <div class="destination-card__content">
           <h2 class="destination-card__title">{{ destinations[2].title }}</h2>
         </div>
-      </article>
+      </article> -->
 
       <!-- Yala National Park -->
-      <article 
+      <!-- <article 
         class="destination-card destination-card--single destination-card--last"
         (click)="onDestinationClick(destinations[3])"
         (mouseenter)="onDestinationHover(destinations[3])"
@@ -74,6 +74,24 @@
         </div>
         <div class="destination-card__content">
           <h2 class="destination-card__title">{{ destinations[3].title }}</h2>
+        </div>
+      </article> -->
+
+      <article *ngFor="let destination of thingsTodoList; index as i"
+        [ngClass]="i == 1 || i == 2 ? 'destination-card destination-card--wide' : 'destination-card destination-card--single'"
+        (click)="onDestinationClick(destination)"
+        (mouseenter)="onDestinationHover(destination)"
+        [attr.aria-label]="destination.title"
+        routerLink="things-todo/single2" [queryParams]="{id: destination.id}">
+        <div class="destination-card__image">
+          <img 
+            [src]="getImageURl(destination.images)" 
+            [alt]="destination.title"
+            loading="lazy">
+          <div class="destination-card__overlay"></div>
+        </div>
+        <div class="destination-card__content">
+          <h2 class="destination-card__title">{{ destination.title }}</h2>
         </div>
       </article>
     </div>

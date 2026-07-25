@@ -6,7 +6,6 @@ $white: #ffffff;
 .day-tours-section {
   padding: 3rem 0;
   background-color: #f8f9fa;
-  margin-top: 150px;
 
   @media (max-width: 767px) {
     padding: 2rem 0;
@@ -26,10 +25,10 @@ $white: #ffffff;
 
 .section-title {
   font-size: 2.5rem;
-  font-weight: 300;
+  font-weight: 700;
   text-align: center;
   margin-bottom: 3rem;
-  color: $primary-teal;
+  color: var(--primary-color);
 
   @media (max-width: 767px) {
     font-size: 2rem;
@@ -67,7 +66,7 @@ $white: #ffffff;
 
     .tour-info {
       .tour-title {
-        color: $primary-teal-hover;
+        color: var(--primary-color);
       }
     }
   }
@@ -147,7 +146,7 @@ $white: #ffffff;
 
 .read-more {
   margin-top: 10px;
-  color: #186f5f;
+  color: var(--secondary-color);
   display: flex;
   gap: 10px;
   span {

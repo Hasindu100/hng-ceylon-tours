@@ -16,22 +16,20 @@ export class FooterComponent {
   };
 
   // Navigation links
-  bookPayLinks = [
-    { label: 'How to Book & Pay', url: '/book-pay' },
-    { label: 'Child Discounts & Terms', url: '/child-discounts' }
-  ];
-
-  popularActivitiesLinks = [
-    { label: 'City Tour', url: '/terms' },
-    { label: 'Safari', url: '/privacy' },
-    { label: 'Hiking', url: '/privacy' },
-    { label: 'Surfing', url: '/privacy' },
-  ];
-
   quickLinks = [
     { label: 'Travel FAQs', url: '/faqs' },
     { label: 'Top Destinations', url: '/destinations' },
     { label: 'What to Pack', url: '/packing-guide' }
+  ];
+
+  // Header Navigation links
+  headerNavLinks = [
+    { label: 'Home', url: '/' },
+    { label: 'Things to do', url: '/things-todo' },
+    { label: 'Trip Type', url: '/tours' },
+    { label: 'Activities', url: '/activities' },
+    { label: 'About', url: '/about' },
+    { label: 'Contact', url: '/contact' }
   ];
 
   // Social media links
@@ -41,17 +39,7 @@ export class FooterComponent {
     { platform: 'instagram', url: 'https://instagram.com/tourslanka', icon: 'fa fa-instagram' }
   ];
 
-  // Newsletter signup
-  newsletterEmail: string = '';
 
-  onNewsletterSubmit(): void {
-    if (this.newsletterEmail) {
-      // Handle newsletter subscription
-      console.log('Newsletter subscription:', this.newsletterEmail);
-      // Add your newsletter subscription logic here
-      this.newsletterEmail = '';
-    }
-  }
 
   // Navigation methods
   navigateTo(url: string): void {

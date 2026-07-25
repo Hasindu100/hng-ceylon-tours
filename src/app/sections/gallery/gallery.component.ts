@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-gallery',
@@ -7,6 +7,9 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 })
 export class GalleryComponent {
 @ViewChild('carousel', { static: false }) carousel!: ElementRef;
+@Input() imageList: string[] = [];
+@Input() title: string = '';
+@Input() description: string = '';
 
   destinations: Destination[] = [
     {

@@ -1,0 +1,100 @@
+<!-- Hero Banner -->
+<app-hero-banner 
+  [title]="'Terms & Conditions'" 
+  [subTitle]="'Please read our terms carefully before using our services'">
+</app-hero-banner>
+
+<!-- Terms Container -->
+<div class="terms-container">
+  <div class="terms-wrapper">
+    <!-- Header Section -->
+    <section class="terms-header">
+      <h1 class="terms-title">Terms & Conditions</h1>
+      <p class="terms-subtitle">
+        These Terms and Conditions govern the use of GetYourCab's services. Please read them carefully to understand our policies and procedures.
+      </p>
+      <div class="last-updated">
+        <span class="label">Last Updated:</span>
+        <span class="date">{{ lastUpdated }}</span>
+      </div>
+    </section>
+
+    <!-- Table of Contents -->
+    <section class="table-of-contents">
+      <h2 class="toc-title">Table of Contents</h2>
+      <nav class="toc-list">
+        <a 
+          *ngFor="let section of termsSections"
+          (click)="scrollToSection(section.id)"
+          class="toc-link"
+        >
+          {{ section.title }}
+        </a>
+      </nav>
+    </section>
+
+    <!-- Terms Content -->
+    <section class="terms-content">
+      <!-- Main Terms Sections -->
+      <article *ngFor="let section of termsSections" [id]="'section-' + section.id" class="terms-section">
+        <!-- Section Header -->
+        <div class="section-header">
+          <h2 class="section-title">{{ section.title }}</h2>
+        </div>
+
+        <!-- Main Content Paragraphs -->
+        <div *ngIf="section.content.length > 0" class="section-body">
+          <p *ngFor="let paragraph of section.content" class="section-paragraph">
+            {{ paragraph }}
+          </p>
+        </div>
+
+        <!-- Subsections -->
+        <div *ngIf="section.subsections" class="subsections">
+          <div *ngFor="let subsection of section.subsections" class="subsection">
+            <h3 class="subsection-title">{{ subsection.title }}</h3>
+            <div class="subsection-content">
+              <ul class="subsection-list">
+                <li *ngFor="let item of subsection.content" class="list-item">
+                  {{ item }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="section-divider"></div>
+      </article>
+    </section>
+
+    <!-- Acknowledgment Section -->
+    <section class="acknowledgment-section">
+      <div class="acknowledgment-box">
+        <h3 class="acknowledgment-title">Acknowledgment & Agreement</h3>
+        <p class="acknowledgment-text">
+          By using GetYourCab's services, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions. 
+          If you disagree with any part of these terms, you must discontinue using our services immediately.
+        </p>
+        <p class="acknowledgment-text">
+          If you have any questions or concerns about these terms, please don't hesitate to contact our customer support team. 
+          We are here to help and ensure you have a clear understanding of our policies.
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="terms-cta">
+      <div class="cta-content">
+        <h2 class="cta-title">Questions About Our Terms?</h2>
+        <p class="cta-description">
+          Our customer support team is available 24/7 to answer any questions or concerns you may have about our terms and conditions.
+        </p>
+        <div class="cta-buttons">
+          <a href="/contact" class="cta-button primary">Contact Support</a>
+          <a href="/faq" class="cta-button secondary">Read Our FAQ</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

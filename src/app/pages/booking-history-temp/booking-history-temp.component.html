@@ -1,0 +1,313 @@
+<div class="booking-history-page">
+
+  <!-- Hero Header -->
+  <div class="page-header">
+    <div class="header-bg">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="grid-overlay"></div>
+    </div>
+    <div class="header-content">
+      <div class="breadcrumb">
+        <span class="breadcrumb-icon">✦</span>
+        <span>My Account</span>
+        <span class="sep">/</span>
+        <span class="active">Travel History</span>
+      </div>
+      <h1 class="page-title">
+        <span class="title-accent">My</span> Journeys
+      </h1>
+      <p class="page-subtitle">Relive your adventures, track ongoing expeditions & review past bookings</p>
+
+      <!-- Stats Bar -->
+      <div class="stats-bar">
+        <div class="stat-card">
+          <span class="stat-number">{{ totalBookings }}</span>
+          <span class="stat-label">Total Trips</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-card">
+          <span class="stat-number">{{ completedCount }}</span>
+          <span class="stat-label">Completed</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-card">
+          <span class="stat-number">{{ inProgressCount }}</span>
+          <span class="stat-label">In Progress</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-card">
+          <span class="stat-number">{{ totalSpent | currency:'USD':'symbol':'1.0-0' }}</span>
+          <span class="stat-label">Total Spent</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filter & Sort Bar -->
+  <div class="controls-bar">
+    <div class="filter-tabs">
+      <button
+        class="tab-btn"
+        [class.active]="activeFilter === 'all'"
+        (click)="setFilter('all')">
+        <span class="tab-dot all"></span>
+        All Bookings
+        <span class="tab-count">{{ totalBookings }}</span>
+      </button>
+      <button
+        class="tab-btn"
+        [class.active]="activeFilter === 'completed'"
+        (click)="setFilter('completed')">
+        <span class="tab-dot completed"></span>
+        Completed
+        <span class="tab-count">{{ completedCount }}</span>
+      </button>
+      <button
+        class="tab-btn"
+        [class.active]="activeFilter === 'inprogress'"
+        (click)="setFilter('inprogress')">
+        <span class="tab-dot inprogress"></span>
+        In Progress
+        <span class="tab-count">{{ inProgressCount }}</span>
+      </button>
+      <button
+        class="tab-btn"
+        [class.active]="activeFilter === 'failed'"
+        (click)="setFilter('failed')">
+        <span class="tab-dot failed"></span>
+        Failed
+        <span class="tab-count">{{ failedCount }}</span>
+      </button>
+    </div>
+
+    <div class="controls-right">
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input
+          type="text"
+          placeholder="Search destinations..."
+          [(ngModel)]="searchQuery"
+          (input)="onSearch()"
+          class="search-input" />
+      </div>
+      <div class="sort-select-wrapper">
+        <select class="sort-select" [(ngModel)]="sortOrder" (change)="onSort()">
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="price-low">Price: Low to High</option>
+        </select>
+        <svg class="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6,9 12,15 18,9"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bookings List -->
+  <div class="bookings-container">
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="filteredBookings.length === 0">
+      <div class="empty-icon">
+        <svg viewBox="0 0 80 80" fill="none">
+          <circle cx="40" cy="40" r="38" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <path d="M25 40 Q40 20 55 40 Q40 60 25 40Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <circle cx="40" cy="40" r="4" fill="currentColor"/>
+        </svg>
+      </div>
+      <h3>No journeys found</h3>
+      <p>Try adjusting your filters or search query</p>
+      <button class="explore-btn" routerLink="/tours">Explore Tours</button>
+    </div>
+
+    <!-- Booking Cards -->
+    <div class="booking-card" *ngFor="let booking of filteredBookings; let i = index"
+         [class.completed]="booking.status === 'completed'"
+         [class.inprogress]="booking.status === 'inprogress'"
+         [class.failed]="booking.status === 'failed'"
+         [style.animation-delay]="i * 0.08 + 's'">
+
+      <!-- Card Left: Image -->
+      <div class="card-image-wrapper">
+        <img [src]="booking.imageUrl" [alt]="booking.destination" class="card-image" />
+        <div class="image-overlay"></div>
+        <div class="status-badge" [class]="booking.status">
+          <span class="status-pulse" *ngIf="booking.status === 'inprogress'"></span>
+          <svg class="status-icon" viewBox="0 0 20 20" fill="currentColor">
+            <path *ngIf="booking.status === 'completed'" fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            <path *ngIf="booking.status === 'inprogress'" fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+            <path *ngIf="booking.status === 'failed'" fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+          </svg>
+          {{ booking.status === 'inprogress' ? 'In Progress' : (booking.status | titlecase) }}
+        </div>
+        <div class="image-tag">{{ booking.tourType }}</div>
+      </div>
+
+      <!-- Card Body -->
+      <div class="card-body">
+        <div class="card-top">
+          <div class="destination-info">
+            <div class="booking-id">Booking #{{ booking.bookingId }}</div>
+            <h3 class="destination-name">Airport Pickup</h3>
+            <div class="location-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="loc-icon">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+              </svg>
+              <span>Bandaranayake Airport</span>
+            </div>
+            <div class="down-arrow">
+              <svg fill="#000000" viewBox="0 0 24 24" id="down-arrow" data-name="Flat Line" xmlns="http://www.w3.org/2000/svg" class="icon flat-line"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><line id="primary" x1="12" y1="3" x2="12" y2="21" style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></line><polyline id="primary-2" data-name="primary" points="9 18 12 21 15 18" style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></polyline></g></svg>
+            </div>
+            <div class="location-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="loc-icon">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+              </svg>
+              <span>Ella</span>
+            </div>
+          </div>
+          <div class="price-block">
+            <span class="price-label">Total Paid</span>
+            <span class="price-value">{{ booking.totalPrice | currency:'USD' }}</span>
+          </div>
+        </div>
+
+        <!-- Tour Details Row -->
+        <div class="details-row">
+          <div class="detail-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <div>
+              <span class="chip-label">Date</span>
+              <span class="chip-value">{{ booking.startDate | date:'MMM dd, yyyy' }}</span>
+            </div>
+          </div>
+          <div class="detail-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/>
+            </svg>
+            <div>
+              <span class="chip-label">Time</span>
+              <span class="chip-value">{{ booking.duration }}</span>
+            </div>
+            <!-- <div>
+              <span class="chip-label">Duration</span>
+              <span class="chip-value">{{ booking.duration }} Days</span>
+            </div> -->
+          </div>
+          <div class="detail-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
+            </svg>
+            <div>
+              <span class="chip-label">Travelers</span>
+              <span class="chip-value">{{ booking.travelers }} {{ booking.travelers === 1 ? 'Person' : 'People' }}</span>
+            </div>
+          </div>
+          <div class="detail-chip">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="Car-3--Streamline-Ultimate" height="24" width="24">
+              <path d="M22.94 9.62H23a1 1 0 0 0 1 -1v-1a1 1 0 0 0 -1 -1h-1.35a1.5 1.5 0 0 0 -1.2 0.61 0.09 0.09 0 0 1 -0.1 0 0.12 0.12 0 0 1 -0.07 -0.07l-0.48 -2.4a3 3 0 0 0 -2.94 -2.41H7.14A3 3 0 0 0 4.2 4.79l-0.48 2.4a0.12 0.12 0 0 1 -0.07 0.07 0.09 0.09 0 0 1 -0.1 0 1.5 1.5 0 0 0 -1.2 -0.61H1a1 1 0 0 0 -1 1v1a1 1 0 0 0 1 1h0.06a0.25 0.25 0 0 1 0.23 0.16 0.26 0.26 0 0 1 0 0.27A4.42 4.42 0 0 0 0 13.12v4a1.49 1.49 0 0 0 0.86 1.35 0.27 0.27 0 0 1 0.14 0.23v1.42a1.5 1.5 0 0 0 1.5 1.5h2a1.5 1.5 0 0 0 1.5 -1.5v-1.24a0.26 0.26 0 0 1 0.25 -0.26h11.5a0.26 0.26 0 0 1 0.25 0.26v1.24a1.5 1.5 0 0 0 1.5 1.5h2a1.5 1.5 0 0 0 1.5 -1.5V18.7a0.27 0.27 0 0 1 0.14 -0.23 1.49 1.49 0 0 0 0.86 -1.35v-4a4.42 4.42 0 0 0 -1.25 -3.07 0.26 0.26 0 0 1 0 -0.27 0.25 0.25 0 0 1 0.19 -0.16Zm-19.69 8H1.5a0.5 0.5 0 0 1 -0.5 -0.5v-0.5a0.5 0.5 0 0 1 0.5 -0.5h1.75a0.76 0.76 0 0 1 0.75 0.76 0.75 0.75 0 0 1 -0.75 0.74Zm2.12 -4.09a0.23 0.23 0 0 1 -0.19 0.09H4a2 2 0 0 1 -2 -1.71 0.25 0.25 0 0 1 0.06 -0.2 0.28 0.28 0 0 1 0.19 -0.09H4.5a0.68 0.68 0 0 1 0.62 0.49l0.3 1.2a0.25 0.25 0 0 1 -0.05 0.22ZM16 13.28l-0.54 1.64a2.49 2.49 0 0 1 -2.37 1.7h-2.15a2.49 2.49 0 0 1 -2.37 -1.7L8 13.28a0.48 0.48 0 0 1 0.06 -0.45 0.52 0.52 0 0 1 0.41 -0.21h7a0.52 0.52 0 0 1 0.41 0.21 0.48 0.48 0 0 1 0.12 0.45Zm2.45 -4.75a0.25 0.25 0 0 1 -0.19 0.09H5.77a0.25 0.25 0 0 1 -0.19 -0.09 0.21 0.21 0 0 1 0 -0.2l0.63 -3.15a1 1 0 0 1 1 -0.8h9.72a1 1 0 0 1 1 0.8l0.63 3.15a0.21 0.21 0 0 1 -0.14 0.2Zm0.4 5.09a0.23 0.23 0 0 1 -0.19 -0.09 0.25 0.25 0 0 1 -0.05 -0.22l0.3 -1.2a0.68 0.68 0 0 1 0.62 -0.49h2.23a0.28 0.28 0 0 1 0.19 0.09 0.25 0.25 0 0 1 0.06 0.2 2 2 0 0 1 -2 1.71Zm4.18 3v0.5a0.5 0.5 0 0 1 -0.5 0.5h-1.78a0.75 0.75 0 0 1 -0.75 -0.74 0.76 0.76 0 0 1 0.75 -0.76h1.75a0.5 0.5 0 0 1 0.5 0.5Z" fill="currentColor" stroke-width="1"></path>
+            </svg>
+            <div>
+              <span class="chip-label">Vehicle Type</span>
+              <span class="chip-value">{{ booking.hotel }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress Bar for In-Progress -->
+        <div class="progress-section" *ngIf="booking.status === 'inprogress'" [hidden]="true">
+          <div class="progress-header">
+            <span class="progress-label">Journey Progress</span>
+            <span class="progress-pct">{{ booking.progress }}%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" [style.width]="booking.progress + '%'">
+              <div class="progress-glow"></div>
+            </div>
+          </div>
+          <div class="progress-steps">
+            <span class="step done">Booked</span>
+            <!-- <span class="step" [class.done]="booking.progress >= 33">Departed</span>
+            <span class="step" [class.done]="booking.progress >= 66">Touring</span>
+            <span class="step" [class.done]="booking.progress >= 100">Returned</span> -->
+          </div>
+        </div>
+
+        <!-- Failed Reason -->
+        <div class="failed-notice" *ngIf="booking.status === 'failed'">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          <span>{{ booking.failReason }}</span>
+        </div>
+
+        <!-- Rating (Completed only) -->
+        <div class="rating-row" *ngIf="booking.status === 'completed' && booking.rating">
+          <span class="rating-label">Your Rating:</span>
+          <div class="stars">
+            <span class="star" *ngFor="let s of [1,2,3,4,5]" [class.filled]="s <= booking.rating">★</span>
+          </div>
+          <span class="rating-comment" *ngIf="booking.review">"{{ booking.review }}"</span>
+        </div>
+        <div class="rating-row unrated" *ngIf="booking.status === 'completed' && !booking.rating">
+          <button class="rate-btn" (click)="openRating(booking)">Rate this experience ✦</button>
+        </div>
+
+        <!-- Card Actions -->
+        <div class="card-actions">
+          <button class="action-btn primary" (click)="viewDetails(booking)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+            </svg>
+            View Details
+          </button>
+          <button class="action-btn secondary" *ngIf="booking.status === 'completed'" (click)="downloadInvoice(booking)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Invoice
+          </button>
+          <button class="action-btn secondary" *ngIf="booking.status === 'completed'" (click)="rebookTour(booking)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="1,4 1,10 7,10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/>
+            </svg>
+            Rebook
+          </button>
+          <button class="action-btn danger" *ngIf="booking.status === 'failed'" (click)="retryBooking(booking)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="1,4 1,10 7,10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/>
+            </svg>
+            Retry
+          </button>
+          <button class="action-btn ghost" *ngIf="booking.status === 'inprogress'" (click)="trackJourney(booking)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="3,11 22,2 13,21 11,13 3,11"/>
+            </svg>
+            Track
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination" *ngIf="filteredBookings.length > 0">
+    <button class="page-btn" [disabled]="currentPage === 1" (click)="changePage(currentPage - 1)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg>
+    </button>
+    <button class="page-btn" *ngFor="let p of pages"
+            [class.active]="p === currentPage"
+            (click)="changePage(p)">{{ p }}</button>
+    <button class="page-btn" [disabled]="currentPage === totalPages" (click)="changePage(currentPage + 1)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg>
+    </button>
+  </div>
+
+</div>

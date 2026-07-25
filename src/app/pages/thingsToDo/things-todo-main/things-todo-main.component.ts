@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from 'src/app/services/common.service';
 import { ThingsTodoService } from 'src/app/services/things-todo.service';
 
 @Component({
@@ -32,9 +33,11 @@ export class ThingsTodoMainComponent implements OnInit {
     }
   ];
 
-  constructor(private thingsTodoService: ThingsTodoService) { }
+  constructor(private thingsTodoService: ThingsTodoService,
+    private commonService: CommonService) { }
 
   ngOnInit(): void {
+    this.commonService.scrollToTop();
     this.getAllThingsTodoList();
   }
 

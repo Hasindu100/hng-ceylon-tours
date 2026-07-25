@@ -1,0 +1,103 @@
+<div class="order-summary" *ngIf="tourDetails">
+  <h2>Tour summary</h2>
+  
+  <div class="tour-header">
+    <!-- <img [src]="order.image" [alt]="order.title" class="tour-image"> -->
+    <div class="tour-info">
+      <div class="locations">
+        <span class="location-label">Pickup location:</span>
+        <span class="location-value">{{ tourDetails.pickup.address }}</span>
+      </div>
+      <div class="locations">
+        <span class="location-label">Drop location:</span>
+        <span class="location-value">{{ tourDetails.dropoff.address }}</span>
+      </div>
+      <!-- <div class="rating">
+        <span class="stars">★★★★½</span>
+        <span class="rating-value">{{ order.rating }} ({{ order.reviewCount }})</span>
+      </div> -->
+      <!-- <div class="badges">
+        <span class="badge badge-warning">Only {{ order.spotsLeft }} spot left</span>
+        <span class="badge badge-dark">Top rated</span>
+      </div> -->
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="tour-details">
+    <div class="detail-row">
+      <span class="icon">
+        <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css">  .st0{fill:#000000;}  </style> <g> <path class="st0" d="M34.313,250.891c2.297-5.016,6.688-13.281,14.438-27.813c3.531-6.672,7.5-14.047,11.563-21.625H24.719 C11.063,201.453,0,212.516,0,226.188c0,13.641,11.063,24.703,24.719,24.703H34.313z"></path> <path class="st0" d="M487.281,201.453h-35.594c4.078,7.578,8.031,14.953,11.563,21.625c7.75,14.531,12.125,22.797,14.438,27.813 h9.594c13.656,0,24.719-11.063,24.719-24.703C512,212.516,500.938,201.453,487.281,201.453z"></path> <path class="st0" d="M39.391,465.188c0,18.406,14.938,33.328,33.328,33.328c18.406,0,33.313-14.922,33.313-33.328v-31.516H39.391 V465.188z"></path> <path class="st0" d="M405.938,465.188c0,18.406,14.938,33.328,33.344,33.328s33.328-14.922,33.328-33.328v-31.516h-66.672V465.188z "></path> <path class="st0" d="M467.875,257.109c1.688,0.484-61.688-115.828-64.719-122.109c-8-16.672-27.781-26.703-47.063-26.703 c-22.281,0-84.344,0-84.344,0s-93.563,0-115.859,0c-19.297,0-39.031,10.031-47.047,26.703 c-3.031,6.281-66.391,122.594-64.719,122.109c0,0-20.5,20.438-22.063,22.063c-8.625,9.281-8,17.297-8,25.313c0,0,0,75.297,0,92.563 c0,17.281,3.063,26.734,23.438,26.734h437c20.375,0,23.469-9.453,23.469-26.734c0-17.266,0-92.563,0-92.563 c0-8.016,0.594-16.031-8.063-25.313C488.406,277.547,467.875,257.109,467.875,257.109z M96.563,221.422 c0,0,40.703-73.313,43.094-78.109c4.125-8.203,15.844-14.141,27.828-14.141h177.031c12,0,23.703,5.938,27.828,14.141 c2.406,4.797,43.109,78.109,43.109,78.109c3.75,6.75,0.438,19.313-10.672,19.313H107.219 C96.109,240.734,92.813,228.172,96.563,221.422z M91.125,384.469c-20.656,0-37.406-16.734-37.406-37.391 c0-20.672,16.75-37.406,37.406-37.406s37.391,16.734,37.391,37.406C128.516,367.734,111.781,384.469,91.125,384.469z M312.781,394.578c0,2.734-2.219,4.953-4.938,4.953H204.172c-2.734,0-4.953-2.219-4.953-4.953v-45.672 c0-2.703,2.219-4.906,4.953-4.906h103.672c2.719,0,4.938,2.203,4.938,4.906V394.578z M420.875,384.469 c-20.656,0-37.422-16.734-37.422-37.391c0-20.672,16.766-37.406,37.422-37.406s37.406,16.75,37.406,37.406 S441.531,384.469,420.875,384.469z"></path> <path class="st0" d="M152.906,49.25c0.016-10.047,8.172-18.203,18.219-18.219h169.75c10.031,0.016,18.188,8.172,18.203,18.219 v49.172h17.547V49.25c0-19.75-16-35.75-35.75-35.766h-169.75c-19.75,0.016-35.75,16.016-35.766,35.766v49.172h17.547V49.25z"></path> <path class="st0" d="M195.141,92.938h8.891c0.438,0,0.719-0.266,0.719-0.672V56.328c0-0.281,0.156-0.422,0.406-0.422h12.063 c0.406,0,0.719-0.266,0.719-0.672v-7.469c0-0.406-0.313-0.688-0.719-0.688h-35.25c-0.438,0-0.719,0.281-0.719,0.688v7.469 c0,0.406,0.281,0.672,0.719,0.672h12.047c0.281,0,0.422,0.141,0.422,0.422v35.938C194.438,92.672,194.719,92.938,195.141,92.938z"></path> <path class="st0" d="M237.438,47.078c-0.5,0-0.781,0.281-0.922,0.688l-16.391,44.5c-0.156,0.406,0,0.672,0.469,0.672h9.203 c0.484,0,0.766-0.203,0.906-0.672l2.672-8.031h16.688l2.719,8.031c0.156,0.469,0.438,0.672,0.938,0.672h9.094 c0.5,0,0.625-0.266,0.5-0.672l-16.125-44.5c-0.156-0.406-0.406-0.688-0.922-0.688H237.438z M247.25,75.813h-11l5.406-16.047h0.203 L247.25,75.813z"></path> <path class="st0" d="M269.844,92.938h9.688c0.625,0,0.906-0.203,1.188-0.672l8.531-13.969h0.219l8.5,13.969 c0.281,0.469,0.531,0.672,1.188,0.672h9.734c0.516,0,0.641-0.406,0.453-0.813l-14.313-22.859l13.297-21.375 c0.234-0.406,0.078-0.813-0.406-0.813h-9.734c-0.563,0-0.844,0.203-1.141,0.688l-7.578,12.391h-0.219l-7.563-12.391 c-0.266-0.484-0.547-0.688-1.125-0.688h-9.75c-0.469,0-0.625,0.406-0.406,0.813l13.266,21.375l-14.234,22.859 C269.156,92.531,269.359,92.938,269.844,92.938z"></path> <path class="st0" d="M320.422,47.766v44.5c0,0.406,0.281,0.672,0.688,0.672h8.922c0.406,0,0.688-0.266,0.688-0.672v-44.5 c0-0.406-0.281-0.688-0.688-0.688h-8.922C320.703,47.078,320.422,47.359,320.422,47.766z"></path> </g> </g></svg>
+      </span>
+      <div>
+        <span class="vehicle-type">Vehicle type:</span>
+        <span class="vehicle-type-value">{{tourDetails.vehicleType.name}}</span>
+      </div>
+    </div>
+
+    <div class="detail-row">
+      <span class="icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 7V12L14.5 13.5M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+      </span>
+      <div>{{ tourDetails.date | date}} starts at {{tourDetails.time }}</div>
+    </div>
+
+    <div class="detail-row">
+      <span class="icon">
+        <svg fill="#000000" viewBox="0 -1.41 122.88 122.88" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><defs><style>.cls-1{fill-rule:evenodd;}</style></defs><title>guest-traveler</title><path class="cls-1" d="M90.54,38.25c2.23-.75,4.58.44,6.13,2.3h18.46a.51.51,0,0,1,.51.51v4.86a.51.51,0,0,1-.51.51H111.9V62.62h-3.73V46.43H98.11a9.11,9.11,0,0,1-2.36,3.36V62.62H92V52.41a57.27,57.27,0,0,1-8,3.38,84.35,84.35,0,0,1-9,2.79,18,18,0,0,1-15.71-4,41.48,41.48,0,0,1-3.49-3.35l-.34-.36-3,17.75a62.39,62.39,0,0,0,7.2,4.17c7.78,3.63,14.18,6.63,15.55,18.85.25,2.14.14,14.68,0,20.84H86a1.8,1.8,0,0,1-.67-1.43v-1.89a4.77,4.77,0,0,1-4.71-4.76v-36a4.78,4.78,0,0,1,4.76-4.76h1.09a.91.91,0,0,0,0,.23l1.19,4.54a7.4,7.4,0,0,0,1.79,3.38A4.22,4.22,0,0,0,92.58,73h4.77v2.55c0,.41,1.92.73,2.32.73H106a.72.72,0,0,0,.73-.72V73h5a4.36,4.36,0,0,0,3.16-1.32,6.81,6.81,0,0,0,1.72-3.4l1-4.48a1,1,0,0,0,0-.24h.51a4.78,4.78,0,0,1,4.76,4.76v36.05a4.77,4.77,0,0,1-4.71,4.76V111a1.8,1.8,0,0,1-.67,1.43h5.38v7.58H0v-7.58H19.83c1.41-3.79,2.86-7.83,4.28-11.89,2.93-8.39,5.74-17,7.8-23.84a22,22,0,0,1-3.21-5.06A11.33,11.33,0,0,1,27.82,65l4.33-21.82c-1.55-.08-3.34-.54-4.8.1-2.83,1.24-7,6.52-9.47,9l-3.31,3.35c-2.55,2.58-4.25,5.44-8.15,5.13-4.84-.38-8.3-5.76-4.89-9.89l7.63-7.72c3.67-3.73,7.16-8.12,11.69-10.68C24.49,30.41,28.45,29,35,29.28c2.4,0,4.94.27,7.34.5l2.8.24c11,.71,16.12,6.5,20.12,11,1.77,2,3.29,3.7,4.94,4.49.78.37,2-.15,3.39-.73L83.76,41l6.78-2.72ZM61.15,112.47c.14-6.94.29-16.73.18-18.62-.09-1.35-1-4.92-2.42-5.57a59.35,59.35,0,0,0-5.83-2.17c-2.75-.91-5-1.83-7.72-2.58-2,6.58-4.68,14.52-7.57,22.09l-2.73,6.85Zm52.87,0H89.49a1.77,1.77,0,0,0,.67-1.43v-1.89h23.19V111a1.77,1.77,0,0,0,.67,1.43ZM88.91,100.24a.88.88,0,0,1,0-1.76h25.82a.88.88,0,0,1,0,1.76Zm0-8.51a.88.88,0,0,1,0-1.76h25.82a.88.88,0,1,1,0,1.76Zm0-8.51a.88.88,0,0,1,0-1.76h25.82a.88.88,0,1,1,0,1.76Zm26.73-18.75H88.5l.9,3.43a5.63,5.63,0,0,0,1.34,2.58,2.49,2.49,0,0,0,1.83.78h19.17a2.65,2.65,0,0,0,1.92-.81,5.09,5.09,0,0,0,1.24-2.51l.74-3.47ZM44.82.71a13.17,13.17,0,1,1-7.56,6.66A13.13,13.13,0,0,1,44.82.71Z"></path></g></svg>
+      </span>
+      <div>{{ tourDetails.adultCount }}  {{ tourDetails.adultCount > 1 ? 'adults' : 'adult' }} <span *ngIf="tourDetails.childCount > 0"> & {{tourDetails.childCount}}  {{tourDetails.childCount > 1 ? 'children' : 'child'}}</span></div>
+    </div>
+
+    <!-- <div class="detail-row">
+      <span class="icon">✏️</span>
+      <a href="#" class="link" (click)="changeDetails(); $event.preventDefault()">
+        Change date or participants
+      </a>
+    </div> -->
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="features">
+    <div class="feature">
+      <span class="icon-check">
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <circle style="fill:#25AE88;" cx="25" cy="25" r="25"></circle> <polyline style="fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" points=" 38,15 22,33 12,25 "></polyline> </g></svg>
+      </span>
+      <div>
+        <div class="feature-title">Free cancellation</div>
+        <div class="feature-subtitle">{{ order.cancellationDeadline }}</div>
+      </div>
+    </div>
+
+    <div class="feature">
+      <span class="icon-thumb">
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path style="fill:#32BEA6;" d="M256,0C177.328,82.672,46.672,64,46.672,64s0,92,0,224S256,512,256,512s209.328-92,209.328-224 s0-224,0-224S334.672,82.672,256,0z"></path> <polygon style="fill:#FFFFFF;" points="240.88,355.664 148.048,283.152 167.728,257.936 233.632,309.376 340.576,151.888 367.04,169.856 "></polygon> </g></svg>
+      </span>
+      <div>
+        <div class="feature-title">Great value</div>
+        <div class="feature-subtitle">Customers rated this {{ order.valueRating }}/5 for value for money</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- <div class="promo-code">
+    <span class="icon">🎟️</span>
+    <a href="#" class="link" (click)="enterPromoCode(); $event.preventDefault()">
+      Enter promo or gift code
+    </a>
+  </div> -->
+
+  <div class="divider"></div>
+
+  <div class="total-section">
+    <div class="total-row">
+      <span class="total-label">Total</span>
+      <span class="total-amount">$ {{ tourDetails.totalPrice }}</span>
+    </div>
+    <div class="tax-notice">All taxes and fees included</div>
+  </div>
+</div>

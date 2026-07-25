@@ -29,7 +29,7 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
 // Main Component Styles
 .popular-destinations {
-  padding: 4rem 0;
+  padding: 0px;
   background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
   
   .container {
@@ -47,7 +47,8 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   .title {
     font-size: 2.5rem;
     font-weight: 700;
-    color: $text-primary;
+    text-transform: capitalize;
+    color: var(--primary-color);
     margin-bottom: 0.75rem;
     line-height: 1.2;
     
@@ -62,7 +63,7 @@ $transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   
   .subtitle {
     font-size: 1.125rem;
-    color: $text-secondary;
+    color: var(--main-text-color);
     margin: 0;
     
     @media (max-width: 480px) {

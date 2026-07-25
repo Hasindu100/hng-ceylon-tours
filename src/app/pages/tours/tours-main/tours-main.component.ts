@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '@angular/fire/auth';
 import { ActivatedRoute } from '@angular/router';
 import { ToursService } from 'src/app/services/tours.service';
 
@@ -34,6 +35,7 @@ export class ToursMainComponent implements OnInit {
 
   tourList: any[] = [];
   tourTypeId: string = '';
+  user: User = this.route.snapshot.data['user'];
 
   constructor(private toursService: ToursService,
     private route: ActivatedRoute) {
