@@ -61,6 +61,7 @@ import { VehicleImagePopupComponent } from './shared/components/vehicle-image-po
 import { RoadMapPopupComponent } from './shared/components/road-map-popup/road-map-popup.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { TermsConditionsComponent } from './pages/terms-conditions/terms-conditions.component';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
 @NgModule({
   declarations: [
@@ -123,6 +124,7 @@ import { TermsConditionsComponent } from './pages/terms-conditions/terms-conditi
     NgSelectModule,
     HttpClientModule,
     CdkMenuModule,
+    NgxIntlTelInputModule,
     ToastrModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),

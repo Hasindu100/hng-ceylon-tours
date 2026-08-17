@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { Auth, GoogleAuthProvider, signInWithPopup } from '@angular/fire/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { th } from 'intl-tel-input/i18n';
 import { ToastrService } from 'ngx-toastr';
 import { firstValueFrom, map, retry, take } from 'rxjs';
 import { BookingVM, VehicleTypeVM } from 'src/app/models/BookingVM';

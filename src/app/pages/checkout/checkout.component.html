@@ -2,7 +2,7 @@
   <div class="container py-4">
     <!-- Header -->
     <div class="checkout-header mb-4">
-      <h2 class="checkout-title">Checkout</h2>
+      <h2 class="checkout-title">Booking Details</h2>
       <p class="checkout-subtitle">
         Almost there! Please take a moment to ensure all the details are accurate. If you need to make any changes, you can go back and edit your booking.
       </p>
@@ -22,19 +22,27 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label class="form-label">Name</label>
-                <input type="text" class="form-control" [value]="bookingData.firstName" readonly />
+                <div class="user-data-container">
+                  <span class="user-data-val" [title]="bookingData.firstName + ' ' + bookingData.lastName">{{bookingData.firstName + ' ' + bookingData.lastName}}</span>
+                </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">Email</label>
-                <input type="email" class="form-control" [value]="bookingData.email" readonly />
+                <div class="user-data-container">
+                  <span class="user-data-val" [title]="bookingData.email">{{bookingData.email}}</span>
+                </div>
               </div>
               <div class="col-md-6">
                 <label class="form-label">Country</label>
-                <input type="text" class="form-control" [value]="bookingData.country" readonly />
+                <div class="user-data-container">
+                  <span class="user-data-val" [title]="bookingData.country">{{bookingData.country}}</span>
+                </div>
               </div>
               <div class="col-md-6">
                 <label class="form-label">Mobile Number</label>
-                <input type="text" class="form-control" [value]="bookingData.mobileNumber" readonly />
+                <div class="user-data-container">
+                  <span class="user-data-val" [title]="bookingData.mobileNumber">{{bookingData.mobileNumber}}</span>
+                </div>
               </div>
             </div>
           </div>

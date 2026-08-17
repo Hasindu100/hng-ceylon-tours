@@ -83,6 +83,8 @@ export class TourHero2Component {
   //auth instance
   auth = inject(Auth);
   errorMessage: string = '';
+  showVehicleImagePopup: boolean = false;
+  vehicleImagePopupImageList: any[] = [];
 
   pickupSearchFormData: TourDetails2 = {
     pickupLocation: '',
@@ -569,7 +571,16 @@ export class TourHero2Component {
     .catch((error => {
       console.error('error:', error);
       this.errorMessage = "Somthing went wrong. Please try again.";
-    }))
+    }));
+  }
+
+  onOpenVehicleImagePopup(imageList: any) {
+    this.showVehicleImagePopup = true;
+    this.vehicleImagePopupImageList = imageList;
+  }
+
+  onCloseVehicleImagePopup() {
+    this.showVehicleImagePopup = false;
   }
 }
 

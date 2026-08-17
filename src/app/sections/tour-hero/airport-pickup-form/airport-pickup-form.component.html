@@ -110,7 +110,7 @@
                             <div class="col-md-4">
                                 <div class="vehicle-info">
                                     <div class="vehicle-name">
-                                        {{ getSelectedVehicleType() }} <a (click)="openVehicleImagePopup()" class="view-link">View</a>
+                                        {{ getSelectedVehicleType() }} <a (click)="onOpenVehicleImagePopup()" class="view-link">View</a>
                                     </div>
                                     <div class="map-view">
                                         <a (click)="openMapPopup()" class="view-link">View road map</a>
@@ -222,13 +222,14 @@
                                             id="country"
                                             [items]="countryList"
                                             bindLabel="name"
-                                            bindValue="iso2"
+                                            bindValue="id"
                                             formControlName="country"
                                             [searchable]="true"
                                             [clearable]="false"
                                             [virtualScroll]="true"
                                             class="country-ng-select input-field"
-                                            placeholder="Select a country">
+                                            placeholder="Select a country"
+                                            (change)="onChangeCountry($event)">
 
                                             <ng-option value="'0'">Select your country</ng-option>
 
@@ -237,10 +238,10 @@
                                                 <img *ngIf="item.flagPng"
                                                     [src]="item.flagPng"
                                                     alt="{{ item.name }} flag"
-                                                    width="18" height="12"
+                                                    width="18" 
+                                                    height="12"
                                                     class="flag-img" />
                                                 <span class="opt-text">{{ item.name }}</span>
-                                                <span class="dial-chip">{{ item.dialCode }}</span>
                                             </ng-template>
 
                                             <!-- Selected value rendering -->
@@ -248,10 +249,10 @@
                                                 <img *ngIf="item.flagPng"
                                                     [src]="item.flagPng"
                                                     alt="{{ item.name }} flag"
-                                                    width="18" height="12"
+                                                    width="18" 
+                                                    height="12"
                                                     class="flag-img" />
                                                 <span class="opt-text">{{ item.name }}</span>
-                                                <span class="dial-chip">{{ item.dialCode }}</span>
                                             </ng-template>
                                         </ng-select>
                                     </div>
@@ -352,11 +353,30 @@
                     <label class="input-section" for="mobileNumber" [ngClass]="{'is-invalid' : MobileNumber?.touched && MobileNumber?.invalid}">
                         <div class="input-container">
                             <div class="input-label">Mobile Number</div>
-                            <input 
+                            <!-- <input 
                                 type="text"
                                 id="mobileNumber" 
                                 class="input-field"
-                                formControlName="mobileNumber">
+                                formControlName="mobileNumber"> -->
+                            <!-- <input 
+                                type="tel"
+                                id="mobileNumber" 
+                                class="input-field"
+                                formControlName="mobileNumber"
+                                #phoneInput> -->
+
+                            <ngx-intl-tel-input
+                                id="mobileNumber" 
+                                class="input-field"
+                                formControlName="mobileNumber"
+                                [enableAutoCountrySelect]="true"
+                                [enablePlaceholder]="true"
+                                [searchCountryFlag]="true"
+                                [phoneValidation]="true"
+                                [separateDialCode]="true"
+                                [selectedCountryISO]="selectedCountryISO">
+
+                            </ngx-intl-tel-input>
                         </div>
                     </label>
                 </div>
@@ -367,7 +387,7 @@
                     <button type="submit" class="k-button btn-tour-secondary" (click)="previousAirportPickupStep()">
                         Back
                     </button>
-                    <button type="submit" class="k-button btn-tour-primary" (click)="pickupDetailsOnSubmit()" [disabled]="!pickupSearchForm.valid">
+                    <button type="submit" class="k-button btn-tour-primary" (click)="pickupDetailsOnSubmit()" [disabled]="!pickupSearchForm.valid || !personalInfoForm.valid">
                         Create Booking
                     </button>
                 </div>
@@ -385,5 +405,5 @@
   </div>
 </div> -->
 
-<app-vehicle-image-popup *ngIf="showVehicleImagePopup" [imageList]="selectedVehicleType?.images" (closeImagePopup)="onCloseVehicleImagePopup()"></app-vehicle-image-popup>
+<!-- <app-vehicle-image-popup *ngIf="showVehicleImagePopup" [imageList]="selectedVehicleType?.images" (closeImagePopup)="onCloseVehicleImagePopup()"></app-vehicle-image-popup> -->
 <app-road-map-popup *ngIf="showMapPopup" [locationData]="routerData" (closeMapPopup)="onCloseMapPopup()"></app-road-map-popup>

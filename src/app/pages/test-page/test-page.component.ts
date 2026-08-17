@@ -1,7 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { CommonService } from 'src/app/services/common.service';
-import intlTelInput from 'intl-tel-input';
 
 import {
   PhoneNumberUtil,
@@ -25,7 +24,7 @@ form: FormGroup = this.fb.group({
     national:   ['', [Validators.required]],
   });
 
-  countries: CountryOption[] = [];      // populated from API
+  countries: any[] = [];      // populated from API
   selectedDialCode = '';
   nationalPlaceholder = 'Enter number';
   e164: string | null = null;
@@ -40,10 +39,10 @@ form: FormGroup = this.fb.group({
 
   
 ngAfterViewInit() {
-    this.iti = intlTelInput(this.phoneInput.nativeElement, {
-      initialCountry: 'lk',
-      separateDialCode: true
-    });
+    // this.iti = intlTelInput(this.phoneInput.nativeElement, {
+    //   initialCountry: 'lk',
+    //   separateDialCode: true
+    // });
 
   }
 
@@ -220,6 +219,13 @@ export interface CountryOption {
   dialCode: string;  // "+94" (single preferred dial code)
   dialCodes: string[]; // all possible dial codes, e.g., ["+1 809","+1 829","+1 849"] for DO
   flagPng?: string;  // optional flag
+}
+export interface CountryOption2 {
+  name: string;      // "Sri Lanka"
+  id: string;      // "LK"
+  dialCode: string;  // "+94" (single preferred dial code)
+  flagPng?: string;  // optional flag
+  iso2?: string;      // "LK"
 }
 
 
