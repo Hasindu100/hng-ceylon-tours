@@ -13,13 +13,13 @@
 .checkout-title {
   font-size: 28px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--primary-color);
   margin-bottom: 10px;
 }
 
 .checkout-subtitle {
   font-size: 14px;
-  color: #6c757d;
+  color: var(--main-text-color);
   margin-bottom: 0;
   line-height: 1.6;
 }
@@ -40,14 +40,14 @@
 .section-title {
   font-size: 18px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--header-text-color);
   margin-bottom: 20px;
 }
 
 /* Form Styles */
 .form-label {
   font-size: 13px;
-  color: #6c757d;
+  color: var(--label-color);
   margin-bottom: 6px;
   font-weight: 500;
 }
@@ -299,6 +299,21 @@
 .btn-confirm:hover {
   transform: translateY(-1px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.user-data-container {
+  background-color: #d3e6ff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  .user-data-val {
+    font-size: 14px;
+    color: var(--primary-text-color);
+  }
 }
 
 /* Responsive Styles */

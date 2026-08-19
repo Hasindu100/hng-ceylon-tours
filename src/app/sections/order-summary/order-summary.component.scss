@@ -37,7 +37,7 @@ h2 {
   margin: 0 0 8px 0;
   font-size: 14px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--header-text-color);
   line-height: 1.4;
 }
 
@@ -47,15 +47,28 @@ h2 {
     color: #1a1a1a;
     line-height: 1.4;
 
+    .location-label {
+      color: var(--primary-text-color);
+    }
+
     .location-value {
       margin-left: 5px;
       color: var(--secondary-text-color);
+      font-weight: 500;
     }
+}
+
+.vehicle-type {
+  color: var(--main-text-color);
 }
 
 .vehicle-type-value {
     color: var(--secondary-text-color);
     margin-left: 5px;
+}
+
+.detail-row-val {
+  color: var(--secondary-text-color);
 }
 
 .rating {

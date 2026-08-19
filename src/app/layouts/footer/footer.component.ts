@@ -17,9 +17,9 @@ export class FooterComponent {
 
   // Navigation links
   quickLinks = [
-    { label: 'Travel FAQs', url: '/faqs' },
-    { label: 'Top Destinations', url: '/destinations' },
-    { label: 'What to Pack', url: '/packing-guide' }
+    { label: 'Home', url: '/' },
+    { label: 'About', url: '/about' },
+    { label: 'Contact', url: '/contact' }
   ];
 
   // Header Navigation links

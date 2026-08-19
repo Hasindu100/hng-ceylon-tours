@@ -34,7 +34,7 @@ export class LocationService {
   }
 
   getNearestRoad2(lon: number, lat: number) {
-    var url = `https://api.openrouteservice.org/v2/snap/driving-car`;
+    var url = `https://api.heigit.org/openrouteservice/v2/snap/driving-car`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `${this.apiKey}=`
@@ -49,7 +49,7 @@ export class LocationService {
   }
 
   getRouteDrivingData(start: [number, number], end: [number, number]) {
-    var url = `https://api.openrouteservice.org/v2/directions/driving-car?api_key=${this.apiKey}=` +
+    var url = `https://api.heigit.org/openrouteservice/v2/directions/driving-car?api_key=${this.apiKey}=` +
       `&start=${start[0]},${start[1]}` +
       `&end=${end[0]},${end[1]}`;
 

@@ -3,7 +3,6 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from 'src/app/services/common.service';
 import { PhoneNumberUtil, PhoneNumberFormat, PhoneNumberType } from 'google-libphonenumber';
-import intlTelInput from 'intl-tel-input';
 import { LocationVM } from 'src/app/models/tour';
 import { TourDetails } from 'src/app/models/tourDetails';
 
@@ -66,10 +65,10 @@ export class BookingDetailsFormComponent {
   }
 
   ngAfterViewInit() {
-    this.iti = intlTelInput(this.phoneInput.nativeElement, {
-      initialCountry: 'lk',
-      separateDialCode: true
-    });
+    // this.iti = intlTelInput(this.phoneInput.nativeElement, {
+    //   initialCountry: 'lk',
+    //   separateDialCode: true
+    // });
   }
 
   setSearchFormData() {
