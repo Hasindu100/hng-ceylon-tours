@@ -67,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "hng-ceylon-tours:build:production"
+              "buildTarget": "hng-ceylon-tours:build:production"
             },
             "development": {
-              "browserTarget": "hng-ceylon-tours:build:development"
+              "buildTarget": "hng-ceylon-tours:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "hng-ceylon-tours:build"
+            "buildTarget": "hng-ceylon-tours:build"
           }
         },
         "test": {
