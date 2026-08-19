@@ -2,9 +2,10 @@ import { AfterViewChecked, AfterViewInit, Component, EventEmitter, Input, OnInit
 import * as L from 'leaflet';
 
 @Component({
-  selector: 'app-road-map-popup',
-  templateUrl: './road-map-popup.component.html',
-  styleUrls: ['./road-map-popup.component.scss']
+    selector: 'app-road-map-popup',
+    templateUrl: './road-map-popup.component.html',
+    styleUrls: ['./road-map-popup.component.scss'],
+    standalone: false
 })
 export class RoadMapPopupComponent implements OnInit, AfterViewInit, AfterViewChecked {
   map!: L.Map;

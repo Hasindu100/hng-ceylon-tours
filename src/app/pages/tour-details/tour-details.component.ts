@@ -5,9 +5,10 @@ import { TourDetails } from 'src/app/models/tourDetails';
 import { CommonService } from 'src/app/services/common.service';
 
 @Component({
-  selector: 'app-tour-details',
-  templateUrl: './tour-details.component.html',
-  styleUrls: ['./tour-details.component.scss']
+    selector: 'app-tour-details',
+    templateUrl: './tour-details.component.html',
+    styleUrls: ['./tour-details.component.scss'],
+    standalone: false
 })
 export class TourDetailsComponent {
   @Input() tourData: TourDetails | null = null;

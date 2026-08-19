@@ -9,9 +9,10 @@ interface SliderItem {
 }
 
 @Component({
-  selector: 'app-image-slider',
-  templateUrl: './image-slider.component.html',
-  styleUrls: ['./image-slider.component.scss']
+    selector: 'app-image-slider',
+    templateUrl: './image-slider.component.html',
+    styleUrls: ['./image-slider.component.scss'],
+    standalone: false
 })
 export class ImageSliderComponent {
   @Input('images') sliderImages: any;

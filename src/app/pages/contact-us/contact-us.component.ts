@@ -6,9 +6,10 @@ import { EmailService } from 'src/app/services/email.service';
 declare var L: any;
 
 @Component({
-  selector: 'app-contact-us',
-  templateUrl: './contact-us.component.html',
-  styleUrls: ['./contact-us.component.scss']
+    selector: 'app-contact-us',
+    templateUrl: './contact-us.component.html',
+    styleUrls: ['./contact-us.component.scss'],
+    standalone: false
 })
 export class ContactUsComponent {
 contactForm: FormGroup;

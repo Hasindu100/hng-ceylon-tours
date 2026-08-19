@@ -6,9 +6,10 @@ import { BookingService } from 'src/app/services/booking.service';
 import { CommonService } from 'src/app/services/common.service';
 
 @Component({
-  selector: 'app-booking-history-temp',
-  templateUrl: './booking-history-temp.component.html',
-  styleUrls: ['./booking-history-temp.component.scss']
+    selector: 'app-booking-history-temp',
+    templateUrl: './booking-history-temp.component.html',
+    styleUrls: ['./booking-history-temp.component.scss'],
+    standalone: false
 })
 export class BookingHistoryTempComponent {
   bookings: Booking[] = [

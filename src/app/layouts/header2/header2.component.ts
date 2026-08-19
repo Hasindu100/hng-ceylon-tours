@@ -6,9 +6,10 @@ import { Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
 
 @Component({
-  selector: 'app-header2',
-  templateUrl: './header2.component.html',
-  styleUrls: ['./header2.component.scss']
+    selector: 'app-header2',
+    templateUrl: './header2.component.html',
+    styleUrls: ['./header2.component.scss'],
+    standalone: false
 })
 export class Header2Component {
 isMobileMenuOpen = false;

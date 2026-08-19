@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-map-display',
-  templateUrl: './map-display.component.html',
-  styleUrls: ['./map-display.component.scss']
+    selector: 'app-map-display',
+    templateUrl: './map-display.component.html',
+    styleUrls: ['./map-display.component.scss'],
+    standalone: false
 })
 export class MapDisplayComponent {
   @Input('latitude') latitude: number = 6.9271;

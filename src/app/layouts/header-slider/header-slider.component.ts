@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-header-slider',
-  templateUrl: './header-slider.component.html',
-  styleUrls: ['./header-slider.component.scss']
+    selector: 'app-header-slider',
+    templateUrl: './header-slider.component.html',
+    styleUrls: ['./header-slider.component.scss'],
+    standalone: false
 })
 export class HeaderSliderComponent {
   selectedTour: string = 'Wildlife Tours';

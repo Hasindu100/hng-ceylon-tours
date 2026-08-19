@@ -7,9 +7,10 @@ import { LocationVM } from 'src/app/models/tour';
 import { TourDetails } from 'src/app/models/tourDetails';
 
 @Component({
-  selector: 'app-booking-details-form',
-  templateUrl: './booking-details-form.component.html',
-  styleUrls: ['./booking-details-form.component.scss']
+    selector: 'app-booking-details-form',
+    templateUrl: './booking-details-form.component.html',
+    styleUrls: ['./booking-details-form.component.scss'],
+    standalone: false
 })
 export class BookingDetailsFormComponent {
   currentStep = 1;

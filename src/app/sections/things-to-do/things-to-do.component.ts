@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ThingsTodoService } from 'src/app/services/things-todo.service';
 
 @Component({
-  selector: 'app-things-to-do',
-  templateUrl: './things-to-do.component.html',
-  styleUrls: ['./things-to-do.component.scss']
+    selector: 'app-things-to-do',
+    templateUrl: './things-to-do.component.html',
+    styleUrls: ['./things-to-do.component.scss'],
+    standalone: false
 })
 export class ThingsToDoComponent implements OnInit {
   destinations: Destination[] = [

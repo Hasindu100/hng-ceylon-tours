@@ -4,9 +4,10 @@ import { TourDetails } from 'src/app/models/tourDetails';
 import { TourDetails2 } from 'src/app/models/tourDetails2';
 
 @Component({
-  selector: 'app-order-summary',
-  templateUrl: './order-summary.component.html',
-  styleUrls: ['./order-summary.component.scss']
+    selector: 'app-order-summary',
+    templateUrl: './order-summary.component.html',
+    styleUrls: ['./order-summary.component.scss'],
+    standalone: false
 })
 export class OrderSummaryComponent implements OnInit {
   order = {

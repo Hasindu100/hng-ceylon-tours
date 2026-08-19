@@ -7,9 +7,10 @@ import { CommonService } from 'src/app/services/common.service';
 import { LocationService } from 'src/app/services/location.service';
 
 @Component({
-  selector: 'app-tour-hero',
-  templateUrl: './tour-hero.component.html',
-  styleUrls: ['./tour-hero.component.scss']
+    selector: 'app-tour-hero',
+    templateUrl: './tour-hero.component.html',
+    styleUrls: ['./tour-hero.component.scss'],
+    standalone: false
 })
 export class TourHeroComponent {
   searchForm: FormGroup;

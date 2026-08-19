@@ -8,9 +8,10 @@ import { ToursService } from 'src/app/services/tours.service';
 import { BookingStatus } from 'src/app/shared/enums';
 
 @Component({
-  selector: 'app-checkout',
-  templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.scss']
+    selector: 'app-checkout',
+    templateUrl: './checkout.component.html',
+    styleUrls: ['./checkout.component.scss'],
+    standalone: false
 })
 export class CheckoutComponent {
   // User Details

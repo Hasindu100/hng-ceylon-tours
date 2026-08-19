@@ -40,10 +40,11 @@ export const slideRight = trigger('slideRight', [
 
 
 @Component({
-  selector: 'app-tour-hero2',
-  templateUrl: './tour-hero2.component.html',
-  styleUrls: ['./tour-hero2.component.scss'],
-  animations: [slideLeft, slideRight]
+    selector: 'app-tour-hero2',
+    templateUrl: './tour-hero2.component.html',
+    styleUrls: ['./tour-hero2.component.scss'],
+    animations: [slideLeft, slideRight],
+    standalone: false
 })
 export class TourHero2Component {
   pickupSelectedVehicle: number = VehicleType.Car;

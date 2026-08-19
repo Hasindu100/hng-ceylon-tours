@@ -3,9 +3,10 @@ import { CommonService } from 'src/app/services/common.service';
 import { ThingsTodoService } from 'src/app/services/things-todo.service';
 
 @Component({
-  selector: 'app-things-todo-main',
-  templateUrl: './things-todo-main.component.html',
-  styleUrls: ['./things-todo-main.component.scss']
+    selector: 'app-things-todo-main',
+    templateUrl: './things-todo-main.component.html',
+    styleUrls: ['./things-todo-main.component.scss'],
+    standalone: false
 })
 export class ThingsTodoMainComponent implements OnInit {
   thingsTodoList: any[] = [];

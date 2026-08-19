@@ -5,9 +5,10 @@ import { BookingService } from 'src/app/services/booking.service';
 import { BookingStatus } from 'src/app/shared/enums';
 
 @Component({
-  selector: 'app-payment-success',
-  templateUrl: './payment-success.component.html',
-  styleUrls: ['./payment-success.component.scss']
+    selector: 'app-payment-success',
+    templateUrl: './payment-success.component.html',
+    styleUrls: ['./payment-success.component.scss'],
+    standalone: false
 })
 export class PaymentSuccessComponent {
   payment = {

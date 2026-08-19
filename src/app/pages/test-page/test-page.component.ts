@@ -10,9 +10,10 @@ import {
 
 
 @Component({
-  selector: 'app-test-page',
-  templateUrl: './test-page.component.html',
-  styleUrls: ['./test-page.component.scss']
+    selector: 'app-test-page',
+    templateUrl: './test-page.component.html',
+    styleUrls: ['./test-page.component.scss'],
+    standalone: false
 })
 export class TestPageComponent {
   @ViewChild('phoneInput') phoneInput!: ElementRef<HTMLInputElement>;

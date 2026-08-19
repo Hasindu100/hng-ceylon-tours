@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-customer-reviews',
-  templateUrl: './customer-reviews.component.html',
-  styleUrls: ['./customer-reviews.component.scss']
+    selector: 'app-customer-reviews',
+    templateUrl: './customer-reviews.component.html',
+    styleUrls: ['./customer-reviews.component.scss'],
+    standalone: false
 })
 export class CustomerReviewsComponent {
   features: FeatureItem[] = [

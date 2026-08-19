@@ -17,9 +17,10 @@ import { VehicleTypeService } from 'src/app/services/vehicle-type.service';
 import { BookingStatus, VehicleType } from 'src/app/shared/enums';
 
 @Component({
-  selector: 'app-custom-tour-form',
-  templateUrl: './custom-tour-form.component.html',
-  styleUrls: ['./custom-tour-form.component.scss']
+    selector: 'app-custom-tour-form',
+    templateUrl: './custom-tour-form.component.html',
+    styleUrls: ['./custom-tour-form.component.scss'],
+    standalone: false
 })
 export class CustomTourFormComponent {
   step: number = 1;

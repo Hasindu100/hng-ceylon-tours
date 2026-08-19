@@ -16,9 +16,10 @@ import { VehicleTypeService } from 'src/app/services/vehicle-type.service';
 import { BookingStatus, VehicleType } from 'src/app/shared/enums';
 
 @Component({
-  selector: 'app-airport-drop-form',
-  templateUrl: './airport-drop-form.component.html',
-  styleUrls: ['./airport-drop-form.component.scss']
+    selector: 'app-airport-drop-form',
+    templateUrl: './airport-drop-form.component.html',
+    styleUrls: ['./airport-drop-form.component.scss'],
+    standalone: false
 })
 export class AirportDropFormComponent {
   step: number = 1;

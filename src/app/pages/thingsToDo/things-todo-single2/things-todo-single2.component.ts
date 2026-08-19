@@ -3,9 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { ThingsTodoService } from 'src/app/services/things-todo.service';
 
 @Component({
-  selector: 'app-things-todo-single2',
-  templateUrl: './things-todo-single2.component.html',
-  styleUrls: ['./things-todo-single2.component.scss']
+    selector: 'app-things-todo-single2',
+    templateUrl: './things-todo-single2.component.html',
+    styleUrls: ['./things-todo-single2.component.scss'],
+    standalone: false
 })
 export class ThingsTodoSingle2Component {
   thingsTodoId: string = '';

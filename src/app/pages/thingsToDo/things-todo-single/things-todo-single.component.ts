@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-things-todo-single',
-  templateUrl: './things-todo-single.component.html',
-  styleUrls: ['./things-todo-single.component.scss']
+    selector: 'app-things-todo-single',
+    templateUrl: './things-todo-single.component.html',
+    styleUrls: ['./things-todo-single.component.scss'],
+    standalone: false
 })
 export class ThingsTodoSingleComponent {
   highlights: Highlight[] = [
