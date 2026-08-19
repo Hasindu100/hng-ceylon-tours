@@ -126,11 +126,13 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
     CdkMenuModule,
     NgxIntlTelInputModule,
     ToastrModule.forRoot(),
+    
+  ],
+  providers: [
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth())
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
