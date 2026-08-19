@@ -1,12 +1,12 @@
 import { inject, Injectable } from "@angular/core";
 import { Auth, authState, User } from "@angular/fire/auth";
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
 import { filter, map, Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
 })
-export class UserResolver implements Resolve<User>{
+export class UserResolver {
     auth = inject(Auth);
     // create the use observable
     user$ = authState(this.auth).pipe(
