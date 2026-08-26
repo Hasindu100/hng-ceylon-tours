@@ -2,8 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from 'src/app/services/common.service';
-import { PhoneNumberUtil, PhoneNumberFormat, PhoneNumberType } from 'google-libphonenumber';
-import { LocationVM } from 'src/app/models/tour';
 import { TourDetails } from 'src/app/models/tourDetails';
 
 @Component({
@@ -34,7 +32,6 @@ export class BookingDetailsFormComponent {
   searchDetails!: TourDetails;
 
   iti: any;
-  private phoneUtil = PhoneNumberUtil.getInstance();
 
   @ViewChild('phoneInput') phoneInput!: ElementRef<HTMLInputElement>;
 

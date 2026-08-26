@@ -1,10 +1,16 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { HeroBannerComponent } from 'src/app/shared/hero-banner/hero-banner.component';
 
 @Component({
     selector: 'app-about-us',
     templateUrl: './about-us.component.html',
     styleUrls: ['./about-us.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: [
+      RouterModule,
+      HeroBannerComponent
+    ]
 })
 export class AboutUsComponent {
   navigationItems = [

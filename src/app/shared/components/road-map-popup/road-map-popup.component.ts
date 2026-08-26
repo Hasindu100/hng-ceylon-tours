@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { AfterViewChecked, AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import * as L from 'leaflet';
 
@@ -5,7 +6,10 @@ import * as L from 'leaflet';
     selector: 'app-road-map-popup',
     templateUrl: './road-map-popup.component.html',
     styleUrls: ['./road-map-popup.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: [
+      CommonModule
+    ]
 })
 export class RoadMapPopupComponent implements OnInit, AfterViewInit, AfterViewChecked {
   map!: L.Map;

@@ -4,7 +4,7 @@ import { Component, Input } from '@angular/core';
     selector: 'app-hero-banner',
     templateUrl: './hero-banner.component.html',
     styleUrls: ['./hero-banner.component.scss'],
-    standalone: false
+    standalone: true
 })
 export class HeroBannerComponent {
   @Input("title") title: string = '';

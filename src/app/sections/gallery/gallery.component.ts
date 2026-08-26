@@ -1,10 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 
 @Component({
     selector: 'app-gallery',
     templateUrl: './gallery.component.html',
     styleUrls: ['./gallery.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: [
+      CommonModule
+    ]
 })
 export class GalleryComponent {
 @ViewChild('carousel', { static: false }) carousel!: ElementRef;

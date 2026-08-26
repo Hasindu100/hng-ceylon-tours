@@ -62,6 +62,7 @@ import { RoadMapPopupComponent } from './shared/components/road-map-popup/road-m
 import { FaqComponent } from './pages/faq/faq.component';
 import { TermsConditionsComponent } from './pages/terms-conditions/terms-conditions.component';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import IntlTelInput from "@intl-tel-input/angular";
 
 @NgModule({ declarations: [
         AppComponent,
@@ -69,20 +70,15 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
         PackagesComponent,
         HeroComponent,
         HeaderSliderComponent,
-        AboutUsComponent,
         CustomerReviewsComponent,
         FooterComponent,
         AboutComponent,
         ClientTestimonialsComponent,
-        ThingsToDoComponent,
         FeaturesComponent,
         BodyComponent,
         ThingsTodoMainComponent,
         HomeComponent,
         ThingsTodoSingleComponent,
-        ContactUsComponent,
-        HeroBannerComponent,
-        GalleryComponent,
         ToursSingleComponent,
         ToursMainComponent,
         ThingsTodoSingle2Component,
@@ -95,7 +91,6 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
         TourHeroComponent,
         LoaderComponent,
         BookingDetailsFormComponent,
-        TestPageComponent,
         OrderSummaryComponent,
         TourHero2Component,
         CheckoutComponent,
@@ -108,8 +103,6 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
         AirportDropFormComponent,
         CustomTourFormComponent,
         VehicleImagePopupComponent,
-        RoadMapPopupComponent,
-        FaqComponent,
         TermsConditionsComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
@@ -122,6 +115,15 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
         NgSelectModule,
         CdkMenuModule,
         NgxIntlTelInputModule,
+        IntlTelInput,
+        RoadMapPopupComponent,
+        ThingsToDoComponent,
+        GalleryComponent,
+        HeroBannerComponent,
+        AboutUsComponent,
+        ContactUsComponent,
+        FaqComponent,
+        TestPageComponent,
         ToastrModule.forRoot()], providers: [
         provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
         provideFirestore(() => getFirestore()),

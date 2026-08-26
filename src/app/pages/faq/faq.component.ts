@@ -1,4 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { HeroBannerComponent } from 'src/app/shared/hero-banner/hero-banner.component';
 
 interface FAQItem {
   id: number;
@@ -12,7 +14,11 @@ interface FAQItem {
     selector: 'app-faq',
     templateUrl: './faq.component.html',
     styleUrls: ['./faq.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: [
+      CommonModule,
+      HeroBannerComponent
+    ]
 })
 export class FaqComponent implements OnInit {
   activeCategory: string = 'general';

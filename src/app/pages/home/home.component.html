@@ -8,6 +8,17 @@
 <app-about></app-about>
 <!-- <app-customer-reviews></app-customer-reviews> -->
 <app-ride-features></app-ride-features>
-<app-things-to-do></app-things-to-do>
+@defer (on viewport) {
+    <app-things-to-do></app-things-to-do>
+}
+@placeholder {
+    <div></div>
+}
+
 <!-- <app-client-testimonials></app-client-testimonials> -->
-<app-gallery [imageList]="gallery" [title]="'Our recent tours captures'" [description]="'Explore our collection of stunning travel destinations.'"></app-gallery>
+ @defer (on viewport) {
+    <app-gallery [imageList]="gallery" [title]="'Our recent tours captures'" [description]="'Explore our collection of stunning travel destinations.'"></app-gallery>
+}
+ @placeholder {
+    <div></div>
+}

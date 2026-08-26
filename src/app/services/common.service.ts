@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Subject } from 'rxjs';
-import { LocationVM } from '../models/tour';
+import { CountryOption2, LocationVM } from '../models/tour';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { CountryOption, CountryOption2 } from '../pages/test-page/test-page.component';
 import { User } from '@angular/fire/auth';
 
 @Injectable({

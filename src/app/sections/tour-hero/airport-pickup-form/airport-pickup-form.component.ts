@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, inject, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, inject, OnInit, Output, ViewChild } from '@angular/core';
 import { Auth, GoogleAuthProvider, signInWithPopup } from '@angular/fire/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -15,6 +15,7 @@ import { LocationService } from 'src/app/services/location.service';
 import { ToursService } from 'src/app/services/tours.service';
 import { VehicleTypeService } from 'src/app/services/vehicle-type.service';
 import { BookingStatus, VehicleType } from 'src/app/shared/enums';
+import IntlTelInput from "@intl-tel-input/angular";
 
 @Component({
     selector: 'app-airport-pickup-form',
@@ -49,6 +50,7 @@ export class AirportPickupFormComponent implements OnInit, AfterViewInit {
   routerData: any;
   countryISO = CountryISO;
   selectedCountryISO: any = CountryISO.SriLanka;
+  showPhoneInput: boolean = true;
   
   pickupSearchFormData: TourDetails2 = {
     pickupLocation: '',
@@ -69,8 +71,9 @@ export class AirportPickupFormComponent implements OnInit, AfterViewInit {
   }
 
   searchInput = new Subject<string>();
+  loadUtils = () => import("intl-tel-input/utils");
 
-  @ViewChild('phoneInput') phoneInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('phoneInput') phoneInput!: IntlTelInput;
   @Output() openVehicleImagePopup: EventEmitter<any> = new EventEmitter<any>();
 
   //#region search form controls
@@ -129,7 +132,8 @@ export class AirportPickupFormComponent implements OnInit, AfterViewInit {
     private tourService: ToursService,
     private bookingService: BookingService,
     private emailService: EmailService,
-    private router: Router) {
+    private router: Router,
+    private cdf: ChangeDetectorRef) {
     this.pickupSearchForm = this.fb.group({
       pickupLocation: ['0', [Validators.required, Validators.min(1)]],
       destination: ['0', [Validators.required, Validators.min(1)]],
@@ -162,6 +166,16 @@ export class AirportPickupFormComponent implements OnInit, AfterViewInit {
     this.getLocationData();
     this.getVehicleTypesData();
     this.getCountryList();
+    
+    
+    // const inputElement = document.querySelector('#phone');
+    // if (inputElement) {
+    //   intlTelInput(inputElement, {
+    //     initialCountry: 'lk',
+    //     seperateDialCode: true,
+    //     utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js'
+    //   });
+    // }
 
     this.searchInput.pipe(
       debounceTime(500),
@@ -497,7 +511,13 @@ export class AirportPickupFormComponent implements OnInit, AfterViewInit {
   }
 
   onChangeCountry(country: any) {
-    this.selectedCountryISO = country?.iso2 || '';
+    this.showPhoneInput = false;
+    
+    setTimeout(() => {
+      this.selectedCountryISO = country?.iso2 || '';
+      this.showPhoneInput = true;
+    });
+    this.cdf.detectChanges();
   }
 
   nextAirportPickupStep(): void {

@@ -2,6 +2,8 @@
 @import "@ng-select/ng-select/themes/default.theme.css";
 @import "flatpickr/dist/flatpickr.min.css";
 @import url('@angular/cdk/overlay-prebuilt.css');
+@import url("intl-tel-input/dist/css/intlTelInput.css");
+
 // Reset and Base Styles
 * {
   margin: 0;

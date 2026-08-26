@@ -1,7 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { EmailService } from 'src/app/services/email.service';
+import { HeroBannerComponent } from 'src/app/shared/hero-banner/hero-banner.component';
 
 declare var L: any;
 
@@ -9,7 +11,13 @@ declare var L: any;
     selector: 'app-contact-us',
     templateUrl: './contact-us.component.html',
     styleUrls: ['./contact-us.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: [
+      CommonModule,
+      FormsModule,
+      ReactiveFormsModule,
+      HeroBannerComponent
+    ]
 })
 export class ContactUsComponent {
 contactForm: FormGroup;
