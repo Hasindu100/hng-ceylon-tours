@@ -1,15 +1,24 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { User } from '@angular/fire/auth';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { BookingVM } from 'src/app/models/BookingVM';
 import { BookingService } from 'src/app/services/booking.service';
 import { CommonService } from 'src/app/services/common.service';
+import { HeroBannerComponent } from 'src/app/shared/hero-banner/hero-banner.component';
 
 @Component({
     selector: 'app-booking-history',
     templateUrl: './booking-history.component.html',
     styleUrls: ['./booking-history.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: [
+      CommonModule,
+      RouterModule,
+      FormsModule,
+      HeroBannerComponent
+    ]
 })
 export class BookingHistoryComponent {
   bookings: Booking[] = [

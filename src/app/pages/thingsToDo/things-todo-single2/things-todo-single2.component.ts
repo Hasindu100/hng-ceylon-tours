@@ -1,12 +1,21 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { GalleryComponent } from 'src/app/sections/gallery/gallery.component';
 import { ThingsTodoService } from 'src/app/services/things-todo.service';
+import { MapDisplayComponent } from 'src/app/shared/map-display/map-display.component';
 
 @Component({
     selector: 'app-things-todo-single2',
     templateUrl: './things-todo-single2.component.html',
     styleUrls: ['./things-todo-single2.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: [
+      CommonModule,
+      RouterModule,
+      GalleryComponent,
+      MapDisplayComponent
+    ]
 })
 export class ThingsTodoSingle2Component {
   thingsTodoId: string = '';

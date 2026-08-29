@@ -445,6 +445,7 @@ export class AirportPickupFormComponent implements OnInit, AfterViewInit {
     const min = (properties?.summary?.duration ?? 0) / 60;
     const latLngs: [number, number][] = [start, end];
     this.commonService.isDataLoading = false;
+    this.locationService.geometryData = data?.features?.[0]?.geometry?.coordinates;
     return { distanceKm: km, durationMin: min, latLngs };
   }
 

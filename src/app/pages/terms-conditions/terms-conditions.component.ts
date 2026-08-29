@@ -1,4 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { HeroBannerComponent } from 'src/app/shared/hero-banner/hero-banner.component';
 
 interface TermsSection {
   id: number;
@@ -16,7 +18,11 @@ interface TermsSubsection {
     selector: 'app-terms-conditions',
     templateUrl: './terms-conditions.component.html',
     styleUrls: ['./terms-conditions.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: [
+      CommonModule,
+      HeroBannerComponent,
+    ]
 })
 export class TermsConditionsComponent implements OnInit {
   lastUpdated: string = 'January 2024';
