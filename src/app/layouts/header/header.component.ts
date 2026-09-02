@@ -1,4 +1,5 @@
 import { Component, HostListener } from '@angular/core';
+import { CommonService } from 'src/app/services/common.service';
 import { ToursService } from 'src/app/services/tours.service';
 
 @Component({
@@ -35,7 +36,8 @@ isMobileMenuOpen = false;
 
   tourTypeList: any[] = [];
 
-  constructor(private toursService: ToursService) { }
+  constructor(private toursService: ToursService,
+    private commonService: CommonService) { }
 
   ngOnInit(): void {
     this.init();
@@ -53,7 +55,9 @@ isMobileMenuOpen = false;
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll() {
-    this.isScrolled = window.pageYOffset > 10;
+    if (typeof window !== 'undefined') {
+      this.isScrolled = window.pageYOffset > 10;
+    }
   }
 
   @HostListener('window:resize', ['$event'])
@@ -79,14 +83,14 @@ isMobileMenuOpen = false;
 
   onSocialClick(social: any): void {
     // Handle social media link clicks
-    window.open(social.url, '_blank');
+    this.commonService.onWindowOpenBlank(social.url);
   }
 
   callPhone(): void {
-    window.location.href = `tel:${this.phone}`;
+    this.commonService.onWindowOpen(`tel:${this.phone}`);
   }
 
   sendEmail(): void {
-    window.location.href = `mailto:${this.email}`;
+    this.commonService.onWindowOpen(`mailto:${this.email}`);
   }
 }

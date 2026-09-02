@@ -30,12 +30,22 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [    
+            "styles": [
               "node_modules/leaflet/dist/leaflet.css",
               "src/styles.scss"
             ],
             "scripts": [],
-            "browser": "src/main.ts"
+            "browser": "src/main.ts",
+            "server": "src/main.server.ts",
+            "outputMode": "server",
+            "security": {
+              "allowedHosts": [
+                "localhost"
+              ]
+            },
+            "ssr": {
+              "entry": "src/server.ts"
+            }
           },
           "configurations": {
             "production": {
@@ -64,6 +74,13 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "allowedHosts": [
+              "localhost",
+              "localhost:4000",
+              "127.0.0.1"
+            ]
+          },
           "configurations": {
             "production": {
               "buildTarget": "hng-ceylon-tours:build:production"

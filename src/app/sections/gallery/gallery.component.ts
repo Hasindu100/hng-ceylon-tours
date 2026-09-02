@@ -60,19 +60,23 @@ export class GalleryComponent {
 
   ngOnInit(): void {
     this.updateItemsPerView();
-    window.addEventListener('resize', () => this.updateItemsPerView());
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', () => this.updateItemsPerView());
+    }
   }
 
   updateItemsPerView(): void {
-    const width = window.innerWidth;
-    if (width >= 1200) {
-      this.itemsPerView = 4;
-    } else if (width >= 768) {
-      this.itemsPerView = 3;
-    } else if (width >= 576) {
-      this.itemsPerView = 2;
-    } else {
-      this.itemsPerView = 1;
+    if (typeof window !== 'undefined') {
+      const width = window.innerWidth;
+      if (width >= 1200) {
+        this.itemsPerView = 4;
+      } else if (width >= 768) {
+        this.itemsPerView = 3;
+      } else if (width >= 576) {
+        this.itemsPerView = 2;
+      } else {
+        this.itemsPerView = 1;
+      }
     }
   }
 

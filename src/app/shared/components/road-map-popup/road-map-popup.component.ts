@@ -43,7 +43,10 @@ export class RoadMapPopupComponent implements OnInit, AfterViewInit, AfterViewCh
   }
 
   async initializeMap() {
-    this.L = await import('leaflet');
+    const leafletModule = await import('leaflet');
+    this.L = leafletModule.default ?? leafletModule;
+
+    console.log("LEAFLET ",this.L);
 
     if (this.map) return; // Initialize only once
 

@@ -235,7 +235,7 @@ export class BookingHistoryTempComponent {
     changePage(page: number): void {
       if (page >= 1 && page <= this.totalPages) {
         this.currentPage = page;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        this.commonService.scrollToTop();
       }
     }
   

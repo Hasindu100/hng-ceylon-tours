@@ -2,7 +2,6 @@ import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, E
 import { Auth, GoogleAuthProvider, signInWithPopup } from '@angular/fire/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CountryISO } from 'ngx-intl-tel-input';
 import { catchError, debounceTime, distinctUntilChanged, firstValueFrom, map, Observable, Subject, switchMap, take } from 'rxjs';
 import { BookingVM, VehicleTypeVM } from 'src/app/models/BookingVM';
 import { PersonalInfo } from 'src/app/models/personalInfo';
@@ -48,8 +47,7 @@ export class AirportPickupFormComponent implements OnInit, AfterViewInit {
   showVehicleImagePopup: boolean = false;
   showMapPopup: boolean = false;
   routerData: any;
-  countryISO = CountryISO;
-  selectedCountryISO: any = CountryISO.SriLanka;
+  selectedCountryISO: any = 'LK';
   showPhoneInput: boolean = true;
   
   pickupSearchFormData: TourDetails2 = {

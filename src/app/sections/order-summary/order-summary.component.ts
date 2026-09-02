@@ -1,4 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BookingVM } from 'src/app/models/BookingVM';
 import { TourDetails } from 'src/app/models/tourDetails';
 import { TourDetails2 } from 'src/app/models/tourDetails2';
@@ -7,7 +9,11 @@ import { TourDetails2 } from 'src/app/models/tourDetails2';
     selector: 'app-order-summary',
     templateUrl: './order-summary.component.html',
     styleUrls: ['./order-summary.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: [
+      CommonModule,
+      FormsModule
+    ]
 })
 export class OrderSummaryComponent implements OnInit {
   order = {

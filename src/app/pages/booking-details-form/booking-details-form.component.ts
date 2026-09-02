@@ -70,11 +70,11 @@ export class BookingDetailsFormComponent {
   }
 
   setSearchFormData() {
-    const searchFormSession = sessionStorage.getItem('tourDetails');
-    if (searchFormSession) {
-      this.searchDetails = JSON.parse(searchFormSession);
+    // const searchFormSession = sessionStorage.getItem('tourDetails');
+    // if (searchFormSession) {
+    //   this.searchDetails = JSON.parse(searchFormSession);
       
-    }
+    // }
   }
 
   getCountryList() {

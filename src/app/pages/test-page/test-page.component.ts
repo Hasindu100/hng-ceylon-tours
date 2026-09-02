@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+
 @Component({
     selector: 'app-test-page',
     templateUrl: './test-page.component.html',
@@ -12,8 +12,7 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        NgSelectModule,
-        NgxIntlTelInputModule
+        NgSelectModule
     ]
 })
 export class TestPageComponent {

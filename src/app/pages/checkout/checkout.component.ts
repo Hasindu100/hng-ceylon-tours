@@ -1,6 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { BookingVM, CheckoutItem } from 'src/app/models/BookingVM';
+import { OrderSummaryComponent } from 'src/app/sections/order-summary/order-summary.component';
 import { BookingService } from 'src/app/services/booking.service';
 import { CheckoutService } from 'src/app/services/checkout.service';
 import { CommonService } from 'src/app/services/common.service';
@@ -11,7 +14,13 @@ import { BookingStatus } from 'src/app/shared/enums';
     selector: 'app-checkout',
     templateUrl: './checkout.component.html',
     styleUrls: ['./checkout.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: [
+      CommonModule,
+      RouterModule,
+      FormsModule,
+      OrderSummaryComponent
+    ]
 })
 export class CheckoutComponent {
   // User Details

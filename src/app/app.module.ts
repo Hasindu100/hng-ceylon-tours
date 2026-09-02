@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -61,7 +61,6 @@ import { VehicleImagePopupComponent } from './shared/components/vehicle-image-po
 import { RoadMapPopupComponent } from './shared/components/road-map-popup/road-map-popup.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { TermsConditionsComponent } from './pages/terms-conditions/terms-conditions.component';
-import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import IntlTelInput from "@intl-tel-input/angular";
 
 @NgModule({ declarations: [
@@ -87,9 +86,7 @@ import IntlTelInput from "@intl-tel-input/angular";
         TourHeroComponent,
         LoaderComponent,
         BookingDetailsFormComponent,
-        OrderSummaryComponent,
         TourHero2Component,
-        CheckoutComponent,
         BookingStepsComponent,
         RideFeaturesComponent,
         BookingHistoryTempComponent,
@@ -108,7 +105,6 @@ import IntlTelInput from "@intl-tel-input/angular";
         CommonModule,
         NgSelectModule,
         CdkMenuModule,
-        NgxIntlTelInputModule,
         IntlTelInput,
         RoadMapPopupComponent,
         ThingsToDoComponent,
@@ -121,6 +117,8 @@ import IntlTelInput from "@intl-tel-input/angular";
         FaqComponent,
         TermsConditionsComponent,
         BookingHistoryComponent,
+        CheckoutComponent,
+        OrderSummaryComponent,
         TestPageComponent,
         TruncatePipe,
         MapDisplayComponent,
@@ -128,6 +126,7 @@ import IntlTelInput from "@intl-tel-input/angular";
         provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
         provideFirestore(() => getFirestore()),
         provideAuth(() => getAuth()),
-        provideHttpClient(withInterceptorsFromDi())
+        provideHttpClient(withInterceptorsFromDi()),
+        provideClientHydration(withEventReplay())
     ] })
 export class AppModule { }
