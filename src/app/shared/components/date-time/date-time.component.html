@@ -1,0 +1,74 @@
+<div class="overlay">
+  <div class="modal1">
+    <button class="close-btn" title="close" (click)="closePopup()">✕</button>
+    <div class="content">
+        <div class="header">
+            <h3>You can edit pickup date & time here</h3>
+        </div>
+        <form #dateTimeForm="ngForm">
+            <div class="form-row">
+                <!-- Check In Date -->
+                <div class="form-group">
+                    <div class="frm-header">
+                        <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M8 2V5M16 2V5M3.5 9.09H20.5M21 8.5V17C21 20 19.5 22 16 22H8C4.5 22 3 20 3 17V8.5C3 5.5 4.5 3.5 8 3.5H16C19.5 3.5 21 5.5 21 8.5Z"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <label for="pickupDate">Date:</label>
+                        </div>
+                        <div class="input-wrapper pickup-date" [ngClass]="{'is-invalid' : pickupDateModel?.invalid}">
+                            <input 
+                                type="date" 
+                                id="pickupDate" 
+                                name="pickupDate"
+                                #pickupDateInput
+                                [(ngModel)]="pickupDate" 
+                            #pickupDateModel="ngModel"
+                                required
+                                class="form-input">
+                        </div>
+                </div>
+
+                <!-- Check In Time -->
+                <div class="form-group">
+                    <div class="frm-header">
+                        <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path
+                                    d="M12 7V12L14.5 13.5M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                                    stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                </path>
+                            </g>
+                        </svg>
+                        <label for="pickupTime">Time:</label>
+                    </div>
+                    <div class="input-wrapper">
+                        <input 
+                            type="time" 
+                            id="pickupTime" 
+                            name="pickupTime"
+                            [(ngModel)]="pickupTime" 
+                            #pickupTimeModel="ngModel" 
+                            required
+                            class="form-input"
+                            [ngClass]="{'is-invalid' : pickupTimeModel?.touched && pickupTimeModel?.invalid}">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Footer Buttons -->
+    <div class="footer-section">
+        <button type="button" class="btn btn-outline-secondary btn-back" (click)="closePopup()">
+            Cancel
+        </button>
+        <button type="button" class="btn btn-primary btn-confirm" [disabled]="dateTimeForm.invalid" (click)="saveChanges()">
+            Save Changes
+        </button>
+    </div>
+  </div>
+</div>

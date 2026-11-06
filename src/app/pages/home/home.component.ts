@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { CommonService } from 'src/app/services/common.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss'],
+    standalone: false
 })
 export class HomeComponent {
   gallery: string[] = [

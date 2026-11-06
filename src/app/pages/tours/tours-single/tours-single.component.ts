@@ -13,9 +13,10 @@ interface TourImage {
 }
 
 @Component({
-  selector: 'app-tours-single',
-  templateUrl: './tours-single.component.html',
-  styleUrls: ['./tours-single.component.scss']
+    selector: 'app-tours-single',
+    templateUrl: './tours-single.component.html',
+    styleUrls: ['./tours-single.component.scss'],
+    standalone: false
 })
 export class ToursSingleComponent {
   duration = '10 Days / 09 Nights';

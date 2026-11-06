@@ -3,7 +3,7 @@
 // Fonts: Cormorant Garamond (display) + DM Sans (body)
 // ================================================
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+
 
 // ── Variables ─────────────────────────────────────────
 :root {
@@ -364,7 +364,7 @@
   padding: 0 48px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 40px;
 
   @media (max-width: 768px) {
     padding: 0 20px;
@@ -394,6 +394,7 @@
 
   @media (max-width: 768px) {
     flex-direction: column;
+    border: 1px solid var(--border-color) !important;
   }
 }
 
@@ -638,6 +639,10 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  &.amount {
+    font-weight: 800;
+  }
 }
 
 // Progress Section
@@ -787,7 +792,7 @@
 // Card Actions
 .card-actions {
   display: flex;
-  gap: 8px;
+  gap: 25px;
   flex-wrap: wrap;
   margin-top: auto;
   padding-top: 4px;
@@ -855,6 +860,30 @@
     &:hover {
       background: rgba(245, 158, 11, 0.2);
     }
+  }
+}
+
+.payment-info-container {
+  display: flex;
+  gap: 20px;
+
+  .payment-info {
+    display: grid;
+  }
+  .paid {
+    color: var(--color-success);
+  }
+  .notpaid {
+    color: var(--color-danger);
+  }
+  .partiallypaid {
+    color: var(--color-warning);
+  }
+  .failed {
+    color: var(--color-danger);
+  }
+  .refunded {
+    color: var(--color-success);
   }
 }
 

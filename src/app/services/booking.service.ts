@@ -6,7 +6,9 @@ import { collectionData } from 'rxfire/firestore';
   providedIn: 'root'
 })
 export class BookingService {
-
+  showDateTimeEditPopup: boolean = false;
+  bookingId: any;
+  
   constructor(private fs: Firestore) { }
 
   saveBooking(bookingData: any) {
@@ -30,6 +32,28 @@ export class BookingService {
     return updateDoc(bookingDoc, { 
       status: status,
       paidAt: serverTimestamp()
+    });
+  }
+
+  updatePaymentOption(bookingId: any, paymentOption: number) {
+    let bookingDoc = doc(this.fs, `bookings/${bookingId}`);
+    return updateDoc(bookingDoc, { 
+      paymentOption: paymentOption,
+      updatedAt: serverTimestamp()
+    });
+  }
+
+  updateBookingPaymentData(bookingId: any, paymentData: any) {
+    let bookingDoc = doc(this.fs, `bookings/${bookingId}`);
+    return updateDoc(bookingDoc, { 
+      ...paymentData
+    });
+  }
+
+  updatePickupDateAndTime(bookingId: any, pickupData: any) {
+    let bookingDoc = doc(this.fs, `bookings/${bookingId}`);
+    return updateDoc(bookingDoc, { 
+      ...pickupData
     });
   }
 }

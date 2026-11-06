@@ -1,14 +1,24 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { User } from '@angular/fire/auth';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { BookingVM } from 'src/app/models/BookingVM';
 import { BookingService } from 'src/app/services/booking.service';
 import { CommonService } from 'src/app/services/common.service';
+import { HeroBannerComponent } from 'src/app/shared/hero-banner/hero-banner.component';
 
 @Component({
-  selector: 'app-booking-history',
-  templateUrl: './booking-history.component.html',
-  styleUrls: ['./booking-history.component.scss']
+    selector: 'app-booking-history',
+    templateUrl: './booking-history.component.html',
+    styleUrls: ['./booking-history.component.scss'],
+    standalone: true,
+    imports: [
+      CommonModule,
+      RouterModule,
+      FormsModule,
+      HeroBannerComponent
+    ]
 })
 export class BookingHistoryComponent {
   bookings: Booking[] = [
@@ -133,6 +143,7 @@ export class BookingHistoryComponent {
   sortOrder: string = 'newest';
   currentPage: number = 1;
   itemsPerPage: number = 5;
+  paymentStatus: string = 'notpaid';
 
   bookingDataList: BookingVM[] = [];
 
@@ -234,7 +245,7 @@ export class BookingHistoryComponent {
   changePage(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      this.commonService.scrollToTop();
     }
   }
 
@@ -288,6 +299,55 @@ export class BookingHistoryComponent {
       this.bookingDataList = res;
       this.applyFilters();
     });
+  }
+
+  getPaymentStatusName(statusId: number) {
+    var status = '';
+    switch (statusId) {
+      case 1:
+        status = 'Paid';
+        this.paymentStatus = 'paid';
+        break;
+      case 2:
+        status = 'Partially Paid';
+        this.paymentStatus = 'partiallypaid';
+        break;
+      case 3:
+        status = 'Not Paid';
+        this.paymentStatus = 'notpaid';
+        break;
+      case 4:
+        status = 'Failed';
+        this.paymentStatus = 'failed';
+        break;
+      case 5:
+        status = 'Refunded';
+        this.paymentStatus = 'refunded';
+        break;
+    }
+    return status;
+  }
+
+  getPaymentStatusClassName(statusId: number) {
+    var className = '';
+    switch (statusId) {
+      case 1:
+        className = 'paid';
+        break;
+      case 2:
+        className = 'partiallypaid';
+        break;
+      case 3:
+        className = 'notpaid';
+        break;
+      case 4:
+        className = 'failed';
+        break;
+      case 5:
+        className = 'refunded';
+        break;
+    }
+    return className;
   }
 }
 

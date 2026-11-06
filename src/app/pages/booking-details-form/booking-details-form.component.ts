@@ -2,14 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from 'src/app/services/common.service';
-import { PhoneNumberUtil, PhoneNumberFormat, PhoneNumberType } from 'google-libphonenumber';
-import { LocationVM } from 'src/app/models/tour';
 import { TourDetails } from 'src/app/models/tourDetails';
 
 @Component({
-  selector: 'app-booking-details-form',
-  templateUrl: './booking-details-form.component.html',
-  styleUrls: ['./booking-details-form.component.scss']
+    selector: 'app-booking-details-form',
+    templateUrl: './booking-details-form.component.html',
+    styleUrls: ['./booking-details-form.component.scss'],
+    standalone: false
 })
 export class BookingDetailsFormComponent {
   currentStep = 1;
@@ -33,7 +32,6 @@ export class BookingDetailsFormComponent {
   searchDetails!: TourDetails;
 
   iti: any;
-  private phoneUtil = PhoneNumberUtil.getInstance();
 
   @ViewChild('phoneInput') phoneInput!: ElementRef<HTMLInputElement>;
 
@@ -72,11 +70,11 @@ export class BookingDetailsFormComponent {
   }
 
   setSearchFormData() {
-    const searchFormSession = sessionStorage.getItem('tourDetails');
-    if (searchFormSession) {
-      this.searchDetails = JSON.parse(searchFormSession);
+    // const searchFormSession = sessionStorage.getItem('tourDetails');
+    // if (searchFormSession) {
+    //   this.searchDetails = JSON.parse(searchFormSession);
       
-    }
+    // }
   }
 
   getCountryList() {

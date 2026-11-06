@@ -6,9 +6,10 @@ import { BookingService } from 'src/app/services/booking.service';
 import { CommonService } from 'src/app/services/common.service';
 
 @Component({
-  selector: 'app-booking-history-temp',
-  templateUrl: './booking-history-temp.component.html',
-  styleUrls: ['./booking-history-temp.component.scss']
+    selector: 'app-booking-history-temp',
+    templateUrl: './booking-history-temp.component.html',
+    styleUrls: ['./booking-history-temp.component.scss'],
+    standalone: false
 })
 export class BookingHistoryTempComponent {
   bookings: Booking[] = [
@@ -234,7 +235,7 @@ export class BookingHistoryTempComponent {
     changePage(page: number): void {
       if (page >= 1 && page <= this.totalPages) {
         this.currentPage = page;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        this.commonService.scrollToTop();
       }
     }
   

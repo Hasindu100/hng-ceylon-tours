@@ -7,6 +7,7 @@ import { collection, collectionData, Firestore } from '@angular/fire/firestore';
 })
 export class LocationService {
   apiKey: string = 'eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImQyYmRkMTlhYTE4NTRhYmQ5NTlhMDNjMjUxM2EyNGNkIiwiaCI6Im11cm11cjY0In0';
+  geometryData: any;
   
   constructor(private fs: Firestore,
     private http: HttpClient) { }

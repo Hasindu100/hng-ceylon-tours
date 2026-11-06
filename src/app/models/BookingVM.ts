@@ -8,6 +8,10 @@ export interface BookingVM {
     distanceKm: number | null,
     duration: number | null,
     totalPrice: number,
+    amountPaid: number,
+    remainingAmount: number,
+    paymentStatus: number,
+    paymentOption: number,
     date: Date,
     time: Date,
     vehicleTypeRef: DocumentReference
@@ -28,6 +32,15 @@ export interface BookingVM {
     customTourType?: CustomTourTypeVM //this should be optional, only for custom tours
 }
 
+export interface PaymentVM {
+  id?: string;
+  bookingId: string;
+  amount: number;
+  paymentMethod: number;
+  transactionId: string;
+  status: number;
+  createdAt: Date;
+}
 
 export interface AddressPoint {
   address: string;

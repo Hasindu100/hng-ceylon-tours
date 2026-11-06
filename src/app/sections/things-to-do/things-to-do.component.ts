@@ -1,10 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { ThingsTodoService } from 'src/app/services/things-todo.service';
 
 @Component({
-  selector: 'app-things-to-do',
-  templateUrl: './things-to-do.component.html',
-  styleUrls: ['./things-to-do.component.scss']
+    selector: 'app-things-to-do',
+    templateUrl: './things-to-do.component.html',
+    styleUrls: ['./things-to-do.component.scss'],
+    standalone: true,
+    imports: [
+      CommonModule,
+      RouterModule
+    ]
 })
 export class ThingsToDoComponent implements OnInit {
   destinations: Destination[] = [

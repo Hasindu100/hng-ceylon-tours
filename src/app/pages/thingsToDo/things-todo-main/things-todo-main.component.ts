@@ -1,11 +1,22 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
 import { ThingsTodoService } from 'src/app/services/things-todo.service';
+import { TruncatePipe } from 'src/app/shared/custom-pipes/truncate.pipe';
+import { HeroBannerComponent } from 'src/app/shared/hero-banner/hero-banner.component';
 
 @Component({
-  selector: 'app-things-todo-main',
-  templateUrl: './things-todo-main.component.html',
-  styleUrls: ['./things-todo-main.component.scss']
+    selector: 'app-things-todo-main',
+    templateUrl: './things-todo-main.component.html',
+    styleUrls: ['./things-todo-main.component.scss'],
+    standalone: true,
+    imports: [
+      CommonModule,
+      RouterModule,
+      TruncatePipe,
+      HeroBannerComponent
+    ]
 })
 export class ThingsTodoMainComponent implements OnInit {
   thingsTodoList: any[] = [];

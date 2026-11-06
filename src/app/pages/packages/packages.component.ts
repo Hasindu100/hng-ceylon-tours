@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-packages',
-  templateUrl: './packages.component.html',
-  styleUrls: ['./packages.component.scss']
+    selector: 'app-packages',
+    templateUrl: './packages.component.html',
+    styleUrls: ['./packages.component.scss'],
+    standalone: false
 })
 export class PackagesComponent {
 tourCards: TourCard[] = [

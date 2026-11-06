@@ -28,19 +28,41 @@ const routes: Routes = [
     component: BodyComponent,
     children: [
       { path: '', component: HomeComponent },
-      { path: 'about', component: AboutUsComponent},
-      { path: 'contact', component: ContactUsComponent},
-      { path: 'faq', component: FaqComponent},
-      { path: 'terms', component: TermsConditionsComponent},
-      { path: 'things-todo', component: ThingsTodoMainComponent },
-      { path: 'things-todo/single', component: ThingsTodoSingleComponent },
-      { path: 'things-todo/single2', component: ThingsTodoSingle2Component },
-      { path: 'packages', component: PackagesComponent },
-      { path: 'tours', component: ToursMainComponent },
-      { path: 'tours/single', component: ToursSingleComponent },
-      { path: 'booking-details', component: BookingDetailsFormComponent },
+      { path: 'about',
+        loadComponent: () => import('./pages/about-us/about-us.component').then(m => m.AboutUsComponent)
+      },
+      { path: 'contact',
+        loadComponent: () => import('./pages/contact-us/contact-us.component').then(m => m.ContactUsComponent)
+      },
+      { path: 'faq',
+        loadComponent: () => import('./pages/faq/faq.component').then(m => m.FaqComponent)
+      },
+      { path: 'terms',
+        loadComponent: () => import('./pages/terms-conditions/terms-conditions.component').then(m => m.TermsConditionsComponent)
+      },
+      { path: 'things-todo',
+        loadComponent: () => import('./pages/thingsToDo/things-todo-main/things-todo-main.component').then(m => m.ThingsTodoMainComponent)
+       },
+      { path: 'things-todo/single',
+        loadComponent: () => import('./pages/thingsToDo/things-todo-single/things-todo-single.component').then(m => m.ThingsTodoSingleComponent)
+       },
+      { path: 'things-todo/single2',
+        loadComponent: () => import('./pages/thingsToDo/things-todo-single2/things-todo-single2.component').then(m => m.ThingsTodoSingle2Component)
+       },
+      { path: 'packages',
+        loadComponent: () => import('./pages/packages/packages.component').then(m => m.PackagesComponent)
+       },
+      // { path: 'tours',
+      //   loadComponent: () => import('./pages/tours/tours-main/tours-main.component').then(m => m.ToursMainComponent)
+      //  },
+      { path: 'tours/single',
+        loadComponent: () => import('./pages/tours/tours-single/tours-single.component').then(m => m.ToursSingleComponent)
+       },
+      { path: 'booking-details',
+        loadComponent: () => import('./pages/booking-details-form/booking-details-form.component').then(m => m.BookingDetailsFormComponent)
+       },
       { path: 'booking-history', 
-        component: BookingHistoryComponent,
+        loadComponent: () => import('./pages/booking-history/booking-history.component').then(m => m.BookingHistoryComponent),
         canActivate: [AuthGuard],
         data: {
           authGuardPipe: redirectToLogin
@@ -49,10 +71,12 @@ const routes: Routes = [
           user: UserResolver
         }
       },
-      { path: 'test', component: TestPageComponent },
+      { path: 'test',
+        loadComponent: () => import('./pages/test-page/test-page.component').then(m => m.TestPageComponent)
+       },
       { 
         path: 'checkout/:bookingId', 
-        component: CheckoutComponent,
+        loadComponent: () => import('./pages/checkout/checkout.component').then(m => m.CheckoutComponent),
         canActivate: [AuthGuard],
         data: {
           authGuardPipe: redirectToLogin
@@ -65,7 +89,7 @@ const routes: Routes = [
   },
   { 
     path: 'payment-success', 
-    component: PaymentSuccessComponent,
+    loadComponent: () => import('./pages/payment-success/payment-success.component').then(m => m.PaymentSuccessComponent),
     canActivate: [AuthGuard],
     data: {
       authGuardPipe: redirectToLogin

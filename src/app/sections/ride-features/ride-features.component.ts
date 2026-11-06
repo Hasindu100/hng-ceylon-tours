@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-ride-features',
-  templateUrl: './ride-features.component.html',
-  styleUrls: ['./ride-features.component.scss']
+    selector: 'app-ride-features',
+    templateUrl: './ride-features.component.html',
+    styleUrls: ['./ride-features.component.scss'],
+    standalone: false
 })
 export class RideFeaturesComponent {
   topFeatures = [

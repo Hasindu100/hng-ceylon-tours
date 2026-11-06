@@ -1,7 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-@import "~@ng-select/ng-select/themes/default.theme.css";
-@import "~flatpickr/dist/flatpickr.min.css";
-@import url('~@angular/cdk/overlay-prebuilt.css');
+
+@import "@ng-select/ng-select/themes/default.theme.css";
+@import "flatpickr/dist/flatpickr.min.css";
+@import url('@angular/cdk/overlay-prebuilt.css');
+@import url("intl-tel-input/dist/css/intlTelInput.css");
+
+
 // Reset and Base Styles
 * {
   margin: 0;
@@ -38,6 +41,9 @@
   --light-background-color: #eff5ff;
   --primary-light-color: #3e679b;
   --dark-background-color: #0a2445;
+  --color-success: #28a745;
+  --color-warning: #ffc107;
+  --color-danger: #dc3545;
 }
 
 html {

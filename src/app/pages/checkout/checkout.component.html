@@ -11,39 +11,140 @@
     <div class="row">
       <!-- Left Column -->
       <div class="col-lg-6">
-        <app-order-summary [tourDetails]="bookingData"></app-order-summary>
+        <div class="mb-4">
+          <div class="mb-4">
+            <app-order-summary [tourDetails]="bookingData"></app-order-summary>
+          </div>
+          <!-- User Details Section -->
+          <div class="card mb-4" *ngIf="bookingData">
+            <div class="card-body">
+              <h5 class="section-title">User Details</h5>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Name</label>
+                  <div class="user-data-container">
+                    <span class="user-data-val" [title]="bookingData.firstName + ' ' + bookingData.lastName">{{bookingData.firstName + ' ' + bookingData.lastName}}</span>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">Email</label>
+                  <div class="user-data-container">
+                    <span class="user-data-val" [title]="bookingData.email">{{bookingData.email}}</span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Country</label>
+                  <div class="user-data-container">
+                    <span class="user-data-val" [title]="bookingData.country">{{bookingData.country}}</span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Mobile Number</label>
+                  <div class="user-data-container">
+                    <span class="user-data-val" [title]="bookingData.mobileNumber">{{bookingData.mobileNumber}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
        <!-- Right Column -->
       <div class="col-lg-6 mb-4">
-        <!-- User Details Section -->
+        
+
+        <!-- Payment Plan Section -->
+        @if (!isHiddenPaymentPlan) {
+          <div class="card mb-4" *ngIf="bookingData">
+            <div class="card-body">
+              <h5 class="section-title">Payment Plan</h5>
+              <div class="payment-plan-list">
+                <div class="payment-plan-item">
+                  <label class="payment-plan-label" for="advancePaymentToggle">Pay 20% of Advanced payment</label>
+                  <div class="form-check form-switch m-0">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="advancePaymentToggle"
+                      [checked]="selectedPaymentPlan === paymentOption.Advanced"
+                      (change)="setPaymentPlan(paymentOption.Advanced, $any($event.target).checked)" />
+                  </div>
+                </div>
+
+                <div class="payment-plan-item mt-3">
+                  <label class="payment-plan-label" for="fullPaymentToggle">Pay full amount</label>
+                  <div class="form-check form-switch m-0">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="fullPaymentToggle"
+                      [checked]="selectedPaymentPlan === paymentOption.Full"
+                      (change)="setPaymentPlan(paymentOption.Full, $any($event.target).checked)" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+        
+
+        <!-- Payment Details Section -->
         <div class="card mb-4" *ngIf="bookingData">
           <div class="card-body">
-            <h5 class="section-title">User Details</h5>
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label class="form-label">Name</label>
-                <div class="user-data-container">
-                  <span class="user-data-val" [title]="bookingData.firstName + ' ' + bookingData.lastName">{{bookingData.firstName + ' ' + bookingData.lastName}}</span>
-                </div>
+            <h5 class="section-title">Payment Details</h5>
+
+            <div class="payment-summary">
+              <!-- <div class="payment-row">
+                <span class="payment-label-text">Budget</span>
+                <span class="payment-amount">LKR {{ budgetAmount.toFixed(2) }}</span>
+              </div> -->
+
+              <div class="payment-row total-row">
+                <span class="payment-label-text">
+                  Total Payment
+                   @if (bookingData.paymentStatus == paymentStatus.Paid) {
+                    <span class="payment-status paid">Paid</span>
+                  }
+                </span>
+                <span class="payment-amount-total">LKR {{ totalAmount | number:'1.2-2' }}</span>
               </div>
-              <div class="col-md-6 mb-3">
-                <label class="form-label">Email</label>
-                <div class="user-data-container">
-                  <span class="user-data-val" [title]="bookingData.email">{{bookingData.email}}</span>
+
+              @if (selectedPaymentPlan == paymentOption.Advanced) {
+                <div class="payment-row total-row">
+                  <span class="payment-label-text">
+                    Advanced Payment ({{ selectedPaymentPercentage }}%)
+                    @if (bookingData.paymentStatus == paymentStatus.PartiallyPaid || bookingData.paymentStatus == paymentStatus.Paid) {
+                      <span class="payment-status paid">Paid</span>
+                    }
+                  </span>
+                  <span class="payment-amount-total">LKR {{ advancedAmount | number:'1.2-2' }}</span>
                 </div>
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Country</label>
-                <div class="user-data-container">
-                  <span class="user-data-val" [title]="bookingData.country">{{bookingData.country}}</span>
+
+                <div class="payment-row total-row">
+                  <span class="payment-label-text">
+                    Remaining Payment
+                    @if (bookingData.paymentStatus == paymentStatus.Paid) {
+                      <span class="payment-status paid">Paid</span>
+                    }
+                    @else if (bookingData.paymentStatus == paymentStatus.PartiallyPaid) {
+                      <span class="payment-status not-paid">Not Paid</span>
+                    }
+                  </span>
+                  <span class="payment-amount-total">LKR {{ remainingAmount | number:'1.2-2' }}</span>
                 </div>
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Mobile Number</label>
-                <div class="user-data-container">
-                  <span class="user-data-val" [title]="bookingData.mobileNumber">{{bookingData.mobileNumber}}</span>
+              }
+
+              @if (bookingData.paymentStatus != paymentStatus.Paid) {
+                <div class="payable-amount-section">
+                  <div class="payable-amount-header">
+                    <span class="payable-amount-label">Payable Amount</span>
+                    <span class="payable-amount">LKR {{ payableAmount | number:'1.2-2'}}</span>
+                  </div>
+                  <p class="payable-amount-note">
+                    Please note that the selected advance payment is non-refundable. The provided cost is an approximate estimate, and the trip cost and travel time may vary due to traffic conditions, the route taken, and waiting time. Toll charges (expressway charges) are not included in the estimate, and the final amount displayed on the meter at the end of the journey is liable to be paid. The balance payment can be settled by cash and by card depending on availability. Thank you for choosing Kangaroo Cabs. We look forward to serving you.
+                  </p>
                 </div>
-              </div>
+              }
             </div>
           </div>
         </div>
@@ -118,7 +219,7 @@
             Back to home
           </button>
           <button *ngIf="!isHideConfirmButton" type="button" class="btn btn-primary btn-confirm" (click)="onConfirmRide()">
-            Confirm Ride
+            Confirm Payment
           </button>
         </div>
       </div>
@@ -223,3 +324,7 @@
 
   </div>
 </div>
+<app-loader *ngIf="isDataLoading"></app-loader>
+@if (showDateTimeEditPopup) {
+  <app-date-time [bookingData]="bookingData" (onRefreshBookingData)="refreshBookingData()" (closeDateTimePopup)="onCloseDateTimePopup()"></app-date-time>
+}

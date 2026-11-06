@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -40,7 +40,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { TourHeroComponent } from './layouts/tour-hero/tour-hero.component';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { BookingDetailsFormComponent } from './pages/booking-details-form/booking-details-form.component';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TestPageComponent } from './pages/test-page/test-page.component';
 import { OrderSummaryComponent } from './sections/order-summary/order-summary.component';
 import { TourHero2Component } from './layouts/tour-hero2/tour-hero2.component';
@@ -61,76 +61,74 @@ import { VehicleImagePopupComponent } from './shared/components/vehicle-image-po
 import { RoadMapPopupComponent } from './shared/components/road-map-popup/road-map-popup.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { TermsConditionsComponent } from './pages/terms-conditions/terms-conditions.component';
-import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import IntlTelInput from "@intl-tel-input/angular";
+import { DateTimeComponent } from './shared/components/date-time/date-time.component';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    PackagesComponent,
-    HeroComponent,
-    HeaderSliderComponent,
-    AboutUsComponent,
-    CustomerReviewsComponent,
-    FooterComponent,
-    AboutComponent,
-    ClientTestimonialsComponent,
-    ThingsToDoComponent,
-    FeaturesComponent,
-    BodyComponent,
-    ThingsTodoMainComponent,
-    HomeComponent,
-    ThingsTodoSingleComponent,
-    ContactUsComponent,
-    HeroBannerComponent,
-    GalleryComponent,
-    ToursSingleComponent,
-    ToursMainComponent,
-    ThingsTodoSingle2Component,
-    ImageSliderComponent,
-    MapDisplayComponent,
-    TruncatePipe,
-    HomeHeroComponent,
-    Header2Component,
-    TourDetailsComponent,
-    TourHeroComponent,
-    LoaderComponent,
-    BookingDetailsFormComponent,
-    TestPageComponent,
-    OrderSummaryComponent,
-    TourHero2Component,
-    CheckoutComponent,
-    BookingHistoryComponent,
-    BookingStepsComponent,
-    RideFeaturesComponent,
-    BookingHistoryTempComponent,
-    PaymentSuccessComponent,
-    AirportPickupFormComponent,
-    AirportDropFormComponent,
-    CustomTourFormComponent,
-    VehicleImagePopupComponent,
-    RoadMapPopupComponent,
-    FaqComponent,
-    TermsConditionsComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    GoogleMapsModule,
-    CommonModule,
-    NgSelectModule,
-    HttpClientModule,
-    CdkMenuModule,
-    NgxIntlTelInputModule,
-    ToastrModule.forRoot(),
-    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    provideFirestore(() => getFirestore()),
-    provideAuth(() => getAuth())
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        HeaderComponent,
+        PackagesComponent,
+        HeroComponent,
+        HeaderSliderComponent,
+        CustomerReviewsComponent,
+        FooterComponent,
+        AboutComponent,
+        ClientTestimonialsComponent,
+        FeaturesComponent,
+        BodyComponent,
+        HomeComponent,
+        ThingsTodoSingleComponent,
+        ToursSingleComponent,
+        ToursMainComponent,
+        ImageSliderComponent,
+        HomeHeroComponent,
+        Header2Component,
+        TourDetailsComponent,
+        TourHeroComponent,
+        BookingDetailsFormComponent,
+        TourHero2Component,
+        BookingStepsComponent,
+        RideFeaturesComponent,
+        BookingHistoryTempComponent,
+        AirportPickupFormComponent,
+        AirportDropFormComponent,
+        CustomTourFormComponent,
+        VehicleImagePopupComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        GoogleMapsModule,
+        CommonModule,
+        NgSelectModule,
+        CdkMenuModule,
+        IntlTelInput,
+        RoadMapPopupComponent,
+        ThingsToDoComponent,
+        ThingsTodoMainComponent,
+        ThingsTodoSingle2Component,
+        GalleryComponent,
+        HeroBannerComponent,
+        AboutUsComponent,
+        ContactUsComponent,
+        FaqComponent,
+        TermsConditionsComponent,
+        BookingHistoryComponent,
+        CheckoutComponent,
+        OrderSummaryComponent,
+        PaymentSuccessComponent,
+        TestPageComponent,
+        TruncatePipe,
+        MapDisplayComponent,
+        LoaderComponent,
+        DateTimeComponent,
+        ToastrModule.forRoot()], providers: [
+        provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+        provideFirestore(() => getFirestore()),
+        provideAuth(() => getAuth()),
+        provideHttpClient(withInterceptorsFromDi()),
+        provideClientHydration(withEventReplay())
+    ] })
 export class AppModule { }

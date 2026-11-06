@@ -6,9 +6,10 @@ import { Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
 
 @Component({
-  selector: 'app-header2',
-  templateUrl: './header2.component.html',
-  styleUrls: ['./header2.component.scss']
+    selector: 'app-header2',
+    templateUrl: './header2.component.html',
+    styleUrls: ['./header2.component.scss'],
+    standalone: false
 })
 export class Header2Component {
 isMobileMenuOpen = false;
@@ -82,7 +83,9 @@ isMobileMenuOpen = false;
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll() {
-    this.isScrolled = window.pageYOffset > 10;
+    if (typeof window !== 'undefined') {
+      this.isScrolled = window.pageYOffset > 10;
+    }
   }
 
   @HostListener('window:resize', ['$event'])
@@ -108,15 +111,15 @@ isMobileMenuOpen = false;
 
   onSocialClick(social: any): void {
     // Handle social media link clicks
-    window.open(social.url, '_blank');
+    this.commonService.onWindowOpenBlank(social.url);
   }
 
   callPhone(): void {
-    window.location.href = `tel:${this.phone}`;
+    this.commonService.onWindowOpen(`tel:${this.phone}`);
   }
 
   sendEmail(): void {
-    window.location.href = `mailto:${this.email}`;
+    this.commonService.onWindowOpen(`mailto:${this.email}`);
   }
 
   onSignInWithGoogle() {
@@ -133,7 +136,7 @@ isMobileMenuOpen = false;
   onSignOut() {
     signOut(this.auth).then((response) => {
       this.router.navigate(['/']).then(() => {
-        window.location.reload();
+        this.commonService.onPageReload();
       });
     })
     .catch((error) => {

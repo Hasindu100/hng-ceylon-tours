@@ -1,9 +1,16 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @Component({
-  selector: 'app-map-display',
-  templateUrl: './map-display.component.html',
-  styleUrls: ['./map-display.component.scss']
+    selector: 'app-map-display',
+    templateUrl: './map-display.component.html',
+    styleUrls: ['./map-display.component.scss'],
+    standalone: true,
+    imports: [
+      CommonModule,
+      GoogleMapsModule,
+    ]
 })
 export class MapDisplayComponent {
   @Input('latitude') latitude: number = 6.9271;

@@ -7,9 +7,10 @@ import { CommonService } from 'src/app/services/common.service';
 import { LocationService } from 'src/app/services/location.service';
 
 @Component({
-  selector: 'app-tour-hero',
-  templateUrl: './tour-hero.component.html',
-  styleUrls: ['./tour-hero.component.scss']
+    selector: 'app-tour-hero',
+    templateUrl: './tour-hero.component.html',
+    styleUrls: ['./tour-hero.component.scss'],
+    standalone: false
 })
 export class TourHeroComponent {
   searchForm: FormGroup;
@@ -76,22 +77,22 @@ export class TourHeroComponent {
   }
 
   setSearchFormData() {
-    var searchFormSession = sessionStorage.getItem('tourDetails');
-    if (searchFormSession) {
-      let searchDetails: TourDetails = JSON.parse(searchFormSession);
-      this.searchForm.patchValue({
-        pickupLocation: this.locationData.find(loc => loc.locationName === searchDetails.pickupLocation)?.id || '0',
-        destination: this.locationData.find(loc => loc.locationName === searchDetails.dropLocation)?.id || '0',
-        pickupDate: searchDetails.pickupDate,
-        pickupTime: searchDetails.pickupTime,
-        guests: searchDetails.noOfGuests
-      });
-      this.commonService.selectedVehicleTypeId = searchDetails.vehicleTypeId;
-      this.commonService.selectedVehicleTypeName = searchDetails.vehicleTypeName;
-      this.guestCount = searchDetails.noOfGuests || 1;
+    // var searchFormSession = sessionStorage.getItem('tourDetails');
+    // if (searchFormSession) {
+    //   let searchDetails: TourDetails = JSON.parse(searchFormSession);
+    //   this.searchForm.patchValue({
+    //     pickupLocation: this.locationData.find(loc => loc.locationName === searchDetails.pickupLocation)?.id || '0',
+    //     destination: this.locationData.find(loc => loc.locationName === searchDetails.dropLocation)?.id || '0',
+    //     pickupDate: searchDetails.pickupDate,
+    //     pickupTime: searchDetails.pickupTime,
+    //     guests: searchDetails.noOfGuests
+    //   });
+    //   this.commonService.selectedVehicleTypeId = searchDetails.vehicleTypeId;
+    //   this.commonService.selectedVehicleTypeName = searchDetails.vehicleTypeName;
+    //   this.guestCount = searchDetails.noOfGuests || 1;
 
-      this.onSearchTourDetails();
-    }
+    //   this.onSearchTourDetails();
+    // }
   }
 
   getLocationData() {

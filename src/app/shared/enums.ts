@@ -11,3 +11,16 @@ export enum BookingStatus {
     Completed = 2,
     Cancelled = 3
 }
+
+export enum PaymentStatus {
+    Paid = 1,
+    PartiallyPaid = 2,
+    NotPaid = 3,
+    Failed = 4,
+    Refunded = 5
+}
+
+export enum PaymentOption {
+    Full = 1,
+    Advanced = 2
+}

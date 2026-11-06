@@ -5,9 +5,10 @@ import { CommonService } from 'src/app/services/common.service';
 import { LocationService } from 'src/app/services/location.service';
 
 @Component({
-  selector: 'app-hero',
-  templateUrl: './hero.component.html',
-  styleUrls: ['./hero.component.scss']
+    selector: 'app-hero',
+    templateUrl: './hero.component.html',
+    styleUrls: ['./hero.component.scss'],
+    standalone: false
 })
 export class HeroComponent {
   searchForm: FormGroup;

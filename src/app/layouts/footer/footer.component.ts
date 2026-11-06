@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
-  selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+    selector: 'app-footer',
+    templateUrl: './footer.component.html',
+    styleUrls: ['./footer.component.scss'],
+    standalone: false
 })
 export class FooterComponent {
   // Contact information
@@ -40,6 +42,7 @@ export class FooterComponent {
   ];
 
 
+  constructor(private commonService: CommonService) {}
 
   // Navigation methods
   navigateTo(url: string): void {
@@ -48,13 +51,10 @@ export class FooterComponent {
   }
 
   openSocialLink(url: string): void {
-    window.open(url, '_blank');
+    this.commonService.onWindowOpenBlank(url);
   }
 
   scrollToTop(): void {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    this.commonService.scrollToTop();
   }
 }

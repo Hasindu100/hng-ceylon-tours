@@ -1,16 +1,30 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { BookingVM, CheckoutItem } from 'src/app/models/BookingVM';
+import { OrderSummaryComponent } from 'src/app/sections/order-summary/order-summary.component';
 import { BookingService } from 'src/app/services/booking.service';
 import { CheckoutService } from 'src/app/services/checkout.service';
 import { CommonService } from 'src/app/services/common.service';
 import { ToursService } from 'src/app/services/tours.service';
-import { BookingStatus } from 'src/app/shared/enums';
+import { DateTimeComponent } from 'src/app/shared/components/date-time/date-time.component';
+import { BookingStatus, PaymentOption, PaymentStatus } from 'src/app/shared/enums';
+import { LoaderComponent } from 'src/app/shared/loader/loader.component';
 
 @Component({
-  selector: 'app-checkout',
-  templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.scss']
+    selector: 'app-checkout',
+    templateUrl: './checkout.component.html',
+    styleUrls: ['./checkout.component.scss'],
+    standalone: true,
+    imports: [
+      CommonModule,
+      RouterModule,
+      FormsModule,
+      OrderSummaryComponent,
+      LoaderComponent,
+      DateTimeComponent
+    ]
 })
 export class CheckoutComponent {
   // User Details
@@ -36,11 +50,21 @@ export class CheckoutComponent {
   // Payment Method
   selectedPaymentMethod: string = 'card';
 
+  // Payment Plan
+  selectedPaymentPlan: PaymentOption = PaymentOption.Full;
+  totalAmount: number = 0;
+  payableAmount: number = 0;
+  remainingAmount: number = 0;
+  advancedAmount: number = 0;
+
   userDetails: any;
   tourDetails: any;
   bookingId: string = '';
   bookingData!: BookingVM;
   isHideConfirmButton: boolean = true;
+  paymentOption = PaymentOption;
+  isHiddenPaymentPlan: boolean = true;
+  paymentStatus = PaymentStatus;
 
   constructor(private tourService: ToursService,
     private bookingService: BookingService,
@@ -69,6 +93,15 @@ export class CheckoutComponent {
       }
     }
     this.bookingId = this.route.snapshot.params['bookingId'];
+    this.bookingService.bookingId = this.bookingId;
+  }
+
+  get showDateTimeEditPopup() {
+    return this.bookingService.showDateTimeEditPopup;
+  }
+
+  get isDataLoading() {
+    return this.commonService.isDataLoading;
   }
 
   ngOnInit(): void {
@@ -90,12 +123,42 @@ export class CheckoutComponent {
     return this.budgetAmount;
   }
 
+  get selectedPaymentPercentage(): number {
+    return this.selectedPaymentPlan === PaymentOption.Advanced ? 20 : 100;
+  }
+
+  // setPaymentPlan(plan: 'advance' | 'full', isChecked: boolean): void {
+  //   if (isChecked) {
+  //     this.selectedPaymentPlan = plan;
+  //     return;
+  //   }
+
+  //   this.selectedPaymentPlan = plan === 'advance' ? 'full' : 'advance';
+  // }
+
+  setPaymentPlan(plan: any, isChecked: boolean): void {
+    if (isChecked) {
+      this.selectedPaymentPlan = plan;
+      this.calculatePaymentDetails();
+      this.updatePaymentOption();
+      return;
+    }
+    this.selectedPaymentPlan = plan === this.paymentOption.Advanced ? this.paymentOption.Full : this.paymentOption.Advanced;
+    this.calculatePaymentDetails();
+    this.updatePaymentOption();
+  }
+
   getBookingDetailsById() {
     this.bookingService.getBookingDetailsById(this.bookingId).then((res) => {
       this.bookingData = res.data() as BookingVM;
-      if (this.bookingData.status == BookingStatus.InProgress) {
+      if (this.bookingData.status == BookingStatus.InProgress || this.bookingData.paymentStatus == PaymentStatus.PartiallyPaid) {
         this.isHideConfirmButton = false;
       }
+      this.selectedPaymentPlan = this.bookingData.paymentOption;
+      if (this.bookingData.paymentStatus == PaymentStatus.NotPaid) {
+        this.isHiddenPaymentPlan = false;
+      }
+      this.calculatePaymentDetails();
       console.log(this.bookingData);
     })
     .catch((error) => {
@@ -112,10 +175,35 @@ export class CheckoutComponent {
     var products: CheckoutItem[] = [];
     products.push({
       name: `${this.bookingData.pickup.address} to ${this.bookingData.dropoff.address}`,
-      price: this.bookingData.totalPrice,
+      price: this.payableAmount,
       qty: 1
     });
 
     this.checkoutService.onProceedToPay(products, this.bookingId);
+  }
+
+  updatePaymentOption() {
+    this.commonService.isDataLoading = true;
+    this.bookingService.updatePaymentOption(this.bookingId, this.selectedPaymentPlan).then(() => {
+      this.commonService.isDataLoading = false;
+    }).catch((error) => {
+      console.error(error);
+      this.commonService.isDataLoading = false;
+    });
+  }
+
+  calculatePaymentDetails() {
+    this.totalAmount = this.bookingData.totalPrice;
+    this.advancedAmount = Number((this.totalAmount * (this.selectedPaymentPercentage / 100)).toFixed(2));
+    this.remainingAmount = Number((this.totalAmount - this.advancedAmount).toFixed(2));
+    this.payableAmount = this.bookingData.paymentStatus == PaymentStatus.PartiallyPaid ? this.remainingAmount : this.advancedAmount;
+  }
+
+  onCloseDateTimePopup() {
+    this.bookingService.showDateTimeEditPopup = false;
+  }
+
+  refreshBookingData() {
+    this.getBookingDetailsById();
   }
 }

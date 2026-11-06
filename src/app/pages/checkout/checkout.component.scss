@@ -235,7 +235,7 @@
 }
 
 /* Advance Payment Section */
-.advance-payment-section {
+.payable-amount-section {
   background-color: #fffbf0;
   border: 1px solid #ffd966;
   border-radius: 8px;
@@ -243,30 +243,47 @@
   margin-top: 16px;
 }
 
-.advance-payment-header {
+.payable-amount-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
 }
 
-.advance-label {
+.payable-amount-label {
   font-size: 14px;
   font-weight: 600;
   color: #1a1a1a;
 }
 
-.advance-amount {
+.payable-amount {
   font-size: 16px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--color-success);
 }
 
-.advance-payment-note {
+.payable-amount-note {
   font-size: 12px;
   color: #6c757d;
   line-height: 1.6;
   margin: 0;
+}
+
+.payment-status {
+  margin-left: 10px;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-weight: 700;
+  color: var(--white);
+  font-size: 12px;
+}
+
+.paid {
+  background: var(--color-success);
+}
+
+.not-paid {
+  background: var(--color-danger);
 }
 
 /* Footer Buttons */
@@ -316,6 +333,25 @@
   }
 }
 
+.payment-plan-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background-color: #f5f6f8;
+  border: 1px solid #e6e8ec;
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.payment-plan-label {
+  font-size: 14px;
+  color: var(--main-text-color);
+  font-weight: 500;
+  margin-bottom: 0;
+  line-height: 1.4;
+}
+
 /* Responsive Styles */
 @media (max-width: 991px) {
   .checkout-title {
@@ -343,5 +379,26 @@
 
   .payment-icons {
     flex-wrap: wrap;
+  }
+
+  .payment-plan-item {
+    padding: 10px 12px;
+  }
+
+  .payment-plan-label {
+    font-size: 13px;
+  }
+
+  .payment-summary {
+    gap: 0;
+  }
+
+  .payment-row {
+    display: grid;
+  }
+
+  .payment-status {
+    position: absolute;
+    right: 20px;
   }
 }

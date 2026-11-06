@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject, map, Subject } from 'rxjs';
-import { LocationVM } from '../models/tour';
+import { CountryOption2, LocationVM } from '../models/tour';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { CountryOption, CountryOption2 } from '../pages/test-page/test-page.component';
 import { User } from '@angular/fire/auth';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,8 @@ export class CommonService {
   user!: User;
   isDataLoading: boolean = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object) { }
 
   // getCountryList() {
   //   let url = 'https://api.restcountries.com/countries/v5?response_fields=names.common,codes.alpha_2,flag.emoji&limit=3&pretty=1';
@@ -119,9 +120,29 @@ export class CommonService {
   }
 
   scrollToTop(): void {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  }
+
+  onWindowOpenBlank(url: string): void {
+    if (isPlatformBrowser(this.platformId)) {
+      window.open(url, '_blank');
+    }
+  }
+
+  onWindowOpen(url: string): void {
+    if (isPlatformBrowser(this.platformId)) {
+      window.location.href = url;
+    }
+  }
+
+  onPageReload() {
+    if (isPlatformBrowser(this.platformId)) {
+      window.location.reload();
+    }
   }
 }

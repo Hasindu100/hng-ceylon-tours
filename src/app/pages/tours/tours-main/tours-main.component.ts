@@ -4,9 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { ToursService } from 'src/app/services/tours.service';
 
 @Component({
-  selector: 'app-tours-main',
-  templateUrl: './tours-main.component.html',
-  styleUrls: ['./tours-main.component.scss']
+    selector: 'app-tours-main',
+    templateUrl: './tours-main.component.html',
+    styleUrls: ['./tours-main.component.scss'],
+    standalone: false
 })
 export class ToursMainComponent implements OnInit {
   tourCards: TourCard[] = [

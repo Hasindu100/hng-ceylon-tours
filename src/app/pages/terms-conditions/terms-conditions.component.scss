@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // Variables
 $primary-color: var(--primary-color, #1f3e66);
 $secondary-color: var(--secondary-color, #FA7921);
@@ -441,7 +443,7 @@ $shadow-hover: 0 4px 16px rgba(31, 62, 102, 0.12);
 
 // CTA Section
 .terms-cta {
-  background: linear-gradient(135deg, $primary-color 0%, lighten(#1f3e66, 5%) 100%);
+  background: linear-gradient(135deg, $primary-color 0%, color.adjust(#1f3e66, $lightness: 5%) 100%);
   border-radius: 12px;
   padding: 50px 40px;
   text-align: center;
@@ -530,7 +532,7 @@ $shadow-hover: 0 4px 16px rgba(31, 62, 102, 0.12);
     color: $white;
 
     &:hover {
-      background-color: darken(#FA7921, 10%);
+      background-color: color.scale(#FA7921, $lightness: -10%);
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(250, 121, 33, 0.3);
     }
@@ -541,7 +543,7 @@ $shadow-hover: 0 4px 16px rgba(31, 62, 102, 0.12);
     color: $primary-color;
 
     &:hover {
-      background-color: darken(#FFFFFC, 5%);
+      background-color: color.scale(#FA7921, $lightness: -5%);
       transform: translateY(-2px);
     }
   }

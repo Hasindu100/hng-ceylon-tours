@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-hero',
-  templateUrl: './hero.component.html',
-  styleUrls: ['./hero.component.scss']
+    selector: 'app-hero',
+    templateUrl: './hero.component.html',
+    styleUrls: ['./hero.component.scss'],
+    standalone: false
 })
 export class HeroComponent {
   searchForm: any;

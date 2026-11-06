@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { collection, collectionData, doc, Firestore, getDoc } from '@angular/fire/firestore';
+import { collection, collectionData, doc, Firestore, getDoc, getDocs } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,9 @@ export class ThingsTodoService {
   getAllThingsTodoList() {
     let thingsTodoCollection = collection(this.fs, 'thingsTodo');
     return collectionData(thingsTodoCollection, { idField: 'id' });
+
+    // const querySnapshot = await getDocs(thingsTodoCollection);
+    // return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   }
 
   getThingsTodoById(id: any) {
