@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, inject, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, EventEmitter, Inject, inject, OnInit, Output, PLATFORM_ID, ViewChild } from '@angular/core';
 import { Auth, GoogleAuthProvider, signInWithPopup } from '@angular/fire/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,8 +13,10 @@ import { EmailService } from 'src/app/services/email.service';
 import { LocationService } from 'src/app/services/location.service';
 import { ToursService } from 'src/app/services/tours.service';
 import { VehicleTypeService } from 'src/app/services/vehicle-type.service';
-import { BookingStatus, VehicleType } from 'src/app/shared/enums';
+import { BookingStatus, PaymentOption, PaymentStatus, VehicleType } from 'src/app/shared/enums';
 import IntlTelInput from "@intl-tel-input/angular";
+import flatpickr from 'flatpickr';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
     selector: 'app-airport-pickup-form',
@@ -131,7 +133,8 @@ export class AirportPickupFormComponent implements OnInit, AfterViewInit {
     private bookingService: BookingService,
     private emailService: EmailService,
     private router: Router,
-    private cdf: ChangeDetectorRef) {
+    private cdf: ChangeDetectorRef,
+    @Inject(PLATFORM_ID) private platformId: Object) {
     this.pickupSearchForm = this.fb.group({
       pickupLocation: ['0', [Validators.required, Validators.min(1)]],
       destination: ['0', [Validators.required, Validators.min(1)]],
@@ -153,6 +156,15 @@ export class AirportPickupFormComponent implements OnInit, AfterViewInit {
   }
   
   ngAfterViewInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      flatpickr('#pickupDate', {
+        altInput: true,
+        altFormat: 'F j, Y',
+        dateFormat: 'Y-m-d',
+        defaultDate: new Date(),
+        minDate: 'today',
+      });
+    }
   }
 
   ngOnInit(): void {
@@ -568,7 +580,7 @@ export class AirportPickupFormComponent implements OnInit, AfterViewInit {
         firstName: this.personalInfoForm.controls['firstName'].value,
         lastName: this.personalInfoForm.controls['lastName'].value,
         email: this.personalInfoForm.controls['email'].value,
-        mobileNumber: this.personalInfoForm.controls['mobileNumber'].value?.e164Number,
+        mobileNumber: this.personalInfoForm.controls['mobileNumber'].value,
         country: countryDetails?.name,
         adultCount: this.personalInfoForm.controls['adultCount'].value,
         childCount: this.personalInfoForm.controls['childCount'].value,
@@ -610,6 +622,10 @@ export class AirportPickupFormComponent implements OnInit, AfterViewInit {
         distanceKm: this.pickupSearchFormData.distanceKm,
         duration: null,
         totalPrice: this.pickupSearchFormData.totalTourPrice,
+        amountPaid: 0,
+        remainingAmount: this.pickupSearchFormData.totalTourPrice,
+        paymentStatus: PaymentStatus.NotPaid,
+        paymentOption: PaymentOption.Full,
         date: this.pickupSearchFormData.date,
         time: this.pickupSearchFormData.time,
         vehicleTypeRef: this.selectedVehicleType.id,
@@ -631,36 +647,35 @@ export class AirportPickupFormComponent implements OnInit, AfterViewInit {
         updatedAt: new Date()
       }
 
-      // this.bookingService.saveBooking(bookingData).then((docRef) => {
-      //   // Email Logic
-      //   const userEmail = this.commonService.user.email;
-      //   const emailObj = {
-      //     to: userEmail,
-      //     subject: `${this.pickupSearchFormData.pickupLocation} to ${this.pickupSearchFormData.destination} tour booking is successful.`,
-      //     text: "",
-      //     userName: this.commonService.user.displayName ?? 'sir/madam',
-      //     url: `${window.location.origin}/checkout/${docRef.id}`,
-      //     reason: 'booking_confirmation'
-      //   }
-      //   if (userEmail != null) {
-      //     this.emailService.sendEmail(emailObj).subscribe({
-      //       next: (res) => {
-      //         this.router.navigate([`/checkout/${docRef.id}`]);
-      //       },
-      //       error: (err) => {
+      this.bookingService.saveBooking(bookingData).then((docRef) => {
+        // Email Logic
+        const userEmail = this.commonService.user.email;
+        const emailObj = {
+          to: userEmail,
+          subject: `${this.pickupSearchFormData.pickupLocation} to ${this.pickupSearchFormData.destination} tour booking is successful.`,
+          text: "",
+          userName: this.commonService.user.displayName ?? 'sir/madam',
+          url: `${window.location.origin}/checkout/${docRef.id}`,
+          reason: 'booking_confirmation'
+        }
+        if (userEmail != null) {
+          this.emailService.sendEmail(emailObj).subscribe({
+            next: (res) => {
+              this.router.navigate([`/checkout/${docRef.id}`]);
+            },
+            error: (err) => {
 
-      //       }
-      //     });
-      //   }
-      //   else {
-      //     this.router.navigate([`/checkout/${docRef.id}`]);
-      //   }        
-      // }).catch((error) => {
-      //   console.log("Something went wrong!");
-      // });
+            }
+          });
+        }
+        else {
+          this.router.navigate([`/checkout/${docRef.id}`]);
+        }        
+      }).catch((error) => {
+        console.log("Something went wrong!");
+      });
     }
   }
-
   
   onOpenVehicleImagePopup() {
     this.openVehicleImagePopup.emit(this.selectedVehicleType?.images);

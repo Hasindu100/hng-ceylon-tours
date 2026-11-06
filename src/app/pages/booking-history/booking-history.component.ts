@@ -143,6 +143,7 @@ export class BookingHistoryComponent {
   sortOrder: string = 'newest';
   currentPage: number = 1;
   itemsPerPage: number = 5;
+  paymentStatus: string = 'notpaid';
 
   bookingDataList: BookingVM[] = [];
 
@@ -298,6 +299,55 @@ export class BookingHistoryComponent {
       this.bookingDataList = res;
       this.applyFilters();
     });
+  }
+
+  getPaymentStatusName(statusId: number) {
+    var status = '';
+    switch (statusId) {
+      case 1:
+        status = 'Paid';
+        this.paymentStatus = 'paid';
+        break;
+      case 2:
+        status = 'Partially Paid';
+        this.paymentStatus = 'partiallypaid';
+        break;
+      case 3:
+        status = 'Not Paid';
+        this.paymentStatus = 'notpaid';
+        break;
+      case 4:
+        status = 'Failed';
+        this.paymentStatus = 'failed';
+        break;
+      case 5:
+        status = 'Refunded';
+        this.paymentStatus = 'refunded';
+        break;
+    }
+    return status;
+  }
+
+  getPaymentStatusClassName(statusId: number) {
+    var className = '';
+    switch (statusId) {
+      case 1:
+        className = 'paid';
+        break;
+      case 2:
+        className = 'partiallypaid';
+        break;
+      case 3:
+        className = 'notpaid';
+        break;
+      case 4:
+        className = 'failed';
+        break;
+      case 5:
+        className = 'refunded';
+        break;
+    }
+    return className;
   }
 }
 

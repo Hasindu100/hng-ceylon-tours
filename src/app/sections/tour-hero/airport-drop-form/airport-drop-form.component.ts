@@ -13,7 +13,7 @@ import { EmailService } from 'src/app/services/email.service';
 import { LocationService } from 'src/app/services/location.service';
 import { ToursService } from 'src/app/services/tours.service';
 import { VehicleTypeService } from 'src/app/services/vehicle-type.service';
-import { BookingStatus, VehicleType } from 'src/app/shared/enums';
+import { BookingStatus, PaymentOption, PaymentStatus, VehicleType } from 'src/app/shared/enums';
 
 @Component({
     selector: 'app-airport-drop-form',
@@ -466,6 +466,10 @@ export class AirportDropFormComponent {
         distanceKm: this.searchFormData.distanceKm,
         duration: null,
         totalPrice: this.searchFormData.totalTourPrice,
+        amountPaid: 0,
+        remainingAmount: this.searchFormData.totalTourPrice,
+        paymentStatus: PaymentStatus.NotPaid,
+        paymentOption: PaymentOption.Full,
         date: this.searchFormData.date,
         time: this.searchFormData.time,
         vehicleTypeRef: this.selectedVehicleType?.id,

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { BookingVM } from 'src/app/models/BookingVM';
 import { TourDetails } from 'src/app/models/tourDetails';
 import { TourDetails2 } from 'src/app/models/tourDetails2';
+import { BookingService } from 'src/app/services/booking.service';
 
 @Component({
     selector: 'app-order-summary',
@@ -35,8 +36,14 @@ export class OrderSummaryComponent implements OnInit {
 
   @Input() tourDetails: BookingVM | undefined;
 
+  constructor(private bookingService: BookingService) {}
+
   ngOnInit(): void {
 
+  }
+
+  editPickupDateTime() {
+    this.bookingService.showDateTimeEditPopup = true;
   }
 
   changeDetails() {

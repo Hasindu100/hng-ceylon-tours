@@ -60,7 +60,7 @@
     .form-input {
       width: 100%;
       padding: 0px 16px;
-      border: 2px solid #e5e7eb;
+      border: 2px solid #d3e6ff;
       border-radius: 10px;
       font-size: 15px;
       color: #374151;
@@ -70,7 +70,7 @@
 
       &:focus {
         outline: none;
-        border-color: #6b2cf5;
+        border-color: var(--primary-light-color);
         background: white;
         box-shadow: 0 0 0 3px rgba(107, 44, 245, 0.1);
       }
@@ -365,6 +365,11 @@
 
 ::ng-deep .iti__selected-country-primary {
   padding-left: 0px !important;
+}
+
+::ng-deep intl-tel-input input.iti__tel-input {
+  border: none !important;
+  outline: none !important;
 }
 
 ::ng-deep .personal-info-form-section {

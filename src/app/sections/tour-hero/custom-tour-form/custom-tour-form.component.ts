@@ -14,7 +14,7 @@ import { EmailService } from 'src/app/services/email.service';
 import { LocationService } from 'src/app/services/location.service';
 import { ToursService } from 'src/app/services/tours.service';
 import { VehicleTypeService } from 'src/app/services/vehicle-type.service';
-import { BookingStatus, VehicleType } from 'src/app/shared/enums';
+import { BookingStatus, PaymentOption, PaymentStatus, VehicleType } from 'src/app/shared/enums';
 
 @Component({
     selector: 'app-custom-tour-form',
@@ -356,6 +356,10 @@ export class CustomTourFormComponent {
           distanceKm: null,
           duration: null,
           totalPrice: 0,
+          amountPaid: 0,
+          remainingAmount: 0,
+          paymentStatus: PaymentStatus.NotPaid,
+          paymentOption: PaymentOption.Full,
           date: this.searchFormData.date,
           time: this.searchFormData.time,
           vehicleTypeRef: this.selectedVehicleType.id,

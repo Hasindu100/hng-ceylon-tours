@@ -62,6 +62,7 @@ import { RoadMapPopupComponent } from './shared/components/road-map-popup/road-m
 import { FaqComponent } from './pages/faq/faq.component';
 import { TermsConditionsComponent } from './pages/terms-conditions/terms-conditions.component';
 import IntlTelInput from "@intl-tel-input/angular";
+import { DateTimeComponent } from './shared/components/date-time/date-time.component';
 
 @NgModule({ declarations: [
         AppComponent,
@@ -84,13 +85,11 @@ import IntlTelInput from "@intl-tel-input/angular";
         Header2Component,
         TourDetailsComponent,
         TourHeroComponent,
-        LoaderComponent,
         BookingDetailsFormComponent,
         TourHero2Component,
         BookingStepsComponent,
         RideFeaturesComponent,
         BookingHistoryTempComponent,
-        PaymentSuccessComponent,
         AirportPickupFormComponent,
         AirportDropFormComponent,
         CustomTourFormComponent,
@@ -119,9 +118,12 @@ import IntlTelInput from "@intl-tel-input/angular";
         BookingHistoryComponent,
         CheckoutComponent,
         OrderSummaryComponent,
+        PaymentSuccessComponent,
         TestPageComponent,
         TruncatePipe,
         MapDisplayComponent,
+        LoaderComponent,
+        DateTimeComponent,
         ToastrModule.forRoot()], providers: [
         provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
         provideFirestore(() => getFirestore()),
