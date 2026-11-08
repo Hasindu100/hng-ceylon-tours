@@ -12,6 +12,6 @@ export const environment = {
         supabaseKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNneWRsampsaGpuaHh5Y2xqcm9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQxOTk4MTQsImV4cCI6MjA2OTc3NTgxNH0.ViZGZOJPJXQV2jnyrJVdY5C0yAhWv1Jp_FTFp9pmBQ4"
     },
     serverUrl: 'http://localhost:5000/',
-    server2Url: 'http://localhost:4242/',
+    server2Url: 'https://getceyloncab-server.vercel.app/',
     stripeAPIKey: 'pk_test_51TDpi0LpoZwKCYOyGKnxoOI0aqOD4dqFpo9zg1aWfLDh7ybn3sNI2tRqUybz2X2xnFGyk8E0FJhj0Fbm4xIHIhFb00Mr9y7W9R'
 }
