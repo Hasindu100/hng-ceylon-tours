@@ -1,7 +1,13 @@
 {
+  "version": 2,
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "dist/**"
+    }
+  },
   "rewrites": [
     {
-      "source": "/((?!assets/).*)",
+      "source": "/((?!.*\\.).*)",
       "destination": "/api"
     }
   ]
