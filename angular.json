@@ -41,7 +41,8 @@
             "security": {
               "allowedHosts": [
                 "localhost",
-                "hng-ceylon-tours.vercel.app"
+                "hng-ceylon-tours.vercel.app",
+                "*.vercel.app"
               ]
             },
             "ssr": {
@@ -80,7 +81,8 @@
               "localhost",
               "localhost:4000",
               "127.0.0.1",
-              "hng-ceylon-tours.vercel.app"
+              "hng-ceylon-tours.vercel.app",
+              "*.vercel.app"
             ]
           },
           "configurations": {
