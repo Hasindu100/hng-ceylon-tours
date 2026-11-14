@@ -20,7 +20,7 @@
             "outputPath": {
               "base": "dist/hng-ceylon-tours"
             },
-            "index": "src/index1.html",
+            "index": "src/index.html",
             "polyfills": [
               "zone.js"
             ],
