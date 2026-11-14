@@ -40,7 +40,8 @@
             "outputMode": "server",
             "security": {
               "allowedHosts": [
-                "localhost"
+                "localhost",
+                "hng-ceylon-tours.vercel.app"
               ]
             },
             "ssr": {
@@ -78,7 +79,8 @@
             "allowedHosts": [
               "localhost",
               "localhost:4000",
-              "127.0.0.1"
+              "127.0.0.1",
+              "hng-ceylon-tours.vercel.app"
             ]
           },
           "configurations": {
