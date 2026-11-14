@@ -1,18 +1,15 @@
 {
   "version": 2,
+  "name": "hng-ceylon-tours",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/api/index"
+    }
+  ],
   "functions": {
     "api/index.js": {
-      "includeFiles": "dist/**"
+      "includeFiles": "dist/hng-ceylon-tours/**"
     }
-  },
-  "routes": [
-    {
-      "src": "/(.*\\.(js|css|ico|png|jpg|jpeg|svg|webp|woff|woff2|ttf|json|txt|xml))",
-      "dest": "/dist/hng-ceylon-tours/browser/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/api/index.js"
-    }
-  ]
+  }
 }
