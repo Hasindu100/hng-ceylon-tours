@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { afterNextRender, Component } from '@angular/core';
 
 @Component({
     selector: 'app-root',
@@ -8,4 +8,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'hng-ceylon-tours';
+
+  constructor() {
+    
+    afterNextRender(() => {
+      const splash = document.getElementById('splash-screen');
+      if (splash) {
+        splash.style.opacity = '0';
+        splash.style.transition = 'opacity 0.4s ease';
+
+        setTimeout(() => splash.remove(), 400);
+      }
+    });
+  }
 }
