@@ -263,6 +263,9 @@
   min-height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--background-color1);
+  background-image: url('../../../assets/images/hero/bg-image.png');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 ::ng-deep {

@@ -33,19 +33,19 @@ contactForm: FormGroup;
     {
       icon: 'fa-solid fa-envelope',
       title: 'Email',
-      value: 'hngceylontours@gmail.com',
-      link: 'mailto:hngceylontours@gmail.com'
+      value: 'getceyloncab@gmail.com',
+      link: 'mailto:getceyloncab@gmail.com'
     },
     {
       icon: 'fa-solid fa-location-dot',
       title: 'Office Location',
-      value: '123 Business Street, Suite 100\nCity, State 12345',
+      value: 'Rathuwanguwa, Mamalgaha, Balangoda, Sri Lanka',
       link: '#'
     },
     {
       icon: 'fa-solid fa-clock',
       title: 'Business Hours',
-      value: 'Mon - Fri: 9:00 AM - 6:00 PM\nSat - Sun: Closed',
+      value: '24/7',
       link: '#'
     }
   ];

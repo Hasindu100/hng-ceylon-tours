@@ -47,43 +47,36 @@ export class PaymentSuccessComponent {
   getBookingDetailsById() {
     this.bookingService.getBookingDetailsById(this.bookingId).then((res) => {
       this.bookingData = res.data() as BookingVM;
-      // this.bookingService.updateBookingStatus(this.bookingId, BookingStatus.Completed).then(() => {
-      //   console.log('Booking status updated successfully');
-      //   this.isLoading = false;
+      // const totalPrice = this.bookingData.totalPrice;
+      // const amountPaid = (this.bookingData.paymentOption == PaymentOption.Advanced && this.bookingData.paymentStatus != PaymentStatus.PartiallyPaid) ? totalPrice * (20 / 100) : totalPrice;
+      // const remainingAmount = totalPrice - amountPaid;
+      // let bookingPaymentData = {
+      //   status: BookingStatus.Completed,
+      //   paymentStatus: this.bookingData.paymentOption == (this.bookingData.paymentOption == PaymentOption.Advanced && this.bookingData.paymentStatus != PaymentStatus.PartiallyPaid) ? PaymentStatus.PartiallyPaid : PaymentStatus.Paid,
+      //   amountPaid: amountPaid,
+      //   remainingAmount: remainingAmount,
+      //   paidAt: serverTimestamp(),
+      //   updatedAt: serverTimestamp()
+      // }
+
+      // const paymentData: PaymentVM = {
+      //   bookingId: this.bookingId,
+      //   amount: amountPaid,
+      //   paymentMethod: 1,
+      //   transactionId: this.sessionId,
+      //   status: PaymentStatus.Paid,
+      //   createdAt: new Date()
+      // }
+
+      // this.bookingService.updateBookingPaymentData(this.bookingId, bookingPaymentData).then(() => {
+      //   this.paymentService.savePaymentData(paymentData).then(() => {
+      //     console.log('Payment data updated successfully');
+      //     this.isLoading = false;
+      //   })
       // }).catch((error) => {
-      //   console.error('Error updating booking status:', error);
+      //   console.error('Error updating payment data:', error);
       //   this.isLoading = false;
       // });
-      const totalPrice = this.bookingData.totalPrice;
-      const amountPaid = (this.bookingData.paymentOption == PaymentOption.Advanced && this.bookingData.paymentStatus != PaymentStatus.PartiallyPaid) ? totalPrice * (20 / 100) : totalPrice;
-      const remainingAmount = totalPrice - amountPaid;
-      let bookingPaymentData = {
-        status: BookingStatus.Completed,
-        paymentStatus: this.bookingData.paymentOption == (this.bookingData.paymentOption == PaymentOption.Advanced && this.bookingData.paymentStatus != PaymentStatus.PartiallyPaid) ? PaymentStatus.PartiallyPaid : PaymentStatus.Paid,
-        amountPaid: amountPaid,
-        remainingAmount: remainingAmount,
-        paidAt: serverTimestamp(),
-        updatedAt: serverTimestamp()
-      }
-
-      const paymentData: PaymentVM = {
-        bookingId: this.bookingId,
-        amount: amountPaid,
-        paymentMethod: 1,
-        transactionId: this.sessionId,
-        status: PaymentStatus.Paid,
-        createdAt: new Date()
-      }
-
-      this.bookingService.updateBookingPaymentData(this.bookingId, bookingPaymentData).then(() => {
-        this.paymentService.savePaymentData(paymentData).then(() => {
-          console.log('Payment data updated successfully');
-          this.isLoading = false;
-        })
-      }).catch((error) => {
-        console.error('Error updating payment data:', error);
-        this.isLoading = false;
-      });
 
     })
     .catch((error) => {
