@@ -7,7 +7,9 @@
 
 .hero-header {
   position: relative;
-  background: #fff;
+  background-image: url('../../../assets/images/hero/bg-image.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
   padding: 60px 0;
   text-align: center;
   flex-shrink: 0;
