@@ -77,13 +77,7 @@ const routes: Routes = [
       { 
         path: 'checkout/:bookingId', 
         loadComponent: () => import('./pages/checkout/checkout.component').then(m => m.CheckoutComponent),
-        canActivate: [AuthGuard],
-        data: {
-          authGuardPipe: redirectToLogin
-        },
-        resolve: {
-          user: UserResolver
-        }
+        
       },
     ]
   },
