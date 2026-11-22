@@ -8,21 +8,17 @@ export default async (req, res) => {
     'dist/hng-ceylon-tours/browser'
   );
 
-  console.log('Working directory:', process.cwd());
   console.log('Browser directory:', browserPath);
 
-  console.log(
-    'CSR file exists:',
-    existsSync(join(browserPath, 'index.csr.html'))
-  );
-
   if (existsSync(browserPath)) {
+    const files = readdirSync(browserPath);
+
     console.log(
       'HTML files:',
-      readdirSync(browserPath).filter(
-        file => file.endsWith('.html')
-      )
+      files.filter(file => file.endsWith('.html'))
     );
+
+    console.log('Total files:', files.length);
   }
 
   const { reqHandler } = await import(
