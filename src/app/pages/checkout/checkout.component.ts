@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { BookingVM, CheckoutItem } from 'src/app/models/BookingVM';
@@ -71,7 +71,8 @@ export class CheckoutComponent {
     private checkoutService: CheckoutService,
     private commonService: CommonService,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    @Inject(PLATFORM_ID) private platformId: Object) {
     if (tourService.airportPickupTourInfo) {
       this.userDetails = tourService.airportPickupTourInfo?.personalInfo;
       this.tourDetails = tourService.airportPickupTourInfo?.tourInfo;
@@ -82,14 +83,16 @@ export class CheckoutComponent {
     }
     else {
       //this.router.navigate(['/']);
-      var tourData = localStorage.getItem('tourData');
-      if (tourData) {
-        this.tourDetails = JSON.parse(tourData);
-      }
+      if (isPlatformBrowser(this.platformId)) {
+        var tourData = localStorage.getItem('tourData');
+        if (tourData) {
+          this.tourDetails = JSON.parse(tourData);
+        }
 
-      var userData = localStorage.getItem('userData');
-      if (userData) {
-        this.userDetails = JSON.parse(userData);
+        var userData = localStorage.getItem('userData');
+        if (userData) {
+          this.userDetails = JSON.parse(userData);
+        }
       }
     }
     this.bookingId = this.route.snapshot.params['bookingId'];
