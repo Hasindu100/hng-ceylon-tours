@@ -1,3 +1,4 @@
+
 {
   "version": 2,
   "name": "hng-ceylon-tours",
@@ -9,7 +10,11 @@
   ],
   "functions": {
     "api/index.js": {
-      "includeFiles": "dist/**"
+      "includeFiles": [
+        "dist/hng-ceylon-tours/browser/**",
+        "dist/hng-ceylon-tours/browser/index.csr.html",
+        "dist/hng-ceylon-tours/server/**"
+      ]
     }
   }
 }

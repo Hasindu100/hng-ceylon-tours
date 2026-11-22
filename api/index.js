@@ -1,28 +1,28 @@
 
 import { existsSync, readdirSync } from 'node:fs';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
 
 export default async (req, res) => {
-  const apiDir = dirname(fileURLToPath(import.meta.url));
+  const browserPath = join(
+    process.cwd(),
+    'dist/hng-ceylon-tours/browser'
+  );
 
-  const paths = [
-    join(apiDir, '../dist/hng-ceylon-tours/browser'),
-    join(process.cwd(), 'dist/hng-ceylon-tours/browser'),
-    '/var/task/dist/hng-ceylon-tours/browser'
-  ];
+  console.log('Working directory:', process.cwd());
+  console.log('Browser directory:', browserPath);
 
-  for (const path of paths) {
-    console.log('Checking:', path);
-    console.log('Directory exists:', existsSync(path));
+  console.log(
+    'CSR file exists:',
+    existsSync(join(browserPath, 'index.csr.html'))
+  );
+
+  if (existsSync(browserPath)) {
     console.log(
-      'CSR exists:',
-      existsSync(join(path, 'index.csr.html'))
+      'HTML files:',
+      readdirSync(browserPath).filter(
+        file => file.endsWith('.html')
+      )
     );
-
-    if (existsSync(path)) {
-      console.log('Files:', readdirSync(path).slice(0, 20));
-    }
   }
 
   const { reqHandler } = await import(
