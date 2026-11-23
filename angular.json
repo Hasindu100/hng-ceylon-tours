@@ -21,8 +21,8 @@
               "base": "dist/hng-ceylon-tours"
             },
             "index": {
-              "input": "src/index1.html",
-              "output": "index.html"
+              "input": "src/index.html",
+              "output": "index1.html"
             },
             "polyfills": [
               "zone.js"
