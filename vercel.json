@@ -1,7 +1,15 @@
+
 {
   "version": 2,
   "name": "hng-ceylon-tours",
+  "framework": null,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/hng-ceylon-tours/browser",
   "rewrites": [
+    {
+      "source": "/",
+      "destination": "/api/index.js"
+    },
     {
       "source": "/(.*)",
       "destination": "/api/index.js"
@@ -9,7 +17,7 @@
   ],
   "functions": {
     "api/index.js": {
-      "includeFiles": "{dist/**,dist/hng-ceylon-tours/browser/*.html}"
+      "includeFiles": "dist/hng-ceylon-tours/**"
     }
   }
 }
