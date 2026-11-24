@@ -6,11 +6,11 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Client
   },
   {
-    path: 'payment-success',
+    path: 'booking-history',
     renderMode: RenderMode.Client
   },
   {
-    path: 'about',
+    path: 'payment-success',
     renderMode: RenderMode.Client
   },
   {
