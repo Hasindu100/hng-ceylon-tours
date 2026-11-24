@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { collection, collectionData, Firestore } from '@angular/fire/firestore';
+import { LoaderService } from './loader.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +11,13 @@ export class LocationService {
   geometryData: any;
   
   constructor(private fs: Firestore,
-    private http: HttpClient) { }
+    private http: HttpClient,
+    private loaderService: LoaderService) { }
 
   loadLocationData() {
     // Implementation for loading location data from Firestore
     let locationsCollection = collection(this.fs, 'locations');
-    return collectionData(locationsCollection, { idField: 'id' });
+    return this.loaderService.trackObservable(() => collectionData(locationsCollection, { idField: 'id' }));
   }
 
   searchLocations(searchTerm: string) {

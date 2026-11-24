@@ -1,4 +1,5 @@
-import { afterNextRender, Component } from '@angular/core';
+import { afterNextRender, Component, inject } from '@angular/core';
+import { LoaderService } from './services/loader.service';
 
 @Component({
     selector: 'app-root',
@@ -8,7 +9,7 @@ import { afterNextRender, Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'hng-ceylon-tours';
-
+  readonly loaderService = inject(LoaderService);
   constructor() {
     
     afterNextRender(() => {
