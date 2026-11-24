@@ -11,11 +11,6 @@ const browserDistFolder = join(import.meta.dirname, '../browser');
 
 const app = express();
 
-app.use((req, res, next) => {
-  console.log('[EXPRESS SSR REQUEST]', req.originalUrl);
-  next();
-});
-
 const angularApp = new AngularNodeAppEngine({
   allowedHosts: ['*.vercel.app', 'localhost'],
   trustProxyHeaders: true,
