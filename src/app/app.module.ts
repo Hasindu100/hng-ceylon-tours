@@ -40,7 +40,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { TourHeroComponent } from './layouts/tour-hero/tour-hero.component';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { BookingDetailsFormComponent } from './pages/booking-details-form/booking-details-form.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 import { TestPageComponent } from './pages/test-page/test-page.component';
 import { OrderSummaryComponent } from './sections/order-summary/order-summary.component';
 import { TourHero2Component } from './layouts/tour-hero2/tour-hero2.component';
@@ -63,6 +63,7 @@ import { FaqComponent } from './pages/faq/faq.component';
 import { TermsConditionsComponent } from './pages/terms-conditions/terms-conditions.component';
 import IntlTelInput from "@intl-tel-input/angular";
 import { DateTimeComponent } from './shared/components/date-time/date-time.component';
+import { loaderInterceptor } from './shared/interceptors/loader.interceptor';
 
 @NgModule({ declarations: [
         AppComponent,
@@ -128,7 +129,7 @@ import { DateTimeComponent } from './shared/components/date-time/date-time.compo
         provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
         provideFirestore(() => getFirestore()),
         provideAuth(() => getAuth()),
-        provideHttpClient(withInterceptorsFromDi()),
-        provideClientHydration(withEventReplay())
+        provideHttpClient(withInterceptorsFromDi(), withInterceptors([loaderInterceptor])),
+        provideClientHydration(withEventReplay()),
     ] })
 export class AppModule { }

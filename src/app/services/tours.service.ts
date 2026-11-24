@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { collection, collectionData, doc, Firestore, getDoc, getDocs, query, where } from '@angular/fire/firestore';
 import { Subject } from 'rxjs';
+import { LoaderService } from './loader.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,31 +11,31 @@ export class ToursService {
   getTours$ = this.getTours.asObservable();
   airportPickupTourInfo: any;
 
-  constructor(private fs: Firestore) { }
+  constructor(private fs: Firestore, private loaderService: LoaderService) { }
 
   getAllTours() {
     let tourCollection = collection(this.fs, 'tours');
-    return collectionData(tourCollection, {idField: 'id'});
+    return this.loaderService.trackObservable(() => collectionData(tourCollection, {idField: 'id'}));
   }
 
   getTourDetailsById(id: any) {
     let tourDoc = doc(this.fs, `tours/${id}`);
-    return getDoc(tourDoc);
+    return this.loaderService.trackPromise(() => getDoc(tourDoc));
   }
 
   getTourTypes() {
     let tourTypesCollection = collection(this.fs, 'tourTypes');
-    return collectionData(tourTypesCollection, {idField: 'id'});
+    return this.loaderService.trackObservable(() => collectionData(tourTypesCollection, {idField: 'id'}));
   }
 
   getToursByTourTypeId(tourTypeId: any) {
     let toursCollection = collection(this.fs, 'tours');
     const q = query(toursCollection, where('tourType.tourTypeId', '==', tourTypeId));
-    return collectionData(q, {idField: 'id'});
+    return this.loaderService.trackObservable(() => collectionData(q, {idField: 'id'}));
   }
 
   getTourTypeDataById(tourTypeId: any) {
     let tourTypeDoc = doc(this.fs, `tourTypes/${tourTypeId}`);
-    return getDoc(tourTypeDoc);
+    return this.loaderService.trackPromise(() => getDoc(tourTypeDoc));
   }
 }
