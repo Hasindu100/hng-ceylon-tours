@@ -10,6 +10,7 @@ import { join } from 'node:path';
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
 const app = express();
+
 const angularApp = new AngularNodeAppEngine({
   allowedHosts: ['*.vercel.app', 'localhost'],
   trustProxyHeaders: true,
